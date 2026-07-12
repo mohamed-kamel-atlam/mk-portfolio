@@ -1,0 +1,3 @@
+# FEATURE LAYER — self-contained product domains (projects, contact, …).
+# See docs/engineering/FOLDER_STRUCTURE.md §3. Features are added from M3 onward;
+# this placeholder keeps the layer present in the tree.

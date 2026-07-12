@@ -1,0 +1,213 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Design tokens — the single runtime source of truth for every design value.
+ *
+ * Values are transcribed from the design docs and must not diverge from them:
+ *   - Color:      docs/design/COLOR_SYSTEM.md
+ *   - Typography: docs/design/TYPOGRAPHY.md
+ *   - Motion:     docs/design/MOTION_GUIDELINES.md
+ *   - Structural: docs/design/DESIGN_TOKENS.md §4
+ *
+ * Tiers (DESIGN_TOKENS.md §2): primitives → semantic → (optional) component.
+ * Components consume ONLY semantic tokens; never a raw --neutral-* / --accent-*.
+ * Theming is a data change: only the semantic tier is re-declared per theme.
+ */
+
+@layer base {
+  :root {
+    /* ---- Tier 1: primitives (theme-agnostic) ---- */
+
+    /* Neutral ramp — cool cast (COLOR_SYSTEM.md §2.1) */
+    --neutral-50: #f7f8f8;
+    --neutral-100: #ecedee;
+    --neutral-200: #d9dbde;
+    --neutral-300: #b8bcc2;
+    --neutral-400: #8a9099;
+    --neutral-500: #626871;
+    --neutral-600: #454b54;
+    --neutral-700: #2e333a;
+    --neutral-800: #1d2126;
+    --neutral-900: #14171a;
+    --neutral-950: #0b0d0f;
+    --white: #ffffff;
+    --black: #000000;
+
+    /* Accent — "iris" blue (COLOR_SYSTEM.md §2.2) */
+    --accent-50: #eef1ff;
+    --accent-100: #dfe4ff;
+    --accent-200: #c4ccff;
+    --accent-300: #9facff;
+    --accent-400: #7c90fc;
+    --accent-500: #5b7cfa;
+    --accent-600: #3f5ce0;
+    --accent-700: #3247b4;
+    --accent-800: #2a3a8c;
+    --accent-900: #26346e;
+    --accent-950: #171e40;
+
+    /* ---- Structural tokens (semantic-by-nature; DESIGN_TOKENS.md §4) ---- */
+
+    /* Spacing — 8-pt grid (§4.1). Step number = value in units of 4px. */
+    --space-0: 0;
+    --space-1: 0.25rem; /* 4px */
+    --space-2: 0.5rem; /* 8px */
+    --space-3: 0.75rem; /* 12px */
+    --space-4: 1rem; /* 16px */
+    --space-6: 1.5rem; /* 24px */
+    --space-8: 2rem; /* 32px */
+    --space-10: 2.5rem; /* 40px */
+    --space-12: 3rem; /* 48px */
+    --space-16: 4rem; /* 64px */
+    --space-20: 5rem; /* 80px */
+    --space-24: 6rem; /* 96px */
+    --space-32: 8rem; /* 128px */
+
+    /* Radius (§4.2) */
+    --radius-xs: 0.125rem;
+    --radius-sm: 0.25rem;
+    --radius-md: 0.5rem;
+    --radius-lg: 0.75rem;
+    --radius-xl: 1rem;
+    --radius-2xl: 1.5rem;
+    --radius-full: 9999px;
+
+    /* Shadow (§4.3) — soft, alpha-based, compose over any surface */
+    --shadow-none: none;
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.24);
+    --shadow-md: 0 4px 12px -2px rgb(0 0 0 / 0.32);
+    --shadow-lg: 0 12px 32px -4px rgb(0 0 0 / 0.4);
+    --shadow-xl: 0 24px 64px -8px rgb(0 0 0 / 0.48);
+
+    /* Z-index ladder (§4.5) */
+    --z-base: 0;
+    --z-raised: 10;
+    --z-dropdown: 1000;
+    --z-sticky: 1100;
+    --z-overlay: 1200;
+    --z-modal: 1300;
+    --z-popover: 1400;
+    --z-toast: 1500;
+    --z-tooltip: 1600;
+
+    /* Breakpoints (§4.6) — exposed as tokens; utilities use Tailwind screens */
+    --bp-tablet: 768px;
+    --bp-laptop: 1024px;
+    --bp-desktop: 1280px;
+    --bp-wide: 1536px;
+
+    /* ---- Typography (TYPOGRAPHY.md) ---- */
+    /* Font-family stacks. Geist is supplied by next/font as --font-geist-*.
+       The canonical token name stays --font-sans / --font-mono; the Arabic
+       face is wired with the locale layer at M2 (INTERNATIONALIZATION.md). */
+    --font-sans:
+      var(--font-geist-sans), "Inter", ui-sans-serif, system-ui, -apple-system,
+      "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-mono:
+      var(--font-geist-mono), "JetBrains Mono", ui-monospace, "SF Mono",
+      "Cascadia Code", Menlo, Consolas, monospace;
+
+    /* Fluid sizes for the large steps (TYPOGRAPHY.md §3); smaller steps are
+       fixed rem and live in the Tailwind fontSize map. */
+    --font-size-display: clamp(2.25rem, 1.5rem + 3.2vw, 3.5rem);
+    --font-size-h1: clamp(1.875rem, 1.4rem + 2vw, 2.5rem);
+    --font-size-h2: clamp(1.625rem, 1.35rem + 1.2vw, 2rem);
+
+    /* ---- Motion (MOTION_GUIDELINES.md) ---- */
+    --duration-fast: 120ms;
+    --duration-normal: 200ms;
+    --duration-slow: 320ms;
+    --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-decelerate: cubic-bezier(0, 0, 0.2, 1);
+    --ease-accelerate: cubic-bezier(0.4, 0, 1, 1);
+
+    /* ---- Tier 2: semantic tokens — DARK theme (primary, COLOR_SYSTEM.md §3.1) ---- */
+    color-scheme: dark;
+    --color-background: var(--neutral-950);
+    --color-foreground: var(--neutral-50);
+    --color-surface: var(--neutral-900);
+    --color-surface-muted: var(--neutral-800);
+    --color-border: var(--neutral-800);
+    --color-muted: var(--neutral-800);
+    --color-muted-foreground: var(--neutral-400);
+    --color-accent: var(--accent-500);
+    --color-accent-foreground: var(--neutral-950);
+    --color-success: #3fb37a;
+    --color-success-foreground: var(--neutral-950);
+    --color-warning: #e0a82e;
+    --color-warning-foreground: var(--neutral-950);
+    --color-danger: #f0595e;
+    --color-danger-foreground: var(--neutral-950);
+    --color-info: #5b9df6;
+    --color-info-foreground: var(--neutral-950);
+  }
+
+  /* ---- Tier 2: semantic tokens — LIGHT theme (COLOR_SYSTEM.md §3.2) ----
+     Same names, different values. Only the semantic tier is re-declared. */
+  [data-theme="light"] {
+    color-scheme: light;
+    --color-background: var(--neutral-50);
+    --color-foreground: var(--neutral-900);
+    --color-surface: var(--white);
+    --color-surface-muted: var(--neutral-100);
+    --color-border: var(--neutral-200);
+    --color-muted: var(--neutral-100);
+    --color-muted-foreground: var(--neutral-500);
+    --color-accent: var(--accent-600);
+    --color-accent-foreground: var(--white);
+    --color-success: #1f8a56;
+    --color-success-foreground: var(--white);
+    --color-warning: #b4791a;
+    --color-warning-foreground: var(--white);
+    --color-danger: #d22f35;
+    --color-danger-foreground: var(--white);
+    --color-info: #2b6fd6;
+    --color-info-foreground: var(--white);
+  }
+
+  /* ---- Base element styles ---- */
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    min-height: 100dvh;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    line-height: 1.6;
+  }
+
+  /* Visible, token-based focus (ACCESSIBILITY.md; DESIGN_LANGUAGE.md → Visible Focus) */
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  ::selection {
+    background-color: var(--color-accent);
+    color: var(--color-accent-foreground);
+  }
+
+  /* Respect reduced-motion globally (MOTION_GUIDELINES.md) */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
