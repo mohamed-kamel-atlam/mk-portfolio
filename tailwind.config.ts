@@ -190,11 +190,17 @@ const config: Config = {
       },
       keyframes: {
         "fade-in": { from: { opacity: "0" }, to: { opacity: "1" } },
+        "fade-in-up": {
+          from: { opacity: "0", transform: "translateY(var(--space-2))" },
+          to: { opacity: "1", transform: "none" },
+        },
       },
       animation: {
-        // Enter transition for overlays (e.g. the mobile menu). Reduced-motion
-        // is honored by the global rule in globals.css.
+        // Enter transitions. Reduced-motion is honored by the global rule in
+        // globals.css and by `motion-safe:` usage at call sites.
         "fade-in": "fade-in var(--duration-normal) var(--ease-decelerate)",
+        "fade-in-up":
+          "fade-in-up var(--duration-slow) var(--ease-decelerate) both",
       },
     },
   },

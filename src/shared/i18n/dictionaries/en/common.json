@@ -17,5 +17,12 @@
   },
   "footer": {
     "rights": "All rights reserved."
+  },
+  "hero": {
+    "availability": "Available for new opportunities",
+    "headline": "Frontend engineering for premium AI products.",
+    "subheadline": "I design, architect, and build production-grade web applications — with the performance, accessibility, and craft of a modern SaaS product.",
+    "ctaPrimary": "View projects",
+    "ctaSecondary": "Get in touch"
   }
 }
