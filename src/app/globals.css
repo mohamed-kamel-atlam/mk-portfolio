@@ -252,6 +252,19 @@
     color: var(--color-accent-foreground);
   }
 
+  /* Smooth color cross-fade during a theme switch (FR-002). The theme provider
+     adds `.theme-transition` to <html> only on change, then removes it, so
+     normal interactions and the first paint never transition. Reduced-motion
+     users get no transition (the rule below forces near-zero duration). */
+  .theme-transition,
+  .theme-transition *,
+  .theme-transition *::before,
+  .theme-transition *::after {
+    transition-property: background-color, border-color, color, fill, stroke;
+    transition-duration: var(--duration-normal);
+    transition-timing-function: var(--ease-standard);
+  }
+
   /* Respect reduced-motion globally (MOTION_GUIDELINES.md) */
   @media (prefers-reduced-motion: reduce) {
     *,

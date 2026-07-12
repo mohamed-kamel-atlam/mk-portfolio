@@ -1,7 +1,0 @@
-# SHARED / TYPES — cross-cutting / global TypeScript types & ambient declarations
-# not owned by any single feature (utility types, asset/module declarations,
-# environment typing).
-#
-# Feature-local types stay in features/<feature>/types (FOLDER_STRUCTURE.md §3.1).
-# Content SCHEMAS live in the content layer (CONTENT_MODEL.md), not here.
-# Follow CODING_STANDARDS §1: `interface` for object shapes, `type` for unions.

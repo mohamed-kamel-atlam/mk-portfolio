@@ -69,9 +69,10 @@ in the server-first model
   hydration would visibly flash. Resolving theme before paint keeps the
   experience premium and avoids a jarring first impression the brand cannot
   afford ([Brand → Target Impression](../product/BRAND.md)).
-- **System mode respects the visitor.** Defaulting to the OS preference is the
-  courteous default; an explicit toggle plus persistence gives control when they
-  want it — satisfying FR-002 without imposing a choice.
+- **System mode respects the visitor.** A `system` mode that tracks the OS
+  preference gives control to those who want it; combined with persistence and
+  an explicit **dark** default, this satisfies FR-002 while preserving the
+  dark-first first impression the brand targets.
 
 ## Alternatives Considered
 

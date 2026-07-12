@@ -4,6 +4,8 @@ import { GeistMono } from "geist/font/mono";
 
 import { defaultLocale, localeDirection } from "@/shared/config/i18n";
 import { siteConfig } from "@/shared/config/site";
+import { getThemeInitScript } from "@/shared/lib/theme-script";
+import { ThemeProvider } from "@/shared/providers";
 
 import "./globals.css";
 
@@ -63,7 +65,10 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-dvh bg-background font-sans text-foreground antialiased">
-        {children}
+        {/* Pre-paint theme resolution — prevents a flash of the wrong theme
+            (ADR-0005). Must run before hydration, hence a raw inline script. */}
+        <script dangerouslySetInnerHTML={{ __html: getThemeInitScript() }} />
+        <ThemeProvider>{children}</ThemeProvider>
       </body>
     </html>
   );
