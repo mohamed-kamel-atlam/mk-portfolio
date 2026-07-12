@@ -188,6 +188,14 @@ const config: Config = {
         decelerate: "var(--ease-decelerate)",
         accelerate: "var(--ease-accelerate)",
       },
+      keyframes: {
+        "fade-in": { from: { opacity: "0" }, to: { opacity: "1" } },
+      },
+      animation: {
+        // Enter transition for overlays (e.g. the mobile menu). Reduced-motion
+        // is honored by the global rule in globals.css.
+        "fade-in": "fade-in var(--duration-normal) var(--ease-decelerate)",
+      },
     },
   },
   plugins: [],

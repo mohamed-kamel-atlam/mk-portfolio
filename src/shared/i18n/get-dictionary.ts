@@ -3,8 +3,9 @@ import enCommon from "./dictionaries/en/common.json";
 
 /**
  * The dictionary shape is the canonical `en` key set (INTERNATIONALIZATION.md
- * §5). Other locales are validated against it, and missing keys fall back to
- * `en` (§2) so a partially translated build degrades gracefully.
+ * §5), namespaced by feature (`nav`, `footer`, …). Other locales are validated
+ * against it, and missing keys fall back to `en` (§2) — a one-level deep merge
+ * so a partially translated namespace still resolves per key.
  */
 export type Dictionary = typeof enCommon;
 
@@ -18,13 +19,32 @@ const loaders: Record<Locale, () => Promise<Partial<Dictionary>>> = {
     ),
 };
 
+function isNamespace(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+
+/** Merge a localized dictionary over the `en` base, one namespace level deep. */
+function mergeWithFallback(
+  base: Dictionary,
+  override: Partial<Dictionary>,
+): Dictionary {
+  const result: Record<string, unknown> = { ...base };
+  for (const [key, value] of Object.entries(override)) {
+    const baseValue = (base as Record<string, unknown>)[key];
+    result[key] =
+      isNamespace(baseValue) && isNamespace(value)
+        ? { ...baseValue, ...value }
+        : value;
+  }
+  return result as Dictionary;
+}
+
 /**
- * Resolve the `common` dictionary for a locale — **server-only** (called from
- * Server Components / metadata). Because it runs on the server, localized text
- * ships as HTML with no dictionary or translation runtime on the client (QAT-1,
- * server-first). Missing keys fall back to `en`.
+ * Resolve the dictionary for a locale — **server-only** (called from Server
+ * Components / metadata). Localized text ships as HTML with no dictionary or
+ * translation runtime on the client (QAT-1). Missing keys fall back to `en`.
  */
 export async function getDictionary(locale: Locale): Promise<Dictionary> {
   const localized = await loaders[locale]();
-  return { ...enCommon, ...localized };
+  return mergeWithFallback(enCommon, localized);
 }

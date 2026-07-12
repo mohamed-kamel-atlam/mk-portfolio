@@ -36,3 +36,12 @@ export function direction(locale: Locale): "ltr" | "rtl" {
 export function isLocale(value: string): value is Locale {
   return (locales as readonly string[]).includes(value);
 }
+
+/**
+ * Build a locale-prefixed href from a locale-agnostic route path. `""` maps to
+ * the locale root. Locale is URL state, so all internal links flow through here
+ * and never hardcode a prefix (INTERNATIONALIZATION.md §7).
+ */
+export function localizedHref(locale: Locale, path: string): string {
+  return path ? `/${locale}${path}` : `/${locale}`;
+}

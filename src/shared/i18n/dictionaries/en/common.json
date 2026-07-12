@@ -2,5 +2,20 @@
   "foundationEyebrow": "Foundation ready",
   "name": "Mohamed Kamel",
   "tagline": "Premium engineering portfolio demonstrating frontend architecture, performance, accessibility, and AI product engineering.",
-  "note": "Repository foundation initialized. Implementation begins at milestone M1."
+  "note": "Repository foundation initialized. Implementation begins at milestone M1.",
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "engineering": "Engineering",
+    "contact": "Contact",
+    "menu": "Open menu",
+    "close": "Close menu",
+    "primary": "Primary",
+    "footer": "Footer",
+    "skipToContent": "Skip to content"
+  },
+  "footer": {
+    "rights": "All rights reserved."
+  }
 }

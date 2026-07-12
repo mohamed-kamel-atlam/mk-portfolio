@@ -13,6 +13,7 @@ import {
 } from "@/shared/i18n/config";
 import { getThemeInitScript } from "@/shared/lib/theme-script";
 import { AppProviders } from "@/shared/providers";
+import { ScrollProgress, SiteFooter, SiteHeader } from "@/shared/ui";
 
 import "../globals.css";
 
@@ -129,11 +130,18 @@ export default async function RootLayout({
       className={fontVariables}
       suppressHydrationWarning
     >
-      <body className="min-h-dvh bg-background font-sans text-foreground antialiased">
+      <body className="flex min-h-dvh flex-col bg-background font-sans text-foreground antialiased">
         {/* Pre-paint theme resolution — prevents a flash of the wrong theme
             (ADR-0005). Must run before hydration, hence a raw inline script. */}
         <script dangerouslySetInnerHTML={{ __html: getThemeInitScript() }} />
-        <AppProviders>{children}</AppProviders>
+        <AppProviders>
+          <SiteHeader locale={locale} />
+          <main id="main-content" className="flex-1">
+            {children}
+          </main>
+          <SiteFooter locale={locale} />
+          <ScrollProgress />
+        </AppProviders>
       </body>
     </html>
   );
