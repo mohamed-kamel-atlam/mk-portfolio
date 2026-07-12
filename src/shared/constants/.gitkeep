@@ -1,0 +1,6 @@
+# SHARED / CONSTANTS — immutable primitive constants & enum-like `as const` maps.
+#
+# Storage keys, query-param keys, external URLs, id/aria prefixes, animation
+# names — pure literals with NO logic. Deliberately distinct from shared/config:
+# config/ COMPOSES values (and may read env); constants/ are pure literals.
+# Per CODING_STANDARDS §1, use string-literal unions / `as const`, never TS enums.

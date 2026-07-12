@@ -1,6 +1,6 @@
 # Folder Structure
 
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Status:** Draft
 **Last Updated:** July 2026
 **Owner:** Mohamed Kamel
@@ -306,10 +306,14 @@ shared/
 ├─ hooks/                  # cross-feature client hooks
 │  ├─ use-media-query.ts
 │  └─ use-mounted.ts
-└─ config/                 # app-wide constants & configuration
-   ├─ site.ts              # site metadata, nav structure, social links
-   ├─ i18n.ts              # locale list, default locale (see INTERNATIONALIZATION.md)
-   └─ routes.ts            # typed route builders
+├─ providers/              # cross-feature React context providers (Client Components)
+├─ config/                 # composed configuration objects & builders
+│  ├─ site.ts              # site metadata, nav structure, social links
+│  ├─ i18n.ts              # locale list, default locale (see INTERNATIONALIZATION.md)
+│  └─ routes.ts            # typed route builders
+├─ constants/              # immutable primitive constants & enum-like `as const` maps
+├─ styles/                 # non-global tokenized style partials (global sheet = app/globals.css)
+└─ types/                  # cross-cutting / global TS types & ambient declarations
 ```
 
 - **`shared/ui`** is the component library referenced by
@@ -320,8 +324,22 @@ shared/
   about the *projects* domain, it belongs in `features/projects/lib`, not here.
 - **`shared/hooks`** holds client hooks used by more than one feature. A hook
   used by a single feature stays in that feature.
-- **`shared/config`** holds app-wide constants: the site map/navigation, the
-  locale configuration, typed route builders.
+- **`shared/providers`** holds cross-feature React context providers (theme,
+  direction/locale) — Client Components mounted at the routing layer's providers
+  mount point ([§2.1](#21-annotated-tree)). A provider needed by only one
+  feature stays in that feature.
+- **`shared/config`** holds composed configuration objects and builders: the
+  site map/navigation, the locale configuration, typed route builders.
+- **`shared/constants`** holds immutable primitive constants and enum-like
+  `as const` maps with no logic (storage keys, query-param keys, external URLs).
+  The split from `config/` is deliberate: `config/` *composes* values (and may
+  read env); `constants/` are pure literals.
+- **`shared/styles`** holds non-global, tokenized style partials (e.g. keyframes)
+  consumed by `shared/ui` or features. The single **global** stylesheet remains
+  `app/globals.css`; this folder never redefines global or base styles.
+- **`shared/types`** holds cross-cutting / global TypeScript types and ambient
+  declarations not owned by a single feature. Feature-local types stay in
+  `features/<feature>/types`.
 - **The shared layer depends on nothing feature-specific.** It never imports
   from `features/` or `app/`. This is what lets every feature depend on it
   safely.
@@ -527,6 +545,13 @@ but left the detail open. Each is consistent with
 7. **Start-local / promote-on-evidence.** Guards against speculative sharing and
    the overengineering risk in the
    [PRD](../product/PRODUCT_REQUIREMENTS.md) ([§8](#8-file-placement-decision-tree)).
+8. **Shared role-folders extended (`providers` / `constants` / `styles` /
+   `types`).** The shared layer's purpose — cross-feature building blocks —
+   extends cleanly to these role-named folders, each with a single,
+   non-overlapping responsibility ([§4](#4-the-shared-layer--shared)). This
+   preserves the "name by role, no generic folders" rule
+   ([§7](#7-folder-naming-conventions)) and keeps app-wide providers, constants,
+   styles, and global types out of the feature layer. Added in v1.1.0.
 
 ---
 

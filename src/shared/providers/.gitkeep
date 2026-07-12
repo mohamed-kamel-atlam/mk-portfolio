@@ -1,0 +1,7 @@
+# SHARED / PROVIDERS — cross-feature React context providers (Client Components).
+#
+# Theme, direction/locale, and similar app-wide context wrappers live here and
+# are mounted at the routing layer's providers mount point (FOLDER_STRUCTURE.md
+# §2.1). "use client" sits at the provider boundary; consumers stay server-first.
+# A provider used by a single feature stays in that feature.
+# Populated from M1/M3 onward (ThemeProvider ships with ADR-0005's implementation).

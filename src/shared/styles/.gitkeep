@@ -1,0 +1,6 @@
+# SHARED / STYLES — non-global, tokenized style partials (keyframes, rare
+# reusable CSS) consumed by shared/ui or features.
+#
+# The single GLOBAL stylesheet remains app/globals.css (FOLDER_STRUCTURE.md §4,
+# DESIGN_TOKENS.md). This folder never redefines global/base styles or tokens,
+# and never hardcodes design values — it references tokens only.
