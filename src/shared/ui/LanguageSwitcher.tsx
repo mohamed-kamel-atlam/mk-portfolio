@@ -10,7 +10,8 @@ import {
   localeNames,
   type Locale,
 } from "@/shared/i18n/config";
-import { cn } from "@/shared/lib/cn";
+
+import { Button } from "./Button";
 
 export interface LanguageSwitcherProps {
   className?: string;
@@ -21,10 +22,10 @@ const ONE_YEAR_SECONDS = 60 * 60 * 24 * 365;
 /**
  * Binary EN/AR language switch. Locale is URL state (INTERNATIONALIZATION.md §7),
  * so switching is a real navigation to the *same route* under the other locale
- * prefix — not a client-only toggle — and it persists a cookie hint that never
- * overrides an explicit URL. The button shows the TARGET language in its own
- * script (`lang`) with an accessible label; the icon never replaces the label
- * (DESIGN_SYSTEM → Iconography). Token-styled; inherits the global focus ring.
+ * prefix — not a client-only toggle — persisting a cookie hint that never
+ * overrides an explicit URL. Presentation is delegated to {@link Button}. The
+ * label renders the TARGET language in its own script (`lang`) with an
+ * accessible name; the icon never replaces the label.
  */
 export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
   const pathname = usePathname();
@@ -51,19 +52,16 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
   }
 
   return (
-    <button
-      type="button"
+    <Button
+      variant="secondary"
       onClick={switchLanguage}
       lang={next}
       aria-label={`Switch language to ${localeNames[next]}`}
       title={localeNames[next]}
-      className={cn(
-        "inline-flex h-10 items-center gap-2 rounded-md border border-border bg-surface px-3 text-foreground transition-colors duration-fast hover:bg-muted",
-        className,
-      )}
+      className={className}
     >
       <Languages className="h-5 w-5" aria-hidden="true" />
-      <span className="text-small font-medium">{localeNames[next]}</span>
-    </button>
+      {localeNames[next]}
+    </Button>
   );
 }
