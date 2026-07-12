@@ -309,8 +309,11 @@ shared/
 ├─ providers/              # cross-feature React context providers (Client Components)
 ├─ config/                 # composed configuration objects & builders
 │  ├─ site.ts              # site metadata, nav structure, social links
-│  ├─ i18n.ts              # locale list, default locale (see INTERNATIONALIZATION.md)
 │  └─ routes.ts            # typed route builders
+├─ i18n/                   # locale config, dictionaries & server loader (INTERNATIONALIZATION.md §5)
+│  ├─ config.ts            # locales, default, direction() — single source of truth
+│  ├─ get-dictionary.ts    # server dictionary loader (en fallback)
+│  └─ dictionaries/        # per-locale JSON, namespaced by feature
 ├─ constants/              # immutable primitive constants & enum-like `as const` maps
 ├─ styles/                 # non-global tokenized style partials (global sheet = app/globals.css)
 └─ types/                  # cross-cutting / global TS types & ambient declarations
@@ -329,7 +332,11 @@ shared/
   mount point ([§2.1](#21-annotated-tree)). A provider needed by only one
   feature stays in that feature.
 - **`shared/config`** holds composed configuration objects and builders: the
-  site map/navigation, the locale configuration, typed route builders.
+  site map/navigation, typed route builders.
+- **`shared/i18n`** holds the locale configuration (the single source of truth
+  for locales, default, and `dir`), the per-locale JSON dictionaries, and the
+  server-side dictionary loader. Its structure is owned by
+  [INTERNATIONALIZATION.md §5](./INTERNATIONALIZATION.md).
 - **`shared/constants`** holds immutable primitive constants and enum-like
   `as const` maps with no logic (storage keys, query-param keys, external URLs).
   The split from `config/` is deliberate: `config/` *composes* values (and may

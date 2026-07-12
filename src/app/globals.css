@@ -204,6 +204,16 @@
     --color-info-foreground: var(--white);
   }
 
+  /* ---- Locale-aware sans stack (TYPOGRAPHY.md §4) ----
+     Arabic uses an Arabic-first family; the token name --font-sans is stable,
+     only its resolved stack changes. Falls back to available system Arabic
+     faces until a self-hosted Arabic webfont is added with Arabic content. */
+  [lang="ar"] {
+    --font-sans:
+      "IBM Plex Sans Arabic", "Noto Sans Arabic", var(--font-geist-sans),
+      ui-sans-serif, system-ui, sans-serif;
+  }
+
   /* ---- RTL typographic corrections (TYPOGRAPHY.md §4) ----
      Arabic is cursive: reset the Latin negative tracking to zero (positive or
      negative tracking breaks letter joins) and loosen body line-height. Only
