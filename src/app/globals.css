@@ -98,6 +98,11 @@
     --bp-desktop: 1280px;
     --bp-wide: 1536px;
 
+    /* Container (§4.7) — max content width & reading measure (v1.0.0 default) */
+    --container-max: 80rem; /* 1280px — premium max content width */
+    --container-prose: 65ch; /* long-form reading measure (~60–75 chars) */
+    --container-gutter: var(--space-6); /* side padding at small widths */
+
     /* ---- Typography (TYPOGRAPHY.md) ---- */
     /* Font-family stacks. Geist is supplied by next/font as --font-geist-*.
        The canonical token name stays --font-sans / --font-mono; the Arabic
@@ -109,11 +114,43 @@
       var(--font-geist-mono), "JetBrains Mono", ui-monospace, "SF Mono",
       "Cascadia Code", Menlo, Consolas, monospace;
 
-    /* Fluid sizes for the large steps (TYPOGRAPHY.md §3); smaller steps are
-       fixed rem and live in the Tailwind fontSize map. */
+    /* Type scale (TYPOGRAPHY.md §2). Large steps are fluid clamp(); the rest are
+       fixed rem. Line-height, tracking, and weight are tokens too, so no
+       typographic value is ever hardcoded in a component or the Tailwind theme. */
     --font-size-display: clamp(2.25rem, 1.5rem + 3.2vw, 3.5rem);
     --font-size-h1: clamp(1.875rem, 1.4rem + 2vw, 2.5rem);
     --font-size-h2: clamp(1.625rem, 1.35rem + 1.2vw, 2rem);
+    --font-size-h3: 1.5rem;
+    --font-size-h4: 1.25rem;
+    --font-size-body-lg: 1.125rem;
+    --font-size-body: 1rem;
+    --font-size-small: 0.875rem;
+    --font-size-caption: 0.75rem;
+
+    /* Line-height per step */
+    --leading-display: 1.05;
+    --leading-h1: 1.1;
+    --leading-h2: 1.15;
+    --leading-h3: 1.25;
+    --leading-h4: 1.35;
+    --leading-body-lg: 1.65;
+    --leading-body: 1.6;
+    --leading-small: 1.5;
+    --leading-caption: 1.45;
+
+    /* Letter-spacing (tracking) per step */
+    --tracking-display: -0.02em;
+    --tracking-h1: -0.02em;
+    --tracking-h2: -0.015em;
+    --tracking-h3: -0.01em;
+    --tracking-h4: -0.005em;
+    --tracking-normal: 0;
+    --tracking-caption: 0.01em;
+
+    /* Font weights — three only (TYPOGRAPHY.md §2.1): no light, bold, or black */
+    --weight-regular: 400;
+    --weight-medium: 500;
+    --weight-semibold: 600;
 
     /* ---- Motion (MOTION_GUIDELINES.md) ---- */
     --duration-fast: 120ms;
@@ -167,6 +204,22 @@
     --color-info-foreground: var(--white);
   }
 
+  /* ---- RTL typographic corrections (TYPOGRAPHY.md §4) ----
+     Arabic is cursive: reset the Latin negative tracking to zero (positive or
+     negative tracking breaks letter joins) and loosen body line-height. Only
+     the token VALUES change; component code stays identical. Activates when the
+     locale layer sets dir="rtl" (M2, INTERNATIONALIZATION.md). */
+  [dir="rtl"] {
+    --tracking-display: 0;
+    --tracking-h1: 0;
+    --tracking-h2: 0;
+    --tracking-h3: 0;
+    --tracking-h4: 0;
+    --tracking-caption: 0;
+    --leading-body: 1.7;
+    --leading-body-lg: 1.75;
+  }
+
   /* ---- Base element styles ---- */
   * {
     border-color: var(--color-border);
@@ -184,7 +237,7 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
-    line-height: 1.6;
+    line-height: var(--leading-body);
   }
 
   /* Visible, token-based focus (ACCESSIBILITY.md; DESIGN_LANGUAGE.md → Visible Focus) */
@@ -209,5 +262,54 @@
       transition-duration: 0.01ms !important;
       scroll-behavior: auto !important;
     }
+  }
+}
+
+@layer components {
+  /* ---- Elevation (DESIGN_TOKENS.md §4.4) ----
+     Elevation is a semantic PAIRING of a surface color with a shadow, not a
+     single value, so it is exposed as token-composed utilities. On the dark
+     canvas depth reads through surface lightness + shadow; in light theme the
+     same tokens lean on shadow. Components use `elevation-N`, never raw values. */
+  .elevation-0 {
+    background-color: var(--color-background);
+    box-shadow: var(--shadow-none);
+  }
+  .elevation-1 {
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-none);
+  }
+  .elevation-2 {
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-md);
+  }
+  .elevation-3 {
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-lg);
+  }
+  .elevation-4 {
+    background-color: var(--color-surface);
+    box-shadow: var(--shadow-xl);
+  }
+
+  /* ---- Container (DESIGN_TOKENS.md §4.7; DESIGN_SYSTEM Grid) ----
+     Centered, responsive page container. Max width and gutter are tokens. */
+  .container-page {
+    width: 100%;
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--container-gutter);
+  }
+  /* 1024px mirrors --bp-laptop; CSS @media cannot read custom properties, so
+     the breakpoint is a documented literal (kept in sync with the token). */
+  @media (min-width: 1024px) {
+    .container-page {
+      padding-inline: var(--space-8);
+    }
+  }
+
+  /* Long-form readable measure (TYPOGRAPHY.md → Usage). */
+  .container-prose {
+    max-width: var(--container-prose);
   }
 }

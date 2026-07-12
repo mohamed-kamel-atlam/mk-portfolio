@@ -93,31 +93,82 @@ const config: Config = {
       fontSize: {
         display: [
           "var(--font-size-display)",
-          { lineHeight: "1.05", letterSpacing: "-0.02em", fontWeight: "600" },
+          {
+            lineHeight: "var(--leading-display)",
+            letterSpacing: "var(--tracking-display)",
+            fontWeight: "var(--weight-semibold)",
+          },
         ],
         h1: [
           "var(--font-size-h1)",
-          { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "600" },
+          {
+            lineHeight: "var(--leading-h1)",
+            letterSpacing: "var(--tracking-h1)",
+            fontWeight: "var(--weight-semibold)",
+          },
         ],
         h2: [
           "var(--font-size-h2)",
-          { lineHeight: "1.15", letterSpacing: "-0.015em", fontWeight: "600" },
+          {
+            lineHeight: "var(--leading-h2)",
+            letterSpacing: "var(--tracking-h2)",
+            fontWeight: "var(--weight-semibold)",
+          },
         ],
         h3: [
-          "1.5rem",
-          { lineHeight: "1.25", letterSpacing: "-0.01em", fontWeight: "600" },
+          "var(--font-size-h3)",
+          {
+            lineHeight: "var(--leading-h3)",
+            letterSpacing: "var(--tracking-h3)",
+            fontWeight: "var(--weight-semibold)",
+          },
         ],
         h4: [
-          "1.25rem",
-          { lineHeight: "1.35", letterSpacing: "-0.005em", fontWeight: "600" },
+          "var(--font-size-h4)",
+          {
+            lineHeight: "var(--leading-h4)",
+            letterSpacing: "var(--tracking-h4)",
+            fontWeight: "var(--weight-semibold)",
+          },
         ],
-        "body-lg": ["1.125rem", { lineHeight: "1.65", fontWeight: "400" }],
-        body: ["1rem", { lineHeight: "1.6", fontWeight: "400" }],
-        small: ["0.875rem", { lineHeight: "1.5", fontWeight: "400" }],
+        "body-lg": [
+          "var(--font-size-body-lg)",
+          {
+            lineHeight: "var(--leading-body-lg)",
+            fontWeight: "var(--weight-regular)",
+          },
+        ],
+        body: [
+          "var(--font-size-body)",
+          {
+            lineHeight: "var(--leading-body)",
+            fontWeight: "var(--weight-regular)",
+          },
+        ],
+        small: [
+          "var(--font-size-small)",
+          {
+            lineHeight: "var(--leading-small)",
+            fontWeight: "var(--weight-regular)",
+          },
+        ],
         caption: [
-          "0.75rem",
-          { lineHeight: "1.45", letterSpacing: "0.01em", fontWeight: "500" },
+          "var(--font-size-caption)",
+          {
+            lineHeight: "var(--leading-caption)",
+            letterSpacing: "var(--tracking-caption)",
+            fontWeight: "var(--weight-medium)",
+          },
         ],
+      },
+      fontWeight: {
+        regular: "var(--weight-regular)",
+        medium: "var(--weight-medium)",
+        semibold: "var(--weight-semibold)",
+      },
+      maxWidth: {
+        container: "var(--container-max)",
+        prose: "var(--container-prose)",
       },
       // Named breakpoints Tablet…Wide (Mobile is the base). Aligns with Tailwind
       // md/lg/xl/2xl so a utility prefix and a token never disagree.

@@ -1,6 +1,6 @@
 # Design Tokens
 
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Status:** Draft
 **Last Updated:** July 2026
 **Owner:** Mohamed Kamel
@@ -29,7 +29,7 @@ that structure.
 conventions, the CSS-custom-property and Tailwind mapping, the theming mechanism
 (dark / light / system) expressed through semantic tokens, and the concrete
 values for the *structural* token families whose home is this document:
-**spacing, radius, shadow, elevation, z-index, and breakpoints**.
+**spacing, radius, shadow, elevation, z-index, breakpoints, and container**.
 
 **Out of scope — owned elsewhere.** Concrete values for the *visual-language*
 families live in their own domain documents, and this document references them
@@ -308,9 +308,27 @@ utility prefix and a token name never disagree.
 | `--bp-wide` | **Wide** | 1536px | Tailwind `2xl` |
 
 Layout is authored **mobile-first** ([Design Language → Responsive Design](./DESIGN_LANGUAGE.md)):
-base styles target Mobile; each breakpoint *adds* at larger widths. Maximum
-content width and the 12-column grid are layout concerns governed by
-[DESIGN_SYSTEM.md → Grid System](./DESIGN_SYSTEM.md).
+base styles target Mobile; each breakpoint *adds* at larger widths. The
+12-column grid is a layout concern governed by
+[DESIGN_SYSTEM.md → Grid System](./DESIGN_SYSTEM.md); the maximum content width
+is tokenized in [§4.7](#47-container).
+
+### 4.7 Container
+
+The maximum content width and long-form reading measure. Values are **v1.0.0
+proposed defaults** and tunable.
+
+| Token | Value | Use |
+| --- | --- | --- |
+| `--container-max` | 80rem (1280px) | Max width of the centered page container; aligns with the Desktop breakpoint. |
+| `--container-prose` | 65ch | Long-form reading measure (~60–75 characters, per [TYPOGRAPHY.md → Usage](./TYPOGRAPHY.md)). |
+| `--container-gutter` | `--space-6` (24px) | Side padding at the smallest widths; widens to `--space-8` from Laptop up. |
+
+A premium layout leans on whitespace ([BRAND.md](../product/BRAND.md)); the
+1280px cap keeps line length comfortable on wide screens instead of letting
+content sprawl. The `.container-page` utility composes these with a responsive
+gutter; long-form text additionally constrains to `--container-prose` via
+`.container-prose`.
 
 ---
 
