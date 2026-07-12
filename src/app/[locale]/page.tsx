@@ -1,4 +1,12 @@
-import { Hero } from "@/features/home";
+import {
+  AiWorkflowPreview,
+  EngineeringPhilosophy,
+  ExperienceTimeline,
+  FeaturedProjects,
+  FinalCta,
+  Hero,
+  TechStack,
+} from "@/features/home";
 import { defaultLocale, isLocale, type Locale } from "@/shared/i18n/config";
 
 interface HomePageProps {
@@ -6,14 +14,23 @@ interface HomePageProps {
 }
 
 /**
- * Landing page (M3). A thin routing-layer composition: it resolves the locale
- * and renders the home feature's sections. The hero is the first; further
- * sections (selected projects, engineering philosophy, …) are added here as
- * they are built (FR-003).
+ * Landing page (FR-003). A thin routing-layer composition: it resolves the
+ * locale and assembles the home feature's sections in narrative order. Each
+ * section is a Server Component and owns its own content and layout.
  */
 export default async function HomePage({ params }: HomePageProps) {
   const { locale } = await params;
   const active: Locale = isLocale(locale) ? locale : defaultLocale;
 
-  return <Hero locale={active} />;
+  return (
+    <>
+      <Hero locale={active} />
+      <FeaturedProjects locale={active} />
+      <TechStack locale={active} />
+      <ExperienceTimeline locale={active} />
+      <EngineeringPhilosophy locale={active} />
+      <AiWorkflowPreview locale={active} />
+      <FinalCta locale={active} />
+    </>
+  );
 }

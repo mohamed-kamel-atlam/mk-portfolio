@@ -1,2 +1,14 @@
+export { AiWorkflowPreview } from "./components/AiWorkflowPreview";
+export type { AiWorkflowPreviewProps } from "./components/AiWorkflowPreview";
+export { EngineeringPhilosophy } from "./components/EngineeringPhilosophy";
+export type { EngineeringPhilosophyProps } from "./components/EngineeringPhilosophy";
+export { ExperienceTimeline } from "./components/ExperienceTimeline";
+export type { ExperienceTimelineProps } from "./components/ExperienceTimeline";
+export { FeaturedProjects } from "./components/FeaturedProjects";
+export type { FeaturedProjectsProps } from "./components/FeaturedProjects";
+export { FinalCta } from "./components/FinalCta";
+export type { FinalCtaProps } from "./components/FinalCta";
 export { Hero } from "./components/Hero";
 export type { HeroProps } from "./components/Hero";
+export { TechStack } from "./components/TechStack";
+export type { TechStackProps } from "./components/TechStack";

@@ -24,5 +24,89 @@
     "subheadline": "I design, architect, and build production-grade web applications — with the performance, accessibility, and craft of a modern SaaS product.",
     "ctaPrimary": "View projects",
     "ctaSecondary": "Get in touch"
+  },
+  "home": {
+    "projects": {
+      "eyebrow": "Selected work",
+      "title": "Featured projects",
+      "intro": "A few builds that show the engineering behind the interface.",
+      "cta": "View all projects",
+      "items": {
+        "streaming": {
+          "title": "AI Streaming Platform",
+          "summary": "A real-time AI product with streamed server rendering and resilient, accessible UX."
+        },
+        "designSystem": {
+          "title": "Design System",
+          "summary": "A tokenized, accessible component system powering multiple applications."
+        }
+      }
+    },
+    "tech": {
+      "eyebrow": "Toolset",
+      "title": "Technologies I build with",
+      "intro": "A focused, modern stack chosen for performance and maintainability.",
+      "groups": {
+        "framework": "Framework",
+        "language": "Language",
+        "styling": "Styling",
+        "content": "Content",
+        "platform": "Platform"
+      }
+    },
+    "timeline": {
+      "eyebrow": "Journey",
+      "title": "Engineering journey",
+      "intro": "How the craft has grown, stage by stage.",
+      "items": {
+        "foundations": {
+          "title": "Foundations",
+          "summary": "Deep frontend fundamentals — semantics, accessibility, and performance."
+        },
+        "scaling": {
+          "title": "Scaling",
+          "summary": "Architecting maintainable, scalable frontend systems for growing products."
+        },
+        "ai": {
+          "title": "AI products",
+          "summary": "Building AI-powered SaaS experiences with production-grade quality."
+        }
+      }
+    },
+    "philosophy": {
+      "eyebrow": "Principles",
+      "title": "Engineering philosophy",
+      "intro": "The convictions behind every decision.",
+      "items": {
+        "engineering": {
+          "title": "Engineering first",
+          "description": "Decisions are driven by architecture and evidence, not trends."
+        },
+        "performance": {
+          "title": "Performance by default",
+          "description": "Fast, lean interfaces are a feature, not an afterthought."
+        },
+        "accessibility": {
+          "title": "Accessibility always",
+          "description": "Everyone can use it — WCAG AA is the baseline, not the goal."
+        },
+        "simplicity": {
+          "title": "Simplicity over complexity",
+          "description": "The simpler solution wins whenever the choice is hard."
+        }
+      }
+    },
+    "ai": {
+      "eyebrow": "AI workflow",
+      "title": "Engineering with AI, deliberately",
+      "intro": "AI accelerates the work; the engineering judgment stays human. Documentation drives the process, and every change is reviewed and verified.",
+      "cta": "Explore the engineering"
+    },
+    "finalCta": {
+      "title": "Let's build something exceptional.",
+      "subtitle": "Available for senior frontend and AI product work.",
+      "primary": "Start a conversation",
+      "secondary": "Browse projects"
+    }
   }
 }
