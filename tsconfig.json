@@ -26,6 +26,7 @@
       "@/app/*": ["app/*"],
       "@/features/*": ["features/*"],
       "@/shared/*": ["shared/*"],
+      "@/content": ["content"],
       "@/content/*": ["content/*"]
     }
   },

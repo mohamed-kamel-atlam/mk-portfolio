@@ -1,4 +1,0 @@
-# CONTENT LAYER — typed, in-repo MDX + structured data (source of truth).
-# Organized by content type. See docs/engineering/FOLDER_STRUCTURE.md §6,
-# docs/developer/CONTENT_MODEL.md, and docs/developer/MDX_PIPELINE.md.
-# Content is authored from M4 onward.

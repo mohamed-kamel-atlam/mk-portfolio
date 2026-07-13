@@ -30,17 +30,7 @@
       "eyebrow": "Selected work",
       "title": "Featured projects",
       "intro": "A few builds that show the engineering behind the interface.",
-      "cta": "View all projects",
-      "items": {
-        "streaming": {
-          "title": "AI Streaming Platform",
-          "summary": "A real-time AI product with streamed server rendering and resilient, accessible UX."
-        },
-        "designSystem": {
-          "title": "Design System",
-          "summary": "A tokenized, accessible component system powering multiple applications."
-        }
-      }
+      "cta": "View all projects"
     },
     "tech": {
       "eyebrow": "Toolset",

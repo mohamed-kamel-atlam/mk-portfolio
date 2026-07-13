@@ -1,0 +1,89 @@
+import { cache } from "react";
+
+import { defaultLocale, type Locale } from "@/shared/i18n/config";
+
+import { loadCollection } from "./loader";
+import type { ContentItem, ContentType } from "./schema";
+
+/**
+ * The typed content-access API (MDX_PIPELINE §7). It returns the same types
+ * validated at build time, so consumers never receive an unexpected shape
+ * (QAT-3). This is the public surface of the Content layer (`@/content`).
+ *
+ * Note: the MDX *render* path (`@/content/mdx`) is a separate module so its
+ * heavier compile dependencies are only loaded by routes that render bodies.
+ */
+
+/** Order by explicit `order` (ascending), then by `date` descending (§2.4). */
+function sortItems<T extends ContentType>(
+  items: ContentItem<T>[],
+): ContentItem<T>[] {
+  return [...items].sort((a, b) => {
+    const ao = a.frontmatter.order;
+    const bo = b.frontmatter.order;
+    if (ao !== undefined && bo !== undefined) return ao - bo;
+    if (ao !== undefined) return -1;
+    if (bo !== undefined) return 1;
+    return b.frontmatter.date.localeCompare(a.frontmatter.date);
+  });
+}
+
+/** All non-draft items of a type for a locale, ordered. */
+export async function listContent<T extends ContentType>(
+  type: T,
+  locale: Locale,
+): Promise<ContentItem<T>[]> {
+  const all = await loadCollection(type);
+  return sortItems(
+    all.filter((e) => e.locale === locale && !e.frontmatter.draft),
+  );
+}
+
+/** Featured members of a collection (`frontmatter.featured === true`). */
+export async function featuredContent<T extends ContentType>(
+  type: T,
+  locale: Locale,
+): Promise<ContentItem<T>[]> {
+  return (await listContent(type, locale)).filter(
+    (e) => e.frontmatter.featured,
+  );
+}
+
+/** One item by slug + locale, falling back to the default locale (MDX_PIPELINE §8). */
+export async function getContent<T extends ContentType>(
+  type: T,
+  slug: string,
+  locale: Locale,
+): Promise<ContentItem<T> | null> {
+  const all = await loadCollection(type);
+  const exact = all.find(
+    (e) => e.slug === slug && e.locale === locale && !e.frontmatter.draft,
+  );
+  if (exact) return exact;
+  const fallback = all.find(
+    (e) =>
+      e.slug === slug && e.locale === defaultLocale && !e.frontmatter.draft,
+  );
+  return fallback ?? null;
+}
+
+/** Distinct slugs for a type — feeds `generateStaticParams` (MDX_PIPELINE §7). */
+export const getContentSlugs = cache(
+  async (type: ContentType): Promise<string[]> => {
+    const all = await loadCollection(type);
+    return [...new Set(all.map((e) => e.slug))];
+  },
+);
+
+export { buildContentMetadata } from "./metadata";
+export type {
+  ContentItem,
+  ContentType,
+  FrontmatterOf,
+  ProjectFrontmatter,
+  CaseStudyFrontmatter,
+  ArticleFrontmatter,
+  JourneyEntryFrontmatter,
+  ExperienceFrontmatter,
+  EngineeringDocFrontmatter,
+} from "./schema";

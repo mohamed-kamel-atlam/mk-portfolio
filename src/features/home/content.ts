@@ -8,20 +8,9 @@
  * (developer/CONTENT_MODEL.md).
  */
 
-export const featuredProjects = [
-  {
-    key: "streaming",
-    tags: ["Next.js", "RSC", "Streaming"],
-    path: "/projects/streaming-platform",
-  },
-  {
-    key: "designSystem",
-    tags: ["Design Tokens", "Tailwind", "a11y"],
-    path: "/projects/design-system",
-  },
-] as const;
-
-export type FeaturedProjectKey = (typeof featuredProjects)[number]["key"];
+// Featured projects now come from the MDX content engine (@/content); see
+// FeaturedProjects.tsx. The remaining data below backs sections not yet migrated
+// to content collections.
 
 export const techGroups = [
   { key: "framework", items: ["Next.js", "React"] },

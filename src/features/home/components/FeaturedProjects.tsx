@@ -1,3 +1,4 @@
+import { featuredContent } from "@/content";
 import { localizedHref, type Locale } from "@/shared/i18n/config";
 import { getDictionary } from "@/shared/i18n/get-dictionary";
 import {
@@ -10,17 +11,21 @@ import {
   Text,
 } from "@/shared/ui";
 
-import { featuredProjects } from "../content";
 import { SectionHeading } from "./SectionHeading";
 
 export interface FeaturedProjectsProps {
   locale: Locale;
 }
 
-/** Selected-work grid. Cards are equal-height (tags pinned to the base). */
+/**
+ * Selected-work grid. Project data comes from the MDX content engine
+ * (`@/content`) — validated frontmatter, ordered and locale-scoped — while the
+ * section chrome (eyebrow/title/intro/cta) is localized via the dictionary.
+ */
 export async function FeaturedProjects({ locale }: FeaturedProjectsProps) {
   const t = await getDictionary(locale);
   const section = t.home.projects;
+  const projects = await featuredContent("projects", locale);
 
   return (
     <Section>
@@ -31,22 +36,19 @@ export async function FeaturedProjects({ locale }: FeaturedProjectsProps) {
           intro={section.intro}
         />
         <div className="grid gap-6 sm:grid-cols-2">
-          {featuredProjects.map((project) => {
-            const item = section.items[project.key];
-            return (
-              <Card key={project.key} className="flex flex-col gap-4">
-                <Heading level={3} size="h4">
-                  {item.title}
-                </Heading>
-                <Text tone="muted">{item.summary}</Text>
-                <div className="mt-auto flex flex-wrap gap-2 pt-2">
-                  {project.tags.map((tag) => (
-                    <Badge key={tag}>{tag}</Badge>
-                  ))}
-                </div>
-              </Card>
-            );
-          })}
+          {projects.map((project) => (
+            <Card key={project.slug} className="flex flex-col gap-4">
+              <Heading level={3} size="h4">
+                {project.frontmatter.title}
+              </Heading>
+              <Text tone="muted">{project.frontmatter.summary}</Text>
+              <div className="mt-auto flex flex-wrap gap-2 pt-2">
+                {project.frontmatter.techStack.map((tech) => (
+                  <Badge key={tech.name}>{tech.name}</Badge>
+                ))}
+              </div>
+            </Card>
+          ))}
         </div>
         <div>
           <ButtonLink
