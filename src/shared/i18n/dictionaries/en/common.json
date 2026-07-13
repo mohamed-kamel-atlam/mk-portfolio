@@ -262,5 +262,56 @@
       "locality": "Tanta, Egypt",
       "alumniOf": "Menoufia University"
     }
+  },
+  "engineering": {
+    "meta": {
+      "title": "Engineering",
+      "description": "The engineering behind the portfolio — architecture, rendering strategies, React internals, performance, accessibility, and the workflow that ships it."
+    },
+    "intro": {
+      "eyebrow": "Engineering",
+      "title": "The engineering behind the interface.",
+      "lead": "Living documentation of how this site is built — the architecture, the rendering model, and the decisions and workflow behind them. The same docs that govern the code, made public."
+    },
+    "groups": {
+      "foundations": "Foundations",
+      "rendering": "Rendering & React",
+      "quality": "Quality",
+      "workflow": "Workflow",
+      "decisions": "Decisions"
+    },
+    "kinds": {
+      "architecture": "Architecture",
+      "folder-structure": "Folder Structure",
+      "performance": "Performance",
+      "rendering": "Rendering",
+      "react-internals": "React Internals",
+      "accessibility": "Accessibility",
+      "ai-workflow": "AI Workflow",
+      "workflow": "Development Workflow",
+      "design-decision": "Architecture Decisions",
+      "code-quality": "Code Quality",
+      "journal": "Journal"
+    },
+    "journal": {
+      "eyebrow": "Journal",
+      "title": "Development journal",
+      "intro": "The build, milestone by milestone — the decisions and turning points behind the portfolio."
+    },
+    "journalKinds": {
+      "learning": "Learning",
+      "project": "Project",
+      "career": "Career",
+      "decision": "Decision",
+      "goal": "Goal"
+    },
+    "article": {
+      "back": "All engineering",
+      "onThisPage": "On this page",
+      "updated": "Updated",
+      "previous": "Previous",
+      "next": "Next",
+      "pager": "Article navigation"
+    }
   }
 }

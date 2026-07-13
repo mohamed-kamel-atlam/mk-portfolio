@@ -1,0 +1,27 @@
+---
+title: Engineering with AI
+summary: How AI accelerates the work while engineering judgment stays human.
+date: 2026-07-13
+order: 6
+kind: ai-workflow
+---
+
+This portfolio is built with heavy AI assistance, and the methodology behind that practice is itself documented as first-class content. The governing rule is one sentence: AI proposes, the human reviews and decides. That boundary is not a caveat added after the fact — it is the mechanism that lets AI accelerate delivery without ever silently changing product requirements or architecture, and the reason the brand can claim trust earned through the product itself rather than through marketing about the process.
+
+## The principle
+
+AI is a force multiplier on a well-specified system, not a shortcut around specifying it. Three reasons this fits the project: working effectively with AI is an honest reflection of modern engineering practice; the architecture — documentation-driven, with locked decisions, layer boundaries, and a state hierarchy already in writing — is what makes AI output reliable rather than a source of drift; and AI removes the cost of mechanical work (scaffolding a token-styled component, drafting localized copy, translating a pattern across features) so the scarce resource, engineering judgment, is spent on decisions. The Definition of Done is identical whoever produced the code.
+
+The owner sets direction, approves or rejects every proposal, owns all architecture and product-scope decisions, and manages version control manually. The AI agent reads documentation as context, proposes implementations, explains trade-offs, and surfaces decisions it is not authorized to make — it is never the final authority. It cannot change product requirements, reverse an architectural decision, add a dependency of consequence, or ship code; it can only recommend, with reasoning.
+
+## Documentation-driven prompting
+
+The central methodology claim is that documentation, not the chat transcript, is the shared context. A conversation is ephemeral and unversioned; the documentation is durable, reviewed, and versioned. Every agent reads `CLAUDE.md` before working — the condensed contract of locked decisions, the four layers, and hard rules — and because the project is documentation-driven, the decision an agent needs usually already exists in writing; its job is to apply the specification, not reinvent it. Effective prompts point to the governing document rather than paraphrasing it, and name the functional requirement and target layer up front. This is also why two different agents, or the same agent weeks apart, produce compatible work: they read the same documents, not the same conversation.
+
+## The loop
+
+AI occupies the first four steps of the working loop — frame, document, build, verify — while the owner owns the fifth: review and commit. There is no separate, lighter track for AI-generated code. A clear guardrail table separates what AI may decide (how to implement a settled requirement, which token or pattern to reuse, Server versus Client Component for a given node) from what it must escalate (any product-requirement change, any change to architecture or a locked decision, introducing global state, adding a dependency of consequence, or anything touching the non-goals). The rule of thumb: AI may choose _how_ to satisfy a written decision; it may never make or unmake the decision itself.
+
+## Review and verification
+
+AI-generated work earns no trust discount. It passes through the same verification any change does: automated quality gates (lint, type check, build, accessibility, performance budget), an architectural review against the Architecture Checklist, the full Definition of Done, and human sign-off. Nothing merges on the agent's own authority — the owner reviews, approves, and commits every change. Because the gates and the checklist are identical for humans and AI, the provenance of a change makes no difference to the bar it must clear, and that equivalence is the guarantee behind the practice.

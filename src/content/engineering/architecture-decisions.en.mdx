@@ -1,0 +1,35 @@
+---
+title: Architecture Decisions
+summary: The ADR log — the significant technical decisions, their context, and their consequences.
+date: 2026-07-13
+order: 9
+kind: design-decision
+---
+
+An Architecture Decision Record (ADR) captures one decision that is expensive to reverse, constrains many decisions after it, or embodies a non-obvious trade-off between quality attributes — not a choice that is local, cheap to change, or self-evident. Each record fixes the context that forced the decision, the option chosen, the alternatives honestly considered and rejected, and the consequences accepted in exchange. This portfolio keeps its ADRs in `docs/adr/` as the canonical record of _why the system is the way it is_, written at the moment each decision is made rather than reconstructed afterward. Every record below is `Accepted` and dated July 2026.
+
+## The decision log
+
+### ADR-0001 — Next.js App Router
+
+The portfolio has no application backend and no runtime database, and its top priorities are performance (Lighthouse ≥ 95) and SEO through server-rendered, localized HTML — while Next.js with the App Router was also an owner directive. The decision builds the entire application on the App Router (the `app/` directory model) rather than the legacy Pages Router, adopting React Server Components as the default execution context, streaming with `loading`/`error` conventions, the Metadata API, and file-system routing including `app/[locale]/`. The consequence: server-first rendering and localized routing become framework defaults rather than bolt-ons, at the cost of a real learning curve around the server/client boundary and deliberate coupling to Next.js and Vercel.
+
+### ADR-0002 — Feature-Based Architecture
+
+Maintainability and codebase scalability rank above short-term implementation speed, and the codebase is expected to grow feature by feature across many milestones. The decision organizes code by feature domain rather than technical type, across four layers — routing, feature, shared, and content — with a strict rule that dependencies point only inward and downward, so a feature never imports another feature's internals. This keeps each feature cohesive and prevents accidental coupling as the codebase scales, at the cost of requiring real judgment about when code is genuinely shared versus feature-specific.
+
+### ADR-0003 — Tailwind CSS Driven by Design Tokens
+
+Consistency is enforced through one non-negotiable rule: no design value is hardcoded in a component, and every value resolves to a design token. The decision styles the application with Tailwind CSS configured so its utilities are driven directly by the design tokens, with semantic color tokens backed by CSS custom properties, making token-bound utilities the path of least resistance and arbitrary values a lintable violation. The consequence: the token rule becomes structural and enforceable in CI rather than dependent on review discipline, at the cost of utility-dense markup and a Tailwind theme config that must stay in lockstep with the design tokens.
+
+### ADR-0004 — Internationalization Approach
+
+Internationalization is a critical, foundational requirement — English and Arabic, RTL support, localized routes and metadata — and the architecture treats it as cross-cutting and non-retrofittable. The decision adopts path-prefixed locale routing under `app/[locale]/`, with `en` as the LTR default and `ar` as RTL, document direction derived from the locale on the server before first paint, per-locale dictionaries, localized metadata with reciprocal `hreflang`, and automatic detection that a user's explicit choice can override. The consequence: every locale gets a distinct, indexable, correctly-directed URL from first paint, at the cost of every route living under `[locale]` and two content trees that must be kept in sync.
+
+### ADR-0005 — Theme System
+
+A theme system is a critical requirement — dark, light, and system modes with persistence and accessible colors — and the design direction is explicitly dark-first, while the server-first rendering model makes a flash of the wrong theme unacceptable. The decision adopts a dark-first theme system expressed entirely through semantic design tokens backed by CSS custom properties, with the active theme resolved via a small blocking script before first paint, and both palettes contrast-checked to WCAG AA. The consequence: one component definition serves every theme with no per-component branching and no flash of incorrect theme, at the cost of a small deliberate exception to the minimal-client-JS rule and the requirement that every semantic token be verified for both palettes.
+
+### ADR-0006 — Rendering Strategy
+
+Performance by default is the highest-priority quality attribute after correctness and accessibility, and the content — projects, articles, journey entries — is known entirely at build time with no runtime database. The decision adopts a server-first rendering strategy: components are Server Components by default, `"use client"` is used only where interactivity genuinely requires it and pushed to the leaves of the tree, pages are statically generated by default, and streaming with Suspense is used where progressive delivery helps. The consequence: minimal client JavaScript and maximal server-rendered, edge-deliverable HTML, at the cost of engineers having to consciously manage the server/client boundary rather than reaching for client state freely.

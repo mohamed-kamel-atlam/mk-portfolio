@@ -6,6 +6,7 @@ import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 import type { PluggableList } from "unified";
 
+import { cn } from "@/shared/lib/cn";
 import { Divider, Heading, Text } from "@/shared/ui";
 
 /**
@@ -41,13 +42,24 @@ const components = {
       {...props}
     />
   ),
-  a: ({ href, ...props }: ComponentPropsWithoutRef<"a">) => (
-    <a
-      href={href ?? "#"}
-      className="text-accent underline underline-offset-4 hover:no-underline"
-      {...props}
-    />
-  ),
+  a: ({ href, className, ...props }: ComponentPropsWithoutRef<"a">) => {
+    // Heading anchors (rehype-autolink-headings, "wrap") must read as headings,
+    // not links: inherit the heading color, no underline, subtle accent on hover.
+    const isHeadingLink =
+      typeof className === "string" && className.includes("heading-link");
+    return (
+      <a
+        href={href ?? "#"}
+        className={cn(
+          isHeadingLink
+            ? "text-inherit no-underline transition-colors duration-fast hover:text-accent"
+            : "text-accent underline underline-offset-4 hover:no-underline",
+          className,
+        )}
+        {...props}
+      />
+    );
+  },
   blockquote: (props: ComponentPropsWithoutRef<"blockquote">) => (
     <blockquote
       className="border-s-2 border-accent bg-surface-muted px-4 py-2 text-muted-foreground"
@@ -77,7 +89,10 @@ const components = {
 const remarkPlugins: PluggableList = [remarkGfm];
 const rehypePlugins: PluggableList = [
   rehypeSlug,
-  [rehypeAutolinkHeadings, { behavior: "wrap" }],
+  [
+    rehypeAutolinkHeadings,
+    { behavior: "wrap", properties: { className: ["heading-link"] } },
+  ],
   [rehypeExternalLinks, { target: "_blank", rel: ["noopener", "noreferrer"] }],
 ];
 const mdxOptions = { remarkPlugins, rehypePlugins };

@@ -1,0 +1,29 @@
+---
+title: React Internals
+summary: Server and Client Components, the RSC boundary, reconciliation, and why less client JavaScript wins.
+date: 2026-07-13
+order: 3
+kind: react-internals
+---
+
+React Server Components are the execution model this project is built on, not an optional optimization layered on top of a client-rendered app. Per `ADR-0006` and `ARCHITECTURE.md §5`, a component is a Server Component unless it must run on the client, and that default is the starting point for every file, not a case-by-case preference. Understanding how React decides what runs where, how it reconciles updates, and when a re-render happens is what makes the server-first rule more than a style preference: it is the mechanism behind the project's performance and SEO posture (`QAT-1`, `QAT-6`).
+
+## Server and Client Components
+
+A Server Component renders to HTML on the server and ships no component JavaScript to the browser; it can read content directly at render time, with no `useEffect` or client-side fetch, because it never runs in the browser at all. A Client Component, marked with `"use client"`, renders once on the server for the initial HTML and then hydrates and re-renders in the browser like classic React. This project treats the Server Component as unquestioned, and a Client Component as a deliberate choice justified only by a fixed checklist — interactive event handlers, `useState`/`useEffect`/`useRef`, browser-only APIs, Context for client state, or a stateful third-party widget. "Easier" or "to be safe" are explicitly not valid reasons; `"use client"` on a page or layout is called out in `RENDERING_STRATEGY.md` as the highest-impact anti-pattern, because it pulls the entire import subtree into the client bundle.
+
+## The RSC boundary
+
+`"use client"` does not mark a single component as client-only — it marks the boundary where the module graph crosses from server to client, and every module that component imports is bundled and shipped to the browser. This is why the project pushes the boundary to the leaves: a toggle, a menu button, a filter input, never a page or section. Props crossing from a Server Component into a Client Component must be serializable — plain data, not functions or elements holding server-only closures — since they are transmitted, not called by reference. The one structural exception is `children`: a Server Component can pass server-only content as `children` into a Client Component shell, and that content stays server-rendered and unbundled, because the shell never imports it. The project leans on this to keep interactive shells (a gallery wrapper, a filter bar) thin while the content inside stays free.
+
+## Reconciliation and keys
+
+React's rendering model produces a tree of elements each render, then diffs it against the previous tree to compute the minimal DOM mutations — reconciliation. Sibling lists are matched by `key`, not position or content equality, so a stable, unique `key` (a project slug, a content ID) tells React an item persisted, preserving its state and avoiding an unnecessary unmount/remount. An array index as `key` for a reorderable or filterable list — as `ProjectFilterBar` results might be — defeats this, matching by position instead of identity and silently swapping state between items. Because most lists here come from statically generated content rather than client-side reordering, the concern is narrower than in a typical client-heavy app, but it still governs any list inside a Client Component island.
+
+## Re-renders and memoization
+
+A component re-renders when its own state changes, a parent re-renders and passes new props by reference, or a consumed Context value changes — this applies only within Client Component trees, since Server Components render once per request with no re-render lifecycle. `useMemo` and `useCallback` trade a computation for a dependency-array comparison on every render; they help when the memoized work is genuinely expensive, and are overhead, not free, everywhere else. Given how few Client Components this project has by design, premature memoization is a smaller risk here than in a client-first app, but it stays a case-by-case call driven by a profiler, not a reflex on every handler.
+
+## Less client JavaScript
+
+Every mechanic above points back to the same lever: work done on the server never needs reconciling, memoizing, or re-rendering in the browser, because it never enters the client's React tree. Moving data shaping and markup generation into Server Components — `RENDERING_STRATEGY.md §7`'s "keep data-shaping on the server" — doesn't just cut bundle size, it removes categories of client-side work: no hydration, no reconciliation pass, no stale closure or missed memo dependency. This is why the project's server-first principle is a performance strategy, not a stylistic one: the fastest client-side render is the one that never has to run.

@@ -1,0 +1,43 @@
+---
+title: Accessibility
+summary: WCAG AA as a baseline — semantics, focus, contrast, reduced motion, and right-to-left support.
+date: 2026-07-13
+order: 5
+kind: accessibility
+---
+
+Accessibility is not a post-launch audit here — it is a build-time requirement of every component, and the one quality attribute the architecture designates as never traded away (QAT-2). This article covers the conformance target, the rules every component must meet, and how conformance is verified.
+
+## WCAG AA as the baseline
+
+The conformance target is **WCAG 2.1 Level AA**, evaluated against the four POUR principles — Perceivable, Operable, Understandable, Robust — on every page, in both locales and both directions (LTR/RTL); this is the whole site, not a subset of "important pages." Where exceeding AA is cheap, the project takes it, but AA is the bar that must always be met. Components are built accessible by construction; testing confirms that baseline, never discovers failures in it.
+
+## Semantics and landmarks
+
+Use the element that means the thing: `<button>` for actions, `<a href>` for navigation, `<nav>`, `<main>`, `<header>`, `<footer>`, `<article>`, `<section>`, and list elements for lists. A `<div>` with a click handler standing in for a `<button>` loses keyboard operability and the correct accessible role.
+
+Every page has exactly **one `<main>`**, plus a consistent landmark set — `banner`, `navigation`, `main`, `contentinfo`, `complementary` — provided by native elements, never by `role=` on a generic container. A "Skip to main content" link is the first focusable element on every page, visible on focus.
+
+## Heading order
+
+Every page has exactly **one `<h1>`**, naming its purpose, and heading levels descend without skipping (`h1 → h2 → h3`). Level conveys structure only — it is decoupled from visual size, a typography-token concern, never a reason to pick a heading tag. Long-form pages, such as docs and case studies, use their heading outline as the navigable structure.
+
+## Keyboard and focus
+
+Everything achievable with a pointer must be achievable from the keyboard — `Tab`/`Shift+Tab`, `Enter`/`Space`, and arrow keys where a pattern expects them (menus, tabs, the command menu). Focus order follows logical reading order, including in RTL, because layout uses logical CSS properties. No element may trap focus. Overlays — dialogs, the command menu, mobile navigation — trap focus while open, close on `Escape`, and return focus to the trigger. `tabindex` never takes a positive value, which corrupts natural order.
+
+A visible focus indicator is required on every focusable element, meeting AA contrast against its background. The ring is a dedicated, theme-aware token rendered via `:focus-visible`, never a hardcoded color. `outline: none` with no replacement is a defect, and the indicator must never be clipped by `overflow: hidden` on an ancestor.
+
+## Contrast and color
+
+Text and UI pairings must clear WCAG AA contrast — at least 4.5:1 for normal text, at least 3:1 for large text and meaningful UI components — in **both** themes; the color system is dark-first, and light mode must clear the same bar. Exact ratios and token values belong to the color-system documentation. Color is never the only carrier of meaning: a state, a required field, an error, or a link is always distinguished by an icon, text, underline, or shape as well, and every color value resolves to a token.
+
+## Reduced motion
+
+Motion must never harm. When `prefers-reduced-motion: reduce` is set, non-essential motion — parallax, large transitions, autoplay, decorative animation — is removed or replaced with an instantaneous or minimal change; essential motion is reduced to its gentlest form rather than eliminated harshly. Nothing flashes more than three times per second, and no large vestibular triggers are permitted. Motion tokens and timings belong to the motion documentation; this standard's contract is narrower: every animation checks the preference and defines a reduced state, in both LTR and RTL.
+
+## Right-to-left
+
+Because Arabic is a first-class locale, RTL must be accessible, not merely rendered. `lang` and `dir` are set correctly from the active locale at the root layout, so assistive technology pronounces content and voices reading order correctly. An inline run in another language — an English term inside Arabic prose — carries its own `lang` attribute. Because layout uses logical CSS properties, focus and reading order follow logical direction automatically in RTL. Directional controls, such as "Previous," are labeled by meaning rather than direction, even though their icon may mirror.
+
+Conformance is verified through a layered approach — automated `axe` checks on every PR tied to a Lighthouse accessibility budget of at least 95, plus mandatory manual keyboard-only and screen-reader passes — since automation alone catches only a fraction of real accessibility defects.

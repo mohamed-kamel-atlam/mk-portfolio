@@ -1,0 +1,62 @@
+---
+title: Folder Structure
+summary: How the codebase is organized — layers, features, shared code, and import boundaries.
+date: 2026-07-13
+order: 8
+kind: folder-structure
+---
+
+Where `ARCHITECTURE.md §6` defines the four-layer _frame_ — routing, feature, shared, and content, with dependencies pointing downward only — this document defines the _detail_: exactly where a file lives, what each directory may contain, and how a feature exposes itself to the rest of the system. The structure is the primary mechanism for maintainability (`QAT-3`) and codebase scalability (`QAT-4`): a contributor should be able to place any new file without deliberation, and a reviewer should be able to spot a misplaced file or an illegal import on sight.
+
+## Top-level layout
+
+Application layers are colocated under a single `src/` directory, keeping application code separate from root-level configuration and keeping path aliases short.
+
+```text
+src/
+├─ app/         # ROUTING LAYER — URLs, layouts, metadata, locale segment
+├─ features/    # FEATURE LAYER — self-contained domains
+├─ shared/      # SHARED LAYER — cross-feature building blocks
+└─ content/     # CONTENT LAYER — typed MDX + structured data
+```
+
+`app/` is the Next.js App Router tree. It is deliberately thin: route files map URLs to pages, own layouts and metadata, define the `[locale]` segment, and compose feature exports — they never implement feature logic. The only React files allowed there are the App Router special files (`layout.tsx`, `page.tsx`, `loading.tsx`, `error.tsx`, `not-found.tsx`, `template.tsx`) plus route-scoped assets such as `opengraph-image.tsx`.
+
+`features/` holds self-contained product domains — `projects`, `contact`, `search`, `theme` — each owning its own components, logic, and types. `shared/` holds cross-feature building blocks (`shared/ui`, `shared/lib`, `shared/hooks`, `shared/providers`, `shared/config`, `shared/i18n`, `shared/constants`, `shared/styles`, `shared/types`) and depends on nothing feature-specific. `content/` is the source of truth for projects, case studies, articles, journey entries, and the published engineering documentation, organized by content type rather than locale or feature.
+
+## Inside a feature
+
+Every feature follows the same shape, though not every subdirectory is required — `hooks/` and `types/` exist only when a feature actually needs them.
+
+```text
+features/projects/
+├─ index.ts         # PUBLIC SURFACE — the only legal import path
+├─ components/      # feature-owned React components (Server + Client)
+├─ lib/              # feature-private logic (composes content access)
+├─ types/            # feature-local types
+└─ hooks/            # feature-local client hooks (optional)
+```
+
+`components/` holds the feature's Server and Client Components together; `lib/` holds pure, feature-private logic, including the functions that read content through the typed content-access layer (it never parses MDX itself). `types/` holds feature-local types — the content _schema_ itself lives in the content layer. Role folders are fixed and never renamed: `components`, `lib`, `types`, `hooks` — never `utils/`, `helpers/`, or `models/`.
+
+## Import boundaries
+
+Path aliases in `tsconfig.json` give every layer a stable, absolute prefix — `@/app/*`, `@/features/*`, `@/shared/*`, `@/content/*` — so a deep import is visually obvious in review. The allowed-import matrix encodes three invariants: dependencies point downward only (routing to feature, feature to shared, feature to content); a feature never imports another feature; and cross-layer feature imports go only through that feature's `index.ts`. A cross-feature need is resolved by promoting the shared piece into `shared/` (or `content/` for content logic), never by reaching into a sibling feature. A lint rule encodes this matrix so a violation fails CI rather than review.
+
+## Barrels and public API
+
+Each feature exposes exactly one `index.ts`, re-exporting the symbols other layers may use — the feature's entire public API:
+
+```ts
+export { ProjectGrid } from "./components/project-grid";
+export { getProjects, getProjectBySlug } from "./lib/get-projects";
+export type { Project } from "./types/project";
+```
+
+Consumers always import from the feature root (`@/features/projects`), never from a deep path such as `@/features/projects/components/project-card`. The barrel is the seam that makes internals refactorable: as long as `index.ts` stays stable, a feature can reorganize `components/` and `lib/` freely. The surface stays minimal — export only what consumers genuinely need, never a symbol used solely inside the feature.
+
+## Placing a new file
+
+The decision procedure stops at the first matching branch: route-level UI or metadata goes to `app/`; content goes to `content/<type>/`; generic, feature-agnostic UI goes to `shared/ui`; a pure utility, hook, or config reusable across features goes to `shared/lib`, `shared/hooks`, or `shared/config`; anything belonging to exactly one feature goes into that feature's role folders, exposed via `index.ts` only if another layer must import it. Two features needing the same thing is resolved by promotion into `shared/` or `content/`, never a feature-to-feature import. When still unsure, the default is feature-local — start local, promote on evidence, since lifting a file up later is cheap and untangling a shared module only one feature ever used is not.
+
+Directories are `kebab-case` throughout, and generic or numbered names (`utils/`, `common/`, `misc/`, `components2/`) are disallowed — a folder whose name cannot be justified by its role should not exist.

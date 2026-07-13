@@ -1,7 +1,12 @@
 import type { Metadata } from "next";
 
 import { siteConfig } from "@/shared/config/site";
-import { localizedHref, openGraphLocales } from "@/shared/i18n/config";
+import {
+  defaultLocale,
+  localizedHref,
+  locales,
+  openGraphLocales,
+} from "@/shared/i18n/config";
 
 import type { ContentItem, ContentType } from "./schema";
 
@@ -20,10 +25,21 @@ export function buildContentMetadata<T extends ContentType>(
   const description = frontmatter.seo?.description ?? frontmatter.summary;
   const url = `${siteConfig.url}${localizedHref(locale, routePath)}`;
 
+  // Content slugs are locale-invariant, so hreflang alternates map cleanly to
+  // the same route per locale, incl. x-default (SEO.md §6).
+  const languages: Record<string, string> = Object.fromEntries(
+    locales.map((code) => [
+      code,
+      `${siteConfig.url}${localizedHref(code, routePath)}`,
+    ]),
+  );
+  languages["x-default"] =
+    `${siteConfig.url}${localizedHref(defaultLocale, routePath)}`;
+
   return {
     title,
     description,
-    alternates: { canonical: url },
+    alternates: { canonical: url, languages },
     openGraph: {
       type: "article",
       title,

@@ -375,7 +375,10 @@ type EngineeringDocKind =
   | "folder-structure"
   | "performance"
   | "rendering"
+  | "react-internals"
+  | "accessibility"
   | "ai-workflow"
+  | "workflow"                   // development workflow / process
   | "design-decision"
   | "code-quality"
   | "journal";                  // FR-015 sprint entries

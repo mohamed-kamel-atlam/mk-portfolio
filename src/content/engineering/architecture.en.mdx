@@ -1,0 +1,43 @@
+---
+title: Architecture
+summary: The four-layer, feature-based architecture behind the portfolio — boundaries, dependencies, and state discipline.
+date: 2026-07-13
+order: 1
+kind: architecture
+---
+
+MohamedKamel.dev is a statically-biased, content-driven Next.js application, not a client-first SPA and not a product with a backend of its own. It has no user accounts, no application API, and no runtime database. Content — projects, articles, journey entries, and this documentation itself — is authored as typed MDX and structured data committed to the repository, then rendered through a single Next.js application on `Vercel`. This document is the keystone: the single mental model every subsystem document (folder structure, rendering, state, i18n) refines rather than contradicts.
+
+## The four layers
+
+The codebase is organized by **feature domain**, not by technical type, across four conceptual layers.
+
+- **Routing layer** — `app/` maps URLs to pages and owns layouts, metadata, and locale segments. It is deliberately thin: it composes features, it does not implement them.
+- **Feature layer** — self-contained domains such as `features/projects` and `features/contact`. Each feature owns its components, logic, and types, and never imports another feature's internals.
+- **Shared layer** — cross-feature building blocks: the UI component library, hooks, and utilities under `shared/ui` and `shared/lib`. Code is promoted here deliberately when genuinely reused, not by accident.
+- **Content layer** — the typed content source (MDX plus structured data) and the loaders that validate it, for example `content/projects/*.mdx`.
+
+## Feature-based architecture
+
+This structure is a locked decision, recorded as `ADR-0002`. The guiding question when placing code is "what does this belong to?" — the _projects_ feature, the _contact_ feature — rather than "what kind of file is this?" (a component, a hook). Two alternatives were considered and rejected: type-based organization (`components/`, `hooks/`, `utils/`), which scatters a single feature across many folders with no structural barrier against accidental imports, and Atomic Design, whose atoms/molecules/organisms vocabulary describes visual composition rather than domain ownership. Feature-based organization keeps a feature's code cohesive and its boundaries explicit, directly serving maintainability (`QAT-3`) and codebase scalability (`QAT-4`).
+
+## The dependency rule
+
+Dependencies point **inward and downward** only: the routing layer may depend on features and shared code; features may depend on shared code and content; shared code depends on nothing feature-specific. A feature never imports another feature's internals — a feature importing another feature is an architectural violation, resolved by promoting the shared piece into the shared layer rather than reaching across the boundary. An arrow that would point sideways (feature to feature) or upward is treated as a defect to fix, not a pattern to accept.
+
+## State minimization
+
+State is kept at the lowest, most local level that works, following a strict preference hierarchy — `Server → URL → Local → Global` — where each level is used only when the level above it cannot serve the need.
+
+1. **Server state** — data known at render time (content, metadata), read directly in Server Components. This is the default and covers the majority of the portfolio.
+2. **URL state** — state that should be shareable, bookmarkable, or restorable, such as the active locale or, later, project filters and search queries.
+3. **Local state** — ephemeral, component-scoped UI state (an open menu, a focused input), held in the nearest Client Component with `useState`/`useReducer`.
+4. **Global state** — client state shared across unrelated parts of the tree, used only with a documented engineering justification recorded in `STATE_MANAGEMENT.md`, and an ADR where it alters the architecture.
+
+Descending the hierarchy adds client JavaScript, hydration cost, and a source of truth that can drift from the server — which is why no global-state library is part of the decided technology stack; the need must be proven before a tool is chosen.
+
+## Quality attributes
+
+Every architectural decision traces to one of seven quality attributes (`QAT-1` through `QAT-7`), each sourced from product and design documentation: performance by default (`QAT-1`, Lighthouse ≥ 95), accessibility to WCAG AA (`QAT-2`), maintainability (`QAT-3`), scalability of the codebase (`QAT-4`), internationalization across English, Arabic, and RTL (`QAT-5`), SEO (`QAT-6`), and consistency enforced through design tokens (`QAT-7`). When two attributes conflict, correctness and accessibility are never traded away, performance outranks visual effect, and maintainability and scalability outrank short-term implementation speed.
+
+These principles are not aspirational; they are enforced through the architecture checklist applied to every feature, page, and component before it is considered architecturally sound.

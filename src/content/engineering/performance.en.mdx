@@ -1,0 +1,29 @@
+---
+title: Performance
+summary: Performance budgets, zero-JS content, fonts and images, and how speed is measured.
+date: 2026-07-13
+order: 4
+kind: performance
+---
+
+Performance is treated as the portfolio's first proof of competence: a visitor should feel the site is a premium product within ten seconds, and a slow page disproves that claim before a single word is read. This turns the architectural quality attribute of performance by default into an enforceable engineering contract — a concrete budget the site must stay within, the techniques that keep it there, and the measurement that gates regressions. The guiding principle is _server-first, minimal client_: ship minimal client JavaScript, and specify how much, measured how, and enforced where.
+
+## Performance budget
+
+The v1.0.0 budget sets Lighthouse at **≥ 95 across all four categories** — Performance, Accessibility, Best Practices, and SEO — not performance alone, because the portfolio's credibility is holistic. Core Web Vitals are held to the "good" thresholds: **LCP ≤ 2.5 s**, **INP ≤ 200 ms** (the responsiveness metric that superseded FID), and **CLS ≤ 0.1**. Bundle size is budgeted **per route** rather than globally, so the cost of any one page is owned rather than averaged away: content routes such as the landing page, about, projects, and blog carry a **≤ 100 KB** first-load JavaScript ceiling, interaction-heavy routes such as the playground or command menu are allowed **≤ 160 KB**, and any single client island may add **≤ 30 KB**. These are proposed v1.0.0 defaults, set at or tighter than the product requirements, and any revision is explicit rather than silent drift.
+
+## Zero-JS content
+
+The single largest performance decision is architectural: components are Server Components unless interactivity genuinely forces otherwise. Server Components ship zero component JavaScript, render to HTML on the server, and read content directly — this is what makes the per-route JS ceiling attainable, and it directly serves both LCP (HTML arrives ready to paint) and INP (little JavaScript to block the main thread). Content is static by default, generated at build time and served from the edge, the fastest possible path to LCP; where a page benefits from progressive delivery, above-the-fold content streams first inside Suspense boundaries so slower sections resolve without blocking the shell.
+
+## Fonts and images
+
+Images use `next/image` for all raster imagery, serving AVIF/WebP with automatic responsive `srcset`. Every image sets explicit `width`/`height` (or `fill` with a sized container) so the layout reserves space in advance — the primary defense for the CLS budget — and the LCP image is prioritized rather than lazy-loaded, while everything below the fold is lazy-loaded. Icons and logos prefer SVG so they cost near nothing. Fonts load through the framework's font optimization: self-hosted, with no render-blocking third-party request, using `font-display: swap` paired with a size-adjusted fallback so text is visible immediately without shifting layout. Fonts are subset to the glyphs actually used, and the Arabic face loads only for the `ar` locale, not for English visitors; the family count stays minimal — a primary face and a monospace face.
+
+## Code splitting and client islands
+
+Interactivity is pushed to the leaves: Client Components stay small islands — a theme toggle, a language switcher, a gallery, a command menu — while the surrounding layout remains server-rendered. A feature not needed for first paint, such as the playground or a modal, is dynamically imported so its cost sits outside the initial bundle. No global-state library is used by default, since such libraries add client weight and are introduced only with a documented justification. Every client dependency is treated as a budget line item, audited before it is added, with a platform API or server-side solution preferred first. Route prefetching is left at the App Router's framework default so in-viewport navigations feel instant, at no cost to initial load.
+
+## Measuring
+
+A budget that is not measured is a wish. The intent for v1.0.0 is that a Lighthouse run executes in CI on representative routes for every pull request, across both locales and both themes, with the category budgets treated as assertions — a score below budget fails the check. The per-route JavaScript ceilings are enforced as a size check on the build output, with an exceeded ceiling failing the check and naming the offending route. Field measurement of real-user Core Web Vitals is deferred to a later version once analytics land; lab gating in CI covers v1.0.0, and field data confirms it afterward. Preview deployments provide a production-like target for these measurements before a change merges.

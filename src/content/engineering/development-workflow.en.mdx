@@ -1,0 +1,35 @@
+---
+title: Development Workflow
+summary: The working loop, definitions of ready and done, and the quality gates every change passes.
+date: 2026-07-13
+order: 7
+kind: workflow
+---
+
+This portfolio treats its own engineering process as part of the product: how a feature moves from idea to production is documented with the same rigor as the system it produces. [DEVELOPMENT_GUIDELINES.md](../docs/engineering/DEVELOPMENT_GUIDELINES.md) is the process companion to the architecture — the architecture defines _what_ the system is, this document defines the _loop_ every contribution runs through to keep it coherent. The loop is identical whether the contributor is a person or an AI agent; only the review step differs.
+
+## The working loop
+
+Four principles compose into a single loop: **Documentation-Driven** (the governing document is written or updated before the code it governs), **Architecture-First** (structural decisions — which of the four layers, which `ADR`, which functional requirement — precede implementation), **Incremental** (work ships in small, coherent, production-ready slices, never a fragment behind a flag), and **Just-in-Time** (detail is documented at the milestone that needs it, not speculatively).
+
+These compose into five concrete stages, repeated per slice:
+
+1. **Frame** — locate the work in the architecture: which layer, which quality attributes (`QAT`), which `ADR`, which functional requirement (`FR-xxx`) it serves.
+2. **Document** — write or adjust the governing document first. A missing decision is recorded (as an `ADR` or strategy document) or explicitly deferred — never resolved silently in code.
+3. **Build** — implement the smallest shippable slice: server-first, tokens-only, locale- and theme-aware from line one, following `CODING_STANDARDS.md`.
+4. **Verify** — run the quality gates and walk the Architecture Checklist and the Definition of Done.
+5. **Review** — the owner reviews code and documentation together; approved work is committed to version control manually.
+
+## Definition of Ready and Definition of Done
+
+A unit of work is **Ready** only when it traces to a functional requirement or an explicit owner directive, sits inside the system's boundaries, has a clear layer and feature placement, has its governing document in place (or written as step 2 of the loop), and is small enough to ship and review in one sitting.
+
+A feature is **Done** only when it satisfies every criterion in the product requirements' Definition of Done: responsive, accessible (WCAG AA), localized (EN/AR, LTR/RTL), theme-compatible, performance-optimized, SEO-ready, fully documented, and production-ready with owner approval. "Documented" is a first-class exit criterion — a feature whose code is complete but whose governing document is stale is not Done.
+
+## Task discipline
+
+Work happens on a focused branch per slice, off `main`, with commits that are small, atomic, and self-describing — a commit message states _why_ the change exists and references the functional requirement or `ADR` it serves. `main` stays releasable at all times. Version control itself is owner-managed: contributors, human or AI, prepare and stage changes and their documentation, but do not branch, commit, or merge on the owner's behalf. Every branch produces a preview deployment, and review runs against that preview rather than a local machine only.
+
+## Quality gates
+
+A change that fails any gate is not ready for review. **Lint** enforces project style and feature-import boundaries. **Type check** requires TypeScript to compile with no errors and no `any` escaping at boundaries. **Build** requires the production build to succeed, with invalid content frontmatter failing the build rather than shipping a broken page. **Accessibility** combines automated checks with manual keyboard and reduced-motion verification. **Performance** is verified against the Lighthouse budget on a Vercel preview deployment. Automated gates are necessary but not sufficient — they cannot judge whether work respects the architecture, which is why the owner's review against the Architecture Checklist is the final gate before anything merges.
