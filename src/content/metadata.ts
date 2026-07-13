@@ -7,6 +7,7 @@ import {
   locales,
   openGraphLocales,
 } from "@/shared/i18n/config";
+import { socialImage } from "@/shared/lib/seo";
 
 import type { ContentItem, ContentType } from "./schema";
 
@@ -47,6 +48,13 @@ export function buildContentMetadata<T extends ContentType>(
       url,
       siteName: siteConfig.name,
       locale: openGraphLocales[locale],
+      images: [socialImage(locale, "opengraph")],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [socialImage(locale, "twitter")],
     },
   };
 }

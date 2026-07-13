@@ -5,15 +5,9 @@ import {
   EngineeringHubIntro,
   JournalTimeline,
 } from "@/features/engineering";
-import { siteConfig } from "@/shared/config/site";
-import {
-  defaultLocale,
-  isLocale,
-  locales,
-  openGraphLocales,
-  type Locale,
-} from "@/shared/i18n/config";
+import { defaultLocale, isLocale, type Locale } from "@/shared/i18n/config";
 import { getDictionary } from "@/shared/i18n/get-dictionary";
+import { buildRouteMetadata } from "@/shared/lib/seo";
 
 interface EngineeringPageProps {
   params: Promise<{ locale: string }>;
@@ -24,29 +18,13 @@ export async function generateMetadata({
 }: EngineeringPageProps): Promise<Metadata> {
   const { locale } = await params;
   const active: Locale = isLocale(locale) ? locale : defaultLocale;
-  const t = await getDictionary(active);
-  const meta = t.engineering.meta;
-
-  const languages: Record<string, string> = Object.fromEntries(
-    locales.map((code) => [code, `${siteConfig.url}/${code}/engineering`]),
-  );
-  languages["x-default"] = `${siteConfig.url}/${defaultLocale}/engineering`;
-  const canonical = `${siteConfig.url}/${active}/engineering`;
-  const socialTitle = `${meta.title} — ${siteConfig.name}`;
-
-  return {
+  const meta = (await getDictionary(active)).engineering.meta;
+  return buildRouteMetadata({
+    locale: active,
+    path: "/engineering",
     title: meta.title,
     description: meta.description,
-    alternates: { canonical, languages },
-    openGraph: {
-      type: "website",
-      title: socialTitle,
-      description: meta.description,
-      url: canonical,
-      locale: openGraphLocales[active],
-    },
-    twitter: { title: socialTitle, description: meta.description },
-  };
+  });
 }
 
 /**

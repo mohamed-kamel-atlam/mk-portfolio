@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 import { getProjects, ProjectsGrid } from "@/features/projects";
-import { siteConfig } from "@/shared/config/site";
 import { defaultLocale, isLocale, type Locale } from "@/shared/i18n/config";
 import { getDictionary } from "@/shared/i18n/get-dictionary";
+import { buildRouteMetadata } from "@/shared/lib/seo";
 import { Container, Heading, Section, Text } from "@/shared/ui";
 
 interface ProjectsPageProps {
@@ -16,11 +16,12 @@ export async function generateMetadata({
   const { locale } = await params;
   const active: Locale = isLocale(locale) ? locale : defaultLocale;
   const t = await getDictionary(active);
-  return {
+  return buildRouteMetadata({
+    locale: active,
+    path: "/projects",
     title: t.projectsPage.title,
     description: t.projectsPage.intro,
-    alternates: { canonical: `${siteConfig.url}/${active}/projects` },
-  };
+  });
 }
 
 /** Projects index — the engineering-story showcase (FR-005). */

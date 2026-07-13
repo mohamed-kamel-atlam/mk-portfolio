@@ -11,15 +11,9 @@ import {
   SkillsOverview,
   WorkingPrinciples,
 } from "@/features/about";
-import { siteConfig } from "@/shared/config/site";
-import {
-  defaultLocale,
-  isLocale,
-  locales,
-  openGraphLocales,
-  type Locale,
-} from "@/shared/i18n/config";
+import { defaultLocale, isLocale, type Locale } from "@/shared/i18n/config";
 import { getDictionary } from "@/shared/i18n/get-dictionary";
+import { buildRouteMetadata } from "@/shared/lib/seo";
 
 interface AboutPageProps {
   params: Promise<{ locale: string }>;
@@ -30,32 +24,14 @@ export async function generateMetadata({
 }: AboutPageProps): Promise<Metadata> {
   const { locale } = await params;
   const active: Locale = isLocale(locale) ? locale : defaultLocale;
-  const t = await getDictionary(active);
-  const meta = t.about.meta;
-
-  // Self-canonical + hreflang alternates incl. x-default (SEO.md §6).
-  const languages: Record<string, string> = Object.fromEntries(
-    locales.map((code) => [code, `${siteConfig.url}/${code}/about`]),
-  );
-  languages["x-default"] = `${siteConfig.url}/${defaultLocale}/about`;
-  const canonical = `${siteConfig.url}/${active}/about`;
-  // OG/Twitter titles don't inherit the document-title template, so compose the
-  // full title here; the document `title` keeps using the parent template.
-  const socialTitle = `${meta.title} — ${siteConfig.name}`;
-
-  return {
+  const meta = (await getDictionary(active)).about.meta;
+  return buildRouteMetadata({
+    locale: active,
+    path: "/about",
     title: meta.title,
     description: meta.description,
-    alternates: { canonical, languages },
-    openGraph: {
-      type: "profile",
-      title: socialTitle,
-      description: meta.description,
-      url: canonical,
-      locale: openGraphLocales[active],
-    },
-    twitter: { title: socialTitle, description: meta.description },
-  };
+    ogType: "profile",
+  });
 }
 
 /**

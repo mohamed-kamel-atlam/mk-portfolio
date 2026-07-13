@@ -1,15 +1,9 @@
 import type { Metadata } from "next";
 
 import { ContactForm, ContactInfo } from "@/features/contact";
-import { siteConfig } from "@/shared/config/site";
-import {
-  defaultLocale,
-  isLocale,
-  locales,
-  openGraphLocales,
-  type Locale,
-} from "@/shared/i18n/config";
+import { defaultLocale, isLocale, type Locale } from "@/shared/i18n/config";
 import { getDictionary } from "@/shared/i18n/get-dictionary";
+import { buildRouteMetadata } from "@/shared/lib/seo";
 import { Container, Heading, Section, Text } from "@/shared/ui";
 
 interface ContactPageProps {
@@ -21,29 +15,13 @@ export async function generateMetadata({
 }: ContactPageProps): Promise<Metadata> {
   const { locale } = await params;
   const active: Locale = isLocale(locale) ? locale : defaultLocale;
-  const t = await getDictionary(active);
-  const meta = t.contact.meta;
-
-  const languages: Record<string, string> = Object.fromEntries(
-    locales.map((code) => [code, `${siteConfig.url}/${code}/contact`]),
-  );
-  languages["x-default"] = `${siteConfig.url}/${defaultLocale}/contact`;
-  const canonical = `${siteConfig.url}/${active}/contact`;
-  const socialTitle = `${meta.title} — ${siteConfig.name}`;
-
-  return {
+  const meta = (await getDictionary(active)).contact.meta;
+  return buildRouteMetadata({
+    locale: active,
+    path: "/contact",
     title: meta.title,
     description: meta.description,
-    alternates: { canonical, languages },
-    openGraph: {
-      type: "website",
-      title: socialTitle,
-      description: meta.description,
-      url: canonical,
-      locale: openGraphLocales[active],
-    },
-    twitter: { title: socialTitle, description: meta.description },
-  };
+  });
 }
 
 /**
