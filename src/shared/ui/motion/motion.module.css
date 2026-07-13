@@ -1,0 +1,94 @@
+/*
+ * Motion & interaction system — colocated styles for the primitives. Every
+ * duration/easing/color/space is a design token (MOTION_GUIDELINES): no hardcoded
+ * timings or beziers. Motion is compositor-only (transform/opacity), travel is
+ * small, and directional effects use logical direction so they mirror in RTL.
+ * The global reduced-motion rule (globals.css) neutralizes all of this; each
+ * primitive also degrades intentionally in JS.
+ */
+
+/* ---- Scroll reveal ----
+   The hidden state is applied ONLY by the Reveal client to off-screen items, so
+   SSR / no-JS / reduced-motion always render content visible (screen readers,
+   too — opacity only, never display:none). */
+.reveal {
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal[data-reveal="hidden"] {
+  opacity: 0;
+  transform: translateY(var(--space-2));
+}
+.reveal[data-reveal="visible"] {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--duration-slow) var(--ease-decelerate),
+    transform var(--duration-slow) var(--ease-decelerate);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+/* ---- Animated underline ----
+   Grows from the reading-start edge on hover/focus; mirrors in RTL. */
+.underline {
+  position: relative;
+}
+.underline::after {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-end: -2px;
+  block-size: 1px;
+  inline-size: 100%;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform var(--duration-normal) var(--ease-standard);
+}
+[dir="rtl"] .underline::after {
+  transform-origin: 100% 50%;
+}
+.underline:hover::after,
+.underline:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* ---- Magnetic ----
+   The client sets an inline transform on pointer move; this owns the smooth
+   settle-back transition only. */
+.magnetic {
+  transition: transform var(--duration-normal) var(--ease-standard);
+  will-change: transform;
+}
+
+/* ---- Cursor glow ----
+   A soft accent light following the pointer inside a surface. The client sets
+   --glow-x / --glow-y; the glow fades in on hover. Decorative but scoped and
+   pointer-driven, so it never distracts from static content. */
+.cursorGlow {
+  position: relative;
+}
+.cursorGlow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: var(--z-behind);
+  border-radius: inherit;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-normal) var(--ease-standard);
+  background: radial-gradient(
+    16rem 16rem at var(--glow-x, 50%) var(--glow-y, 50%),
+    color-mix(in srgb, var(--color-accent) 16%, transparent),
+    transparent 60%
+  );
+}
+.cursorGlow:hover::before {
+  opacity: 1;
+}
+
+/* ---- Parallax ----
+   The client sets the transform inline; this owns the smooth transition. */
+.parallax {
+  transition: transform var(--duration-normal) var(--ease-standard);
+  will-change: transform;
+}

@@ -35,7 +35,7 @@ export function ProjectCard({
     <Link href={href} className={cn("group block rounded-lg", className)}>
       <Card
         elevation={1}
-        className="flex h-full flex-col gap-3 transition-colors duration-fast group-hover:border-accent"
+        className="flex h-full flex-col gap-3 transition duration-normal group-hover:border-accent group-hover:shadow-lg motion-safe:group-hover:-translate-y-1"
       >
         {role ? (
           <Text size="caption" tone="muted" className="uppercase">

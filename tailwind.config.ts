@@ -191,9 +191,22 @@ const config: Config = {
         accelerate: "var(--ease-accelerate)",
       },
       keyframes: {
+        // Entrance patterns (MOTION_GUIDELINES §4): opacity + ≤8px travel, or a
+        // subtle scale (never from 0). Travel uses the space-2 (8px) token.
         "fade-in": { from: { opacity: "0" }, to: { opacity: "1" } },
         "fade-in-up": {
           from: { opacity: "0", transform: "translateY(var(--space-2))" },
+          to: { opacity: "1", transform: "none" },
+        },
+        "fade-in-down": {
+          from: {
+            opacity: "0",
+            transform: "translateY(calc(var(--space-2) * -1))",
+          },
+          to: { opacity: "1", transform: "none" },
+        },
+        "scale-in": {
+          from: { opacity: "0", transform: "scale(0.97)" },
           to: { opacity: "1", transform: "none" },
         },
       },
@@ -203,6 +216,9 @@ const config: Config = {
         "fade-in": "fade-in var(--duration-normal) var(--ease-decelerate)",
         "fade-in-up":
           "fade-in-up var(--duration-slow) var(--ease-decelerate) both",
+        "fade-in-down":
+          "fade-in-down var(--duration-slow) var(--ease-decelerate) both",
+        "scale-in": "scale-in var(--duration-slow) var(--ease-decelerate) both",
       },
     },
   },

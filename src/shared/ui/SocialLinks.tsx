@@ -1,16 +1,19 @@
 import { socialLinks } from "@/shared/config/site";
 import { cn } from "@/shared/lib/cn";
 
+import styles from "./motion/motion.module.css";
+
 const listVariants = {
   inline: "flex flex-wrap items-center gap-x-6 gap-y-2",
   stacked: "flex flex-col gap-3",
 } as const;
 
+// Both variants use the shared animated underline + color transition.
 const linkVariants = {
   inline:
     "text-small text-muted-foreground transition-colors duration-fast hover:text-foreground",
   stacked:
-    "text-body text-muted-foreground underline-offset-4 transition-colors duration-fast hover:text-foreground hover:underline",
+    "text-body text-muted-foreground transition-colors duration-fast hover:text-foreground",
 } as const;
 
 export interface SocialLinksProps {
@@ -39,7 +42,7 @@ export function SocialLinks({
               {...(isExternal
                 ? { target: "_blank", rel: "noopener noreferrer" }
                 : {})}
-              className={linkVariants[variant]}
+              className={cn(styles.underline, linkVariants[variant])}
             >
               {social.label}
             </a>

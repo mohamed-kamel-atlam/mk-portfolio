@@ -8,14 +8,18 @@
  * apply; filled variants use `hover:opacity-90` and subtle ones `hover:bg-muted`.
  */
 
+// The interaction language for every button-like control (MOTION_GUIDELINES):
+// token-fast transition; a ≤1px hover lift and a 0.98 press scale, both gated by
+// `motion-safe` so reduced-motion users get the color/elevation feedback only.
 export const interactiveBase =
-  "inline-flex select-none items-center justify-center gap-2 rounded-md font-medium transition duration-fast disabled:pointer-events-none disabled:opacity-50";
+  "inline-flex select-none items-center justify-center gap-2 rounded-md font-medium transition duration-fast motion-safe:hover:-translate-y-px motion-safe:active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50";
 
 export const interactiveVariants = {
-  primary: "bg-accent text-accent-foreground hover:opacity-90",
-  secondary: "border border-border bg-surface text-foreground hover:bg-muted",
+  primary: "bg-accent text-accent-foreground hover:opacity-90 hover:shadow-md",
+  secondary:
+    "border border-border bg-surface text-foreground hover:border-accent hover:bg-muted",
   ghost: "text-foreground hover:bg-muted",
-  danger: "bg-danger text-danger-foreground hover:opacity-90",
+  danger: "bg-danger text-danger-foreground hover:opacity-90 hover:shadow-md",
 } as const;
 
 export type InteractiveVariant = keyof typeof interactiveVariants;

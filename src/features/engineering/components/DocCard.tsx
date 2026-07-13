@@ -17,7 +17,7 @@ export interface DocCardProps {
 export function DocCard({ href, kindLabel, title, summary }: DocCardProps) {
   return (
     <Link href={href} className="group block h-full rounded-lg">
-      <Card className="flex h-full flex-col gap-3 transition-colors duration-fast group-hover:border-accent">
+      <Card className="flex h-full flex-col gap-3 transition duration-normal group-hover:border-accent group-hover:shadow-lg motion-safe:group-hover:-translate-y-1">
         <div>
           <Badge variant="neutral">{kindLabel}</Badge>
         </div>

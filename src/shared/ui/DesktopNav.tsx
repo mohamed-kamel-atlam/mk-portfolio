@@ -5,6 +5,8 @@ import { usePathname } from "next/navigation";
 
 import { cn } from "@/shared/lib/cn";
 
+import styles from "./motion/motion.module.css";
+
 export interface NavLinkItem {
   key: string;
   href: string;
@@ -48,6 +50,7 @@ export function DesktopNav({ items, ariaLabel, className }: DesktopNavProps) {
             href={item.href}
             aria-current={active ? "page" : undefined}
             className={cn(
+              styles.underline,
               "text-small font-medium transition-colors duration-fast",
               active
                 ? "text-foreground"
