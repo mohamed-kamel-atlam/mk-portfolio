@@ -313,5 +313,43 @@
       "next": "Next",
       "pager": "Article navigation"
     }
+  },
+  "contact": {
+    "meta": {
+      "title": "Contact",
+      "description": "Get in touch with Mohamed Kamel — frontend and AI product engineering. Send a message or reach out directly."
+    },
+    "intro": {
+      "eyebrow": "Contact",
+      "title": "Let's build something exceptional.",
+      "lead": "Have a role, a project, or a question? Send a message and I'll get back to you."
+    },
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Your name",
+      "email": "Email",
+      "emailPlaceholder": "you@example.com",
+      "message": "Message",
+      "messagePlaceholder": "Tell me about the role or project…",
+      "submit": "Send message",
+      "submitting": "Sending…"
+    },
+    "errors": {
+      "nameInvalid": "Please enter your name (at least 2 characters).",
+      "nameTooLong": "That name is too long.",
+      "emailInvalid": "Please enter a valid email address.",
+      "emailTooLong": "That email is too long.",
+      "messageTooShort": "Please write at least 10 characters.",
+      "messageTooLong": "That message is too long (max 2000 characters).",
+      "submitFailed": "Something went wrong sending your message. Please try again."
+    },
+    "success": {
+      "title": "Message sent.",
+      "body": "Thanks for reaching out — I'll get back to you soon."
+    },
+    "info": {
+      "title": "Other ways to reach me",
+      "subtitle": "Prefer email or social? Find me here."
+    }
   }
 }
