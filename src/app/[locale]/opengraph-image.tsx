@@ -1,6 +1,12 @@
 import { ImageResponse } from "next/og";
 
 import { siteConfig } from "@/shared/config/site";
+import { locales } from "@/shared/i18n/config";
+
+/** Prebuild the image per locale at build time (static, not on-demand). */
+export function generateStaticParams() {
+  return locales.map((locale) => ({ locale }));
+}
 
 /**
  * Default social share image (1200×630) for every route under `[locale]`

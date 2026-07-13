@@ -14,6 +14,21 @@ const nextConfig = {
     // AVIF/WebP first, per docs/design/DESIGN_SYSTEM.md → Images and QAT-1.
     formats: ["image/avif", "image/webp"],
   },
+  // Explicit long-cache for the app icon. Route HTML is covered by the SSG full
+  // route cache; hashed `_next/static` assets are already immutable by default.
+  async headers() {
+    return [
+      {
+        source: "/icon.svg",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=604800, stale-while-revalidate=2592000",
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;
