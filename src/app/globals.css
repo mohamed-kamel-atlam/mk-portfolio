@@ -48,6 +48,28 @@
     --accent-900: #26346e;
     --accent-950: #171e40;
 
+    /* Deep-navy canvas ramp — dark-theme surfaces. Premium AI-SaaS direction:
+       a very deep navy rather than pure black, cool-cast to pair with the iris
+       accent (COLOR_SYSTEM.md §3.1 — dark canvas). */
+    --navy-950: #07111f;
+    --navy-900: #081423;
+    --navy-850: #0b1728;
+    --navy-800: #101b2d;
+    --navy-750: #16233a;
+    --navy-700: #1e2c46;
+
+    /* Warm-neutral canvas — light-theme surfaces. Soft warm off-white rather
+       than flat white, for an equally premium light mode (COLOR_SYSTEM.md §3.2). */
+    --warm-50: #faf9f7;
+    --warm-100: #f1efe9;
+    --warm-200: #e5e2d9;
+
+    /* Violet — a soft secondary hue used ONLY by the background lighting system
+       (aurora); never for UI text or controls. */
+    --violet-400: #9c8cff;
+    --violet-500: #7c5cf6;
+    --violet-600: #6547e0;
+
     /* ---- Structural tokens (semantic-by-nature; DESIGN_TOKENS.md §4) ---- */
 
     /* Spacing — 8-pt grid (§4.1). Step number = value in units of 4px. */
@@ -82,6 +104,7 @@
     --shadow-xl: 0 24px 64px -8px rgb(0 0 0 / 0.48);
 
     /* Z-index ladder (§4.5) */
+    --z-behind: -1; /* decorative backdrops, below base content */
     --z-base: 0;
     --z-raised: 10;
     --z-dropdown: 1000;
@@ -162,39 +185,107 @@
 
     /* ---- Tier 2: semantic tokens — DARK theme (primary, COLOR_SYSTEM.md §3.1) ---- */
     color-scheme: dark;
-    --color-background: var(--neutral-950);
+    --color-background: var(--navy-900);
     --color-foreground: var(--neutral-50);
-    --color-surface: var(--neutral-900);
-    --color-surface-muted: var(--neutral-800);
-    --color-border: var(--neutral-800);
-    --color-muted: var(--neutral-800);
+    --color-surface: var(--navy-850);
+    --color-surface-muted: var(--navy-800);
+    --color-border: var(--navy-750);
+    --color-muted: var(--navy-800);
     --color-muted-foreground: var(--neutral-400);
     /* accent-400 (not -500): keeps small accent text — e.g. the caption eyebrow
        on a surface-muted band — above WCAG AA 4.5:1 (COLOR_SYSTEM.md / QAT-2). */
     --color-accent: var(--accent-400);
-    --color-accent-foreground: var(--neutral-950);
+    --color-accent-foreground: var(--navy-950);
     --color-success: #3fb37a;
-    --color-success-foreground: var(--neutral-950);
+    --color-success-foreground: var(--navy-950);
     --color-warning: #e0a82e;
-    --color-warning-foreground: var(--neutral-950);
+    --color-warning-foreground: var(--navy-950);
     --color-danger: #f0595e;
-    --color-danger-foreground: var(--neutral-950);
+    --color-danger-foreground: var(--navy-950);
     --color-info: #5b9df6;
-    --color-info-foreground: var(--neutral-950);
+    --color-info-foreground: var(--navy-950);
     /* Scrim behind modals/sheets — theme-agnostic, so declared once here. */
     --color-overlay: rgb(0 0 0 / 0.5);
+    /* Aurora hues — the two soft lights the background engine blends (dark). */
+    --color-aurora-1: var(--accent-500);
+    --color-aurora-2: var(--violet-500);
+
+    /* ---- Background & lighting presets (shared/ui/background) ----
+       Built from semantic tokens via color-mix, so they re-resolve per theme
+       (custom properties substitute at use time). No component hardcodes a
+       gradient; every effect points at one of these. */
+    --gradient-primary: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-accent) 12%, transparent),
+      transparent 60%
+    );
+    --gradient-secondary: radial-gradient(
+      100% 100% at 100% 0%,
+      color-mix(in srgb, var(--color-aurora-2) 14%, transparent),
+      transparent 60%
+    );
+    --gradient-hero: radial-gradient(
+      120% 80% at 50% -20%,
+      color-mix(in srgb, var(--color-accent) 16%, transparent),
+      transparent 70%
+    );
+    --gradient-accent: linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--color-accent) 85%, transparent),
+      color-mix(in srgb, var(--color-aurora-2) 75%, transparent)
+    );
+    --gradient-engineering: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-info) 10%, transparent),
+      transparent 55%
+    );
+    --gradient-dark: linear-gradient(
+      180deg,
+      transparent,
+      color-mix(in srgb, var(--navy-950) 60%, transparent)
+    );
+    --gradient-light: linear-gradient(
+      180deg,
+      transparent,
+      color-mix(in srgb, var(--warm-100) 60%, transparent)
+    );
+    /* Single aurora blob (soft light → transparent); positioned per blob. */
+    --bg-aurora-1: radial-gradient(
+      closest-side,
+      color-mix(in srgb, var(--color-aurora-1) 70%, transparent),
+      transparent
+    );
+    --bg-aurora-2: radial-gradient(
+      closest-side,
+      color-mix(in srgb, var(--color-aurora-2) 68%, transparent),
+      transparent
+    );
+    /* Radial ambient glow (accent-tinted). */
+    --bg-glow: radial-gradient(
+      closest-side,
+      color-mix(in srgb, var(--color-accent) 22%, transparent),
+      transparent
+    );
+    /* Engineering grid — line color + cell size (on the 8-pt grid: space-10). */
+    --bg-grid-line: color-mix(in srgb, var(--color-border) 65%, transparent);
+    --bg-grid-size: var(--space-10);
+    /* Global energy of the ambient backdrop (dimmed under reduced transparency). */
+    --bg-aurora-opacity: 0.5;
+    --bg-glow-opacity: 0.6;
+    --bg-noise-opacity: 0.035;
+    --bg-grid-opacity: 0.4;
   }
 
   /* ---- Tier 2: semantic tokens — LIGHT theme (COLOR_SYSTEM.md §3.2) ----
      Same names, different values. Only the semantic tier is re-declared. */
   [data-theme="light"] {
     color-scheme: light;
-    --color-background: var(--neutral-50);
+    --color-background: var(--warm-50);
     --color-foreground: var(--neutral-900);
     --color-surface: var(--white);
-    --color-surface-muted: var(--neutral-100);
-    --color-border: var(--neutral-200);
-    --color-muted: var(--neutral-100);
+    --color-surface-muted: var(--warm-100);
+    --color-border: var(--warm-200);
+    --color-muted: var(--warm-100);
     --color-muted-foreground: var(--neutral-500);
     --color-accent: var(--accent-600);
     --color-accent-foreground: var(--white);
@@ -206,6 +297,13 @@
     --color-danger-foreground: var(--white);
     --color-info: #2b6fd6;
     --color-info-foreground: var(--white);
+    /* Softer aurora hues + lower ambient energy on the bright warm canvas. */
+    --color-aurora-1: var(--accent-400);
+    --color-aurora-2: var(--violet-400);
+    --bg-aurora-opacity: 0.28;
+    --bg-glow-opacity: 0.35;
+    --bg-noise-opacity: 0.025;
+    --bg-grid-opacity: 0.5;
   }
 
   /* ---- Locale-aware sans stack (TYPOGRAPHY.md §4) ----

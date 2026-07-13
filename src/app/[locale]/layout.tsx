@@ -15,6 +15,7 @@ import { getThemeInitScript } from "@/shared/lib/theme-script";
 import { localeAlternates } from "@/shared/lib/seo";
 import { AppProviders } from "@/shared/providers";
 import { ScrollProgress, SiteFooter, SiteHeader } from "@/shared/ui";
+import { ThemeBackground } from "@/shared/ui/background";
 
 import "../globals.css";
 
@@ -83,9 +84,10 @@ export async function generateMetadata({
 }
 
 export const viewport: Viewport = {
+  // Match the resolved canvas tokens: deep navy (dark) / warm off-white (light).
   themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#0b0d0f" },
-    { media: "(prefers-color-scheme: light)", color: "#f7f8f8" },
+    { media: "(prefers-color-scheme: dark)", color: "#081423" },
+    { media: "(prefers-color-scheme: light)", color: "#faf9f7" },
   ],
   colorScheme: "dark light",
 };
@@ -129,6 +131,8 @@ export default async function RootLayout({
         {/* Pre-paint theme resolution — prevents a flash of the wrong theme
             (ADR-0005). Must run before hydration, hence a raw inline script. */}
         <script dangerouslySetInnerHTML={{ __html: getThemeInitScript() }} />
+        {/* Global ambient backdrop (fixed, behind all content). */}
+        <ThemeBackground />
         <AppProviders>
           <SiteHeader locale={locale} />
           <main id="main-content" className="flex-1">

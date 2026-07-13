@@ -1,0 +1,195 @@
+/*
+ * Background & lighting system — colocated styles for the layer components.
+ * Holds only what Tailwind tokens cannot express cleanly: the aurora blobs and
+ * their slow drift, the corner/edge glows, the engineering grid + mask, and the
+ * noise texture. Every color/size resolves to a design token (globals.css); the
+ * only literals are the inline SVG noise and viewport-relative decorative sizes.
+ *
+ * Motion is compositor-only (transform/opacity) and caught by the global
+ * `prefers-reduced-motion` rule (animations settle to static). Logical
+ * properties keep positions correct in RTL.
+ */
+
+/* ---- Aurora ---- */
+.aurora {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  contain: layout paint;
+}
+
+.blob {
+  position: absolute;
+  border-radius: var(--radius-full);
+  opacity: var(--bg-aurora-opacity);
+  will-change: transform;
+}
+
+.blobA {
+  inline-size: clamp(20rem, 55vw, 46rem);
+  block-size: clamp(20rem, 55vw, 46rem);
+  inset-block-start: -14rem;
+  inset-inline-start: -6rem;
+  background: var(--bg-aurora-1);
+  animation: aurora-drift-a 38s var(--ease-standard) infinite alternate;
+}
+
+.blobB {
+  inline-size: clamp(18rem, 48vw, 40rem);
+  block-size: clamp(18rem, 48vw, 40rem);
+  inset-block-start: -10rem;
+  inset-inline-end: -8rem;
+  background: var(--bg-aurora-2);
+  animation: aurora-drift-b 46s var(--ease-standard) infinite alternate;
+}
+
+.blobC {
+  inline-size: clamp(18rem, 50vw, 42rem);
+  block-size: clamp(18rem, 50vw, 42rem);
+  inset-block-end: -16rem;
+  inset-inline-start: 30%;
+  background: var(--bg-aurora-1);
+  animation: aurora-drift-c 52s var(--ease-standard) infinite alternate;
+}
+
+/* Translate-only (no scale): scaling a gradient-filled box repaints it every
+   frame; translate is composited on the GPU with zero main-thread paint. */
+@keyframes aurora-drift-a {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(8%, 6%, 0);
+  }
+}
+
+@keyframes aurora-drift-b {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-9%, 5%, 0);
+  }
+}
+
+@keyframes aurora-drift-c {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-6%, -7%, 0);
+  }
+}
+
+/* ---- Glow / radial lights ---- */
+.glow {
+  position: absolute;
+  opacity: var(--bg-glow-opacity);
+  background: var(--bg-glow);
+  will-change: transform;
+}
+
+.glowTop {
+  inset-block-start: -30vh;
+  inset-inline-start: 50%;
+  inline-size: min(90rem, 120vw);
+  block-size: 60vh;
+  transform: translateX(-50%);
+}
+
+.glowBottom {
+  inset-block-end: -34vh;
+  inset-inline-start: 50%;
+  inline-size: min(80rem, 110vw);
+  block-size: 56vh;
+  transform: translateX(-50%);
+}
+
+.glowCenter {
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  inline-size: min(70rem, 100vw);
+  block-size: 70vh;
+  transform: translate(-50%, -50%);
+}
+
+.glowCorner {
+  inset-block-start: -18vh;
+  inset-inline-end: -18vw;
+  inline-size: min(48rem, 70vw);
+  block-size: 48vh;
+}
+
+/* A gentle ambient float for corner/center glows (very slow). */
+.floating {
+  animation: glow-float 30s var(--ease-standard) infinite alternate;
+}
+
+@keyframes glow-float {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(0, 3%, 0);
+  }
+}
+
+/* ---- Engineering grid ---- */
+.grid {
+  position: absolute;
+  inset: 0;
+  opacity: var(--bg-grid-opacity);
+  background-image:
+    linear-gradient(to right, var(--bg-grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--bg-grid-line) 1px, transparent 1px);
+  background-size: var(--bg-grid-size) var(--bg-grid-size);
+  /* Fade the grid toward the edges so it never reaches the content bounds. */
+  -webkit-mask-image: radial-gradient(
+    ellipse 80% 60% at 50% 0%,
+    #000 0%,
+    transparent 78%
+  );
+  mask-image: radial-gradient(
+    ellipse 80% 60% at 50% 0%,
+    #000 0%,
+    transparent 78%
+  );
+}
+
+/* ---- Noise texture ----
+   Inline fractal-noise SVG (the one unavoidable literal — a data URL cannot
+   reference a token). Tiled and held near-invisible to kill gradient banding. */
+.noise {
+  position: absolute;
+  inset: 0;
+  opacity: var(--bg-noise-opacity);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+/* ---- Gradient wash presets ---- */
+.gradient {
+  position: absolute;
+  inset: 0;
+}
+.gradientPrimary {
+  background: var(--gradient-primary);
+}
+.gradientSecondary {
+  background: var(--gradient-secondary);
+}
+.gradientHero {
+  background: var(--gradient-hero);
+}
+.gradientAccent {
+  background: var(--gradient-accent);
+}
+.gradientEngineering {
+  background: var(--gradient-engineering);
+}
+.gradientDark {
+  background: var(--gradient-dark);
+}
+.gradientLight {
+  background: var(--gradient-light);
+}

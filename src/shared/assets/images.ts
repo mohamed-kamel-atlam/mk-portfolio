@@ -36,10 +36,10 @@ export type ImageSizePreset = keyof typeof IMAGE_SIZES;
 /**
  * A lightweight solid-tone blur placeholder for local photography, as an SVG
  * data URL (no Buffer/btoa, works on server and client). The tone is the
- * resolved `--color-surface-muted` (neutral-800) — a literal is required here
+ * resolved dark `--color-surface-muted` (navy-800) — a literal is required here
  * because a data URL cannot read a CSS variable; kept in sync with globals.css.
  */
-export function blurDataUrl(tone = "#1d2126"): string {
+export function blurDataUrl(tone = "#101b2d"): string {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><rect width="8" height="8" fill="${tone}"/></svg>`;
   return `data:image/svg+xml,${encodeURIComponent(svg)}`;
 }

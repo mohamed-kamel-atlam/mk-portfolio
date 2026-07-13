@@ -75,6 +75,7 @@ const config: Config = {
         xl: "var(--shadow-xl)",
       },
       zIndex: {
+        behind: "var(--z-behind)",
         base: "var(--z-base)",
         raised: "var(--z-raised)",
         dropdown: "var(--z-dropdown)",
