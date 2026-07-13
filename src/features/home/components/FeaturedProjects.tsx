@@ -1,9 +1,13 @@
 import { featuredContent } from "@/content";
 import { localizedHref, type Locale } from "@/shared/i18n/config";
 import { getDictionary } from "@/shared/i18n/get-dictionary";
-import { ButtonLink, Container, ProjectCard, Section } from "@/shared/ui";
-
-import { SectionHeading } from "./SectionHeading";
+import {
+  ButtonLink,
+  Container,
+  ProjectCard,
+  Section,
+  SectionHeading,
+} from "@/shared/ui";
 
 export interface FeaturedProjectsProps {
   locale: Locale;

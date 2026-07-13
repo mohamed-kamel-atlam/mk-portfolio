@@ -9,21 +9,19 @@ import {
   Text,
 } from "@/shared/ui";
 
-import { philosophyPrinciples } from "../content";
+import { mindsetPillars } from "../content";
 
-export interface EngineeringPhilosophyProps {
+export interface EngineeringMindsetProps {
   locale: Locale;
 }
 
-/** Principle cards, drawn from the project's documented engineering values. */
-export async function EngineeringPhilosophy({
-  locale,
-}: EngineeringPhilosophyProps) {
+/** How Mohamed approaches engineering — the "what kind of engineer" pillars. */
+export async function EngineeringMindset({ locale }: EngineeringMindsetProps) {
   const t = await getDictionary(locale);
-  const section = t.home.philosophy;
+  const section = t.about.mindset;
 
   return (
-    <Section className="bg-surface-muted">
+    <Section>
       <Container className="flex flex-col gap-10">
         <SectionHeading
           eyebrow={section.eyebrow}
@@ -31,7 +29,7 @@ export async function EngineeringPhilosophy({
           intro={section.intro}
         />
         <div className="grid gap-6 sm:grid-cols-2">
-          {philosophyPrinciples.map((key) => {
+          {mindsetPillars.map((key) => {
             const item = section.items[key];
             return (
               <Card key={key} className="flex flex-col gap-2">

@@ -1,0 +1,18 @@
+export { AboutIntro } from "./components/AboutIntro";
+export type { AboutIntroProps } from "./components/AboutIntro";
+export { EngineeringMindset } from "./components/EngineeringMindset";
+export type { EngineeringMindsetProps } from "./components/EngineeringMindset";
+export { AboutExperience } from "./components/AboutExperience";
+export type { AboutExperienceProps } from "./components/AboutExperience";
+export { SkillsOverview } from "./components/SkillsOverview";
+export type { SkillsOverviewProps } from "./components/SkillsOverview";
+export { CoreValues } from "./components/CoreValues";
+export type { CoreValuesProps } from "./components/CoreValues";
+export { WorkingPrinciples } from "./components/WorkingPrinciples";
+export type { WorkingPrinciplesProps } from "./components/WorkingPrinciples";
+export { CurrentFocus } from "./components/CurrentFocus";
+export type { CurrentFocusProps } from "./components/CurrentFocus";
+export { FutureGoals } from "./components/FutureGoals";
+export type { FutureGoalsProps } from "./components/FutureGoals";
+export { PersonJsonLd } from "./components/PersonJsonLd";
+export type { PersonJsonLdProps } from "./components/PersonJsonLd";

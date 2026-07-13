@@ -111,5 +111,156 @@
     "pager": "Project navigation",
     "viewSource": "View source",
     "viewLive": "Live demo"
+  },
+  "about": {
+    "meta": {
+      "title": "About",
+      "description": "Frontend engineer building scalable, production-grade web applications — with the architecture, performance, and accessibility of a modern AI SaaS product."
+    },
+    "intro": {
+      "kicker": "Mohamed Kamel Atlam · Frontend Engineer",
+      "headline": "I build premium, scalable frontends for AI products.",
+      "lead": "I design and engineer production-grade web applications — owning architecture, performance, and accessibility from the first commit to deployment. A background in Artificial Intelligence keeps me fluent in the data-heavy products I build.",
+      "availability": "Open to frontend & AI product roles",
+      "location": "Tanta, Egypt",
+      "education": "BSc Artificial Intelligence · 2026",
+      "languages": "English · العربية",
+      "ctaPrimary": "View my work",
+      "ctaSecondary": "Get in touch"
+    },
+    "mindset": {
+      "eyebrow": "Mindset",
+      "title": "How I think about engineering",
+      "intro": "Not a UI coder — an engineer who owns the system behind the interface.",
+      "items": {
+        "product": {
+          "title": "Product engineer",
+          "description": "I own products end to end — from planning and architecture through delivery — not just isolated screens."
+        },
+        "architecture": {
+          "title": "Architecture-oriented",
+          "description": "I design for scale first: clear boundaries, reusable components, and structure that survives a growing team."
+        },
+        "performance": {
+          "title": "Performance-focused",
+          "description": "Fast, lean interfaces are a requirement — measured, profiled, and tuned, never assumed."
+        },
+        "ai": {
+          "title": "AI product builder",
+          "description": "I build data-heavy AI dashboards and SaaS experiences, comfortable with the real workflows behind them."
+        }
+      }
+    },
+    "experience": {
+      "eyebrow": "Experience",
+      "title": "Selected experience",
+      "intro": "Real products — a graduation platform, a commercial build, and client work — shipped end to end.",
+      "present": "Present"
+    },
+    "skills": {
+      "eyebrow": "Skills",
+      "title": "Technical toolkit",
+      "intro": "A focused, modern stack chosen for scale, performance, and maintainability.",
+      "groups": {
+        "core": "Frontend core",
+        "state": "State management",
+        "styling": "Styling & UI",
+        "architecture": "Architecture",
+        "apis": "APIs, auth & data",
+        "performance": "Performance",
+        "tooling": "Tools & collaboration",
+        "ai": "AI / ML foundations"
+      }
+    },
+    "values": {
+      "eyebrow": "Values",
+      "title": "What I hold to",
+      "intro": "The convictions behind every decision.",
+      "items": {
+        "excellence": {
+          "title": "Engineering excellence",
+          "description": "Decisions driven by architecture and evidence, not trends or hype."
+        },
+        "simplicity": {
+          "title": "Simplicity",
+          "description": "The simpler solution wins whenever the choice is hard."
+        },
+        "ownership": {
+          "title": "Ownership",
+          "description": "I take responsibility for outcomes, not just tickets — from first commit to production."
+        },
+        "accessibility": {
+          "title": "Accessibility",
+          "description": "WCAG AA is the baseline, not the goal — everyone can use what I build."
+        },
+        "performance": {
+          "title": "Performance",
+          "description": "Speed is a feature; I treat it as a first-class requirement."
+        },
+        "curiosity": {
+          "title": "Continuous learning",
+          "description": "I keep expanding — currently deeper into Next.js, backend, and AI systems."
+        }
+      }
+    },
+    "principles": {
+      "eyebrow": "Principles",
+      "title": "How I work",
+      "intro": "The same non-negotiables this very portfolio is built on.",
+      "items": {
+        "documentation": {
+          "title": "Documentation-driven",
+          "description": "The governing decision is written before the code, so intent is explicit."
+        },
+        "architecture": {
+          "title": "Architecture-first",
+          "description": "Structure and boundaries are designed before implementation begins."
+        },
+        "serverFirst": {
+          "title": "Server-first",
+          "description": "Render on the server by default; ship the client only what must be interactive."
+        },
+        "stateDiscipline": {
+          "title": "State discipline",
+          "description": "Server, then URL, then local — global state only when nothing else fits."
+        },
+        "tokens": {
+          "title": "Tokens over hardcoding",
+          "description": "Every color, space, and type value resolves to a design token — never a magic number."
+        },
+        "simplicity": {
+          "title": "Simplicity when in doubt",
+          "description": "When two paths are close, I take the one that is easier to maintain."
+        }
+      }
+    },
+    "focus": {
+      "eyebrow": "Now",
+      "title": "Current focus",
+      "intro": "Where my attention is today.",
+      "items": [
+        "Deepening Next.js and the App Router for production-grade SSR and RSC.",
+        "Architecting scalable, token-driven design systems.",
+        "Building AI-powered SaaS dashboards around real data workflows.",
+        "Strengthening backend fluency with NestJS and REST API design."
+      ]
+    },
+    "goals": {
+      "eyebrow": "Next",
+      "title": "Where I'm heading",
+      "intro": "The direction of the work ahead.",
+      "items": [
+        "Graduate in 2026 (BSc, Artificial Intelligence) and move into a senior-track frontend role.",
+        "Lead frontend architecture on an AI SaaS product.",
+        "Contribute to design systems and a strong code-review culture.",
+        "Grow full-stack range while staying frontend-deep."
+      ]
+    },
+    "jsonLd": {
+      "name": "Mohamed Kamel Atlam",
+      "jobTitle": "Frontend Engineer",
+      "locality": "Tanta, Egypt",
+      "alumniOf": "Menoufia University"
+    }
   }
 }

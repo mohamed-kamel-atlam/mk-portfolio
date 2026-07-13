@@ -9,18 +9,16 @@ import {
   Text,
 } from "@/shared/ui";
 
-import { philosophyPrinciples } from "../content";
+import { coreValues } from "../content";
 
-export interface EngineeringPhilosophyProps {
+export interface CoreValuesProps {
   locale: Locale;
 }
 
-/** Principle cards, drawn from the project's documented engineering values. */
-export async function EngineeringPhilosophy({
-  locale,
-}: EngineeringPhilosophyProps) {
+/** The convictions behind the work — drawn from the documented brand values. */
+export async function CoreValues({ locale }: CoreValuesProps) {
   const t = await getDictionary(locale);
-  const section = t.home.philosophy;
+  const section = t.about.values;
 
   return (
     <Section className="bg-surface-muted">
@@ -30,8 +28,8 @@ export async function EngineeringPhilosophy({
           title={section.title}
           intro={section.intro}
         />
-        <div className="grid gap-6 sm:grid-cols-2">
-          {philosophyPrinciples.map((key) => {
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {coreValues.map((key) => {
             const item = section.items[key];
             return (
               <Card key={key} className="flex flex-col gap-2">

@@ -23,6 +23,8 @@ export type { ProjectCardProps } from "./ProjectCard";
 export { ScrollProgress } from "./ScrollProgress";
 export { Section } from "./Section";
 export type { SectionProps } from "./Section";
+export { SectionHeading } from "./SectionHeading";
+export type { SectionHeadingProps } from "./SectionHeading";
 export { SiteFooter } from "./SiteFooter";
 export type { SiteFooterProps } from "./SiteFooter";
 export { SiteHeader } from "./SiteHeader";

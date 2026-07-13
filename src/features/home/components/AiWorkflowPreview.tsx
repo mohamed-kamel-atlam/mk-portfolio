@@ -1,8 +1,6 @@
 import { localizedHref, type Locale } from "@/shared/i18n/config";
 import { getDictionary } from "@/shared/i18n/get-dictionary";
-import { ButtonLink, Container, Section } from "@/shared/ui";
-
-import { SectionHeading } from "./SectionHeading";
+import { ButtonLink, Container, Section, SectionHeading } from "@/shared/ui";
 
 export interface AiWorkflowPreviewProps {
   locale: Locale;

@@ -1,5 +1,7 @@
 import { cn } from "@/shared/lib/cn";
-import { Heading, Text } from "@/shared/ui";
+
+import { Heading } from "./Heading";
+import { Text } from "./Text";
 
 export interface SectionHeadingProps {
   eyebrow: string;
@@ -10,10 +12,11 @@ export interface SectionHeadingProps {
 }
 
 /**
- * The shared heading pattern for every home section — an accent eyebrow, an
- * `<h2>`, and an optional intro. Defined once so section layouts are never
- * duplicated. Composes the shared Heading/Text primitives; the eyebrow uses the
- * caption token (tracking resets in RTL) so it reads correctly in both scripts.
+ * The shared section-heading pattern — an accent eyebrow, an `<h2>`, and an
+ * optional intro. Defined once in `shared/ui` so section layouts are never
+ * duplicated across features (home, about, …). Composes the Heading/Text
+ * primitives; the eyebrow uses the caption token (tracking resets in RTL) so it
+ * reads correctly in both scripts.
  */
 export function SectionHeading({
   eyebrow,

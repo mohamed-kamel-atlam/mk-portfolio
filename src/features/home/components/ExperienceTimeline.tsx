@@ -1,9 +1,8 @@
 import { type Locale } from "@/shared/i18n/config";
 import { getDictionary } from "@/shared/i18n/get-dictionary";
-import { Container, Heading, Section, Text } from "@/shared/ui";
+import { Container, Heading, Section, SectionHeading, Text } from "@/shared/ui";
 
 import { timelineStages } from "../content";
-import { SectionHeading } from "./SectionHeading";
 
 export interface ExperienceTimelineProps {
   locale: Locale;
