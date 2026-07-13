@@ -51,6 +51,7 @@ export function middleware(request: NextRequest): NextResponse {
 
 export const config = {
   // Run on everything except Next internals, API routes, and any path with a
-  // file extension (icon.svg, sitemap.xml, robots.txt, images, …).
-  matcher: ["/((?!_next/|api/|.*\\..*).*)"],
+  // file extension (icon.svg, sitemap.xml, robots.txt, images, …), plus the
+  // generated `apple-icon` metadata route (extensionless, so not matched above).
+  matcher: ["/((?!_next/|api/|apple-icon|.*\\..*).*)"],
 };

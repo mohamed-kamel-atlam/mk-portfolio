@@ -43,26 +43,12 @@ export const mainNav: readonly NavItem[] = [
   { key: "contact", path: "/contact" },
 ] as const;
 
-export type SocialKey = "github" | "linkedin" | "email";
-
-export interface SocialLink {
-  key: SocialKey;
-  /** Accessible name (a proper noun; not localized). */
-  label: string;
-  href: string;
-}
-
-/** Social links. */
-export const socialLinks: readonly SocialLink[] = [
-  {
-    key: "github",
-    label: "GitHub",
-    href: "https://github.com/mohamed-kamel-atlam",
-  },
-  {
-    key: "linkedin",
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/in/mohamed-atlam-597496290",
-  },
-  { key: "email", label: "Email", href: "mailto:mohamedatlam1710@gmail.com" },
-] as const;
+// Social configuration lives in its own module for scalability; re-exported here
+// so `@/shared/config/site` remains the one config entry point (no consumer churn).
+export {
+  socialLinks,
+  SOCIAL_LABELS,
+  type SocialLink,
+  type SocialKey,
+  type SocialPlatform,
+} from "./social";

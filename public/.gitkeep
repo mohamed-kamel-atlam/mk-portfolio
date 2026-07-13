@@ -1,5 +1,0 @@
-# PUBLIC — static assets served as-is at the site root (robots.txt, static
-# images, downloadable files). See FOLDER_STRUCTURE.md §1.
-#
-# App icons live in app/ (Next metadata files); fonts are self-hosted via the
-# `geist` package. Assets are added as features need them.

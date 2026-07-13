@@ -13,6 +13,9 @@ const nextConfig = {
   images: {
     // AVIF/WebP first, per docs/design/DESIGN_SYSTEM.md → Images and QAT-1.
     formats: ["image/avif", "image/webp"],
+    // Cache optimized images for 31 days (default is 60s) — assets are content-
+    // hashed/stable, so long-lived caching cuts repeat optimization work (QAT-1).
+    minimumCacheTTL: 2678400,
   },
   // Explicit long-cache for the app icon. Route HTML is covered by the SSG full
   // route cache; hashed `_next/static` assets are already immutable by default.

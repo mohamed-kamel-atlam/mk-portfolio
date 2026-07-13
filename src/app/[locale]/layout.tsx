@@ -52,7 +52,7 @@ export async function generateMetadata({
     applicationName: siteConfig.name,
     authors: [{ name: siteConfig.name }],
     creator: siteConfig.name,
-    icons: { icon: "/icon.svg" },
+    icons: { icon: "/icon.svg", apple: "/apple-icon" },
     formatDetection: { email: false, address: false, telephone: false },
     robots: {
       index: true,

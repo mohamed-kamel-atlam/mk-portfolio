@@ -61,6 +61,12 @@ export const projectSchema = contentBase.extend({
     .optional(),
   github: z.string().url().optional(),
   liveDemo: z.string().url().optional(),
+  /**
+   * Cover image file name in `public/images/projects` (resolve with
+   * `projectCover` from `@/shared/assets`). Optional — prepares cover rendering
+   * without coupling project data to a component.
+   */
+  cover: z.string().optional(),
   gallery: z.array(galleryImage).optional(),
   caseStudy: z.string().optional(),
   relatedArticles: z.array(z.string()).optional(),
