@@ -1,13 +1,8 @@
 import type { Metadata } from "next";
 
 import { siteConfig } from "@/shared/config/site";
-import {
-  defaultLocale,
-  localizedHref,
-  locales,
-  openGraphLocales,
-} from "@/shared/i18n/config";
-import { socialImage } from "@/shared/lib/seo";
+import { localizedHref, locales, openGraphLocales } from "@/shared/i18n/config";
+import { localeAlternates, socialImage } from "@/shared/lib/seo";
 
 import type { ContentItem, ContentType } from "./schema";
 
@@ -26,21 +21,17 @@ export function buildContentMetadata<T extends ContentType>(
   const description = frontmatter.seo?.description ?? frontmatter.summary;
   const url = `${siteConfig.url}${localizedHref(locale, routePath)}`;
 
-  // Content slugs are locale-invariant, so hreflang alternates map cleanly to
-  // the same route per locale, incl. x-default (SEO.md §6).
-  const languages: Record<string, string> = Object.fromEntries(
-    locales.map((code) => [
-      code,
-      `${siteConfig.url}${localizedHref(code, routePath)}`,
-    ]),
-  );
-  languages["x-default"] =
-    `${siteConfig.url}${localizedHref(defaultLocale, routePath)}`;
+  // An author-provided OG image wins; otherwise fall back to the branded card.
+  const ogImage = frontmatter.seo?.ogImage
+    ? { url: frontmatter.seo.ogImage, width: 1200, height: 630, alt: title }
+    : socialImage(locale, "opengraph");
 
   return {
     title,
     description,
-    alternates: { canonical: url, languages },
+    // Content slugs are locale-invariant, so hreflang alternates map cleanly to
+    // the same route per locale, incl. x-default (SEO.md §6).
+    alternates: { canonical: url, languages: localeAlternates(routePath) },
     openGraph: {
       type: "article",
       title,
@@ -48,13 +39,16 @@ export function buildContentMetadata<T extends ContentType>(
       url,
       siteName: siteConfig.name,
       locale: openGraphLocales[locale],
-      images: [socialImage(locale, "opengraph")],
+      alternateLocale: locales
+        .filter((code) => code !== locale)
+        .map((code) => openGraphLocales[code]),
+      images: [ogImage],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description,
-      images: [socialImage(locale, "twitter")],
+      images: [frontmatter.seo?.ogImage ?? socialImage(locale, "twitter")],
     },
   };
 }

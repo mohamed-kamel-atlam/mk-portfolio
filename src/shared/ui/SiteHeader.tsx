@@ -54,8 +54,8 @@ export async function SiteHeader({ locale }: SiteHeaderProps) {
 
         <div className="flex items-center gap-2">
           <div className="hidden items-center gap-2 md:flex">
-            <LanguageSwitcher />
-            <ThemeToggle />
+            <LanguageSwitcher label={t.nav.switchLanguage} />
+            <ThemeToggle label={t.nav.toggleTheme} />
           </div>
           <MobileNav
             items={items}
@@ -63,6 +63,8 @@ export async function SiteHeader({ locale }: SiteHeaderProps) {
               open: t.nav.menu,
               close: t.nav.close,
               nav: t.nav.primary,
+              toggleTheme: t.nav.toggleTheme,
+              switchLanguage: t.nav.switchLanguage,
             }}
             className="md:hidden"
           />

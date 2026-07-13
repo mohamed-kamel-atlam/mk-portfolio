@@ -7,7 +7,7 @@ import { useEffect, useRef } from "react";
 
 import { cn } from "@/shared/lib/cn";
 
-import type { NavLinkItem } from "./DesktopNav";
+import { useIsActive, type NavLinkItem } from "./DesktopNav";
 import { IconButton } from "./IconButton";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { ThemeToggle } from "./ThemeToggle";
@@ -18,6 +18,8 @@ export interface MobileNavProps {
     open: string;
     close: string;
     nav: string;
+    toggleTheme: string;
+    switchLanguage: string;
   };
   className?: string;
 }
@@ -65,10 +67,7 @@ export function MobileNav({ items, labels, className }: MobileNavProps) {
     if (event.target === dialogRef.current) close();
   }
 
-  const isActive = (item: NavLinkItem) =>
-    item.isHome
-      ? pathname === item.href
-      : pathname === item.href || pathname.startsWith(`${item.href}/`);
+  const isActive = useIsActive();
 
   return (
     <div className={className}>
@@ -80,7 +79,7 @@ export function MobileNav({ items, labels, className }: MobileNavProps) {
         ref={dialogRef}
         aria-label={labels.nav}
         onClick={onBackdropClick}
-        className="m-0 ms-auto h-dvh max-h-dvh w-full max-w-xs bg-surface text-foreground backdrop:bg-black/50 open:animate-fade-in"
+        className="m-0 ms-auto h-dvh max-h-dvh w-full max-w-xs bg-surface text-foreground backdrop:bg-overlay open:animate-fade-in"
       >
         <div className="flex h-full flex-col gap-6 p-6">
           <div className="flex justify-end">
@@ -112,8 +111,8 @@ export function MobileNav({ items, labels, className }: MobileNavProps) {
           </nav>
 
           <div className="mt-auto flex items-center gap-2">
-            <LanguageSwitcher />
-            <ThemeToggle />
+            <LanguageSwitcher label={labels.switchLanguage} />
+            <ThemeToggle label={labels.toggleTheme} />
           </div>
         </div>
       </dialog>

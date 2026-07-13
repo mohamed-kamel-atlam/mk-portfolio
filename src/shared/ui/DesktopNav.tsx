@@ -20,7 +20,8 @@ export interface DesktopNavProps {
   className?: string;
 }
 
-function useIsActive() {
+/** Active-link matcher shared by the desktop and mobile navs (single source). */
+export function useIsActive() {
   const pathname = usePathname();
   return (item: NavLinkItem) =>
     item.isHome

@@ -13,7 +13,9 @@
     "close": "أغلق القائمة",
     "primary": "التنقل الرئيسي",
     "footer": "تذييل",
-    "skipToContent": "تخطَّ إلى المحتوى"
+    "skipToContent": "تخطَّ إلى المحتوى",
+    "toggleTheme": "تبديل السمة",
+    "switchLanguage": "تغيير اللغة"
   },
   "footer": {
     "rights": "جميع الحقوق محفوظة."
@@ -110,7 +112,8 @@
     "next": "التالي",
     "pager": "تنقّل المشاريع",
     "viewSource": "الكود المصدري",
-    "viewLive": "عرض حي"
+    "viewLive": "عرض حي",
+    "eyebrow": "أعمال مختارة"
   },
   "about": {
     "meta": {

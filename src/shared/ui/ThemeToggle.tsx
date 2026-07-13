@@ -8,6 +8,8 @@ import { IconButton } from "./IconButton";
 
 export interface ThemeToggleProps {
   className?: string;
+  /** Localized accessible label; falls back to an English default. */
+  label?: string;
 }
 
 /**
@@ -15,14 +17,14 @@ export interface ThemeToggleProps {
  * `useTheme()`; presentation is delegated to {@link IconButton}, so it shares the
  * design system's button styling rather than duplicating it (ADR-0005).
  */
-export function ThemeToggle({ className }: ThemeToggleProps) {
+export function ThemeToggle({ className, label }: ThemeToggleProps) {
   const { resolvedTheme, setTheme } = useTheme();
   const isDark = resolvedTheme === "dark";
   const next = isDark ? "light" : "dark";
 
   return (
     <IconButton
-      label={`Switch to ${next} theme`}
+      label={label ?? `Switch to ${next} theme`}
       onClick={() => setTheme(next)}
       className={className}
     >

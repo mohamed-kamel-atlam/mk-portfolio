@@ -74,6 +74,9 @@ export function buildRouteMetadata({
       url: canonical,
       siteName: siteConfig.name,
       locale: openGraphLocales[locale],
+      alternateLocale: locales
+        .filter((code) => code !== locale)
+        .map((code) => openGraphLocales[code]),
       images: [socialImage(locale, "opengraph")],
     },
     twitter: {

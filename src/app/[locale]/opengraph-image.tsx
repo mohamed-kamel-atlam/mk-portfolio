@@ -46,7 +46,7 @@ export default function OpengraphImage() {
             borderRadius: "20px",
             backgroundColor: "#14171a",
             fontSize: "46px",
-            fontWeight: 700,
+            fontWeight: 600,
           }}
         >
           <span style={{ color: "#5b7cfa" }}>M</span>

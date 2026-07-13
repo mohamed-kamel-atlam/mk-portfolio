@@ -37,6 +37,8 @@ export { SiteHeader } from "./SiteHeader";
 export type { SiteHeaderProps } from "./SiteHeader";
 export { Skeleton } from "./Skeleton";
 export type { SkeletonProps } from "./Skeleton";
+export { SocialLinks } from "./SocialLinks";
+export type { SocialLinksProps } from "./SocialLinks";
 export { Spinner } from "./Spinner";
 export type { SpinnerProps } from "./Spinner";
 export { Text } from "./Text";

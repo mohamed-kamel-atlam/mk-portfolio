@@ -13,6 +13,7 @@ import {
   DEFAULT_THEME,
   THEME_STORAGE_KEY,
   THEME_TRANSITION_MS,
+  THEMES,
 } from "@/shared/constants/theme";
 import type { ResolvedTheme, Theme } from "@/shared/types/theme";
 
@@ -62,8 +63,12 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
 
   // Sync React state to the persisted preference after hydration.
   useEffect(() => {
-    const stored = localStorage.getItem(THEME_STORAGE_KEY) as Theme | null;
-    const next = stored ?? DEFAULT_THEME;
+    // Validate the persisted value against the known themes — never trust a raw
+    // localStorage string (tampering, extensions, schema drift).
+    const stored = localStorage.getItem(THEME_STORAGE_KEY);
+    const next: Theme = THEMES.includes(stored as Theme)
+      ? (stored as Theme)
+      : DEFAULT_THEME;
     setThemeState(next);
     setResolvedTheme(resolve(next));
   }, []);

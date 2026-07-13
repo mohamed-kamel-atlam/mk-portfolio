@@ -15,6 +15,8 @@ import { Button } from "./Button";
 
 export interface LanguageSwitcherProps {
   className?: string;
+  /** Localized accessible label; falls back to an English default. */
+  label?: string;
 }
 
 const ONE_YEAR_SECONDS = 60 * 60 * 24 * 365;
@@ -27,7 +29,7 @@ const ONE_YEAR_SECONDS = 60 * 60 * 24 * 365;
  * label renders the TARGET language in its own script (`lang`) with an
  * accessible name; the icon never replaces the label.
  */
-export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
+export function LanguageSwitcher({ className, label }: LanguageSwitcherProps) {
   const pathname = usePathname();
   const router = useRouter();
 
@@ -56,7 +58,7 @@ export function LanguageSwitcher({ className }: LanguageSwitcherProps) {
       variant="secondary"
       onClick={switchLanguage}
       lang={next}
-      aria-label={`Switch language to ${localeNames[next]}`}
+      aria-label={label ?? `Switch language to ${localeNames[next]}`}
       title={localeNames[next]}
       className={className}
     >

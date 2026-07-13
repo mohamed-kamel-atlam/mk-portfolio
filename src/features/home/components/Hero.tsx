@@ -1,10 +1,16 @@
 import { ChevronDown } from "lucide-react";
 
-import { socialLinks } from "@/shared/config/site";
 import { localizedHref, type Locale } from "@/shared/i18n/config";
 import { getDictionary } from "@/shared/i18n/get-dictionary";
 import { cn } from "@/shared/lib/cn";
-import { Badge, ButtonLink, Container, Heading, Text } from "@/shared/ui";
+import {
+  Badge,
+  ButtonLink,
+  Container,
+  Heading,
+  SocialLinks,
+  Text,
+} from "@/shared/ui";
 
 import styles from "./Hero.module.css";
 
@@ -62,24 +68,7 @@ export async function Hero({ locale }: HeroProps) {
             </ButtonLink>
           </div>
 
-          <ul className="mt-2 flex flex-wrap items-center gap-x-6 gap-y-2">
-            {socialLinks.map((social) => {
-              const isExternal = social.href.startsWith("http");
-              return (
-                <li key={social.key}>
-                  <a
-                    href={social.href}
-                    {...(isExternal
-                      ? { target: "_blank", rel: "noopener noreferrer" }
-                      : {})}
-                    className="text-small text-muted-foreground transition-colors duration-fast hover:text-foreground"
-                  >
-                    {social.label}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
+          <SocialLinks variant="inline" className="mt-2" />
         </div>
       </Container>
 

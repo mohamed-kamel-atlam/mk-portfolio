@@ -3,6 +3,7 @@ import type { MetadataRoute } from "next";
 import { listContent } from "@/content";
 import { siteConfig } from "@/shared/config/site";
 import { defaultLocale, locales } from "@/shared/i18n/config";
+import { localeAlternates } from "@/shared/lib/seo";
 
 /**
  * sitemap.xml (SEO.md §6) — every indexable route, for every locale, with
@@ -18,16 +19,6 @@ const STATIC_PATHS = [
   "/engineering",
   "/contact",
 ] as const;
-
-/** hreflang alternates for a locale-agnostic path (all locales + x-default). */
-function alternates(path: string): { languages: Record<string, string> } {
-  const languages: Record<string, string> = {};
-  for (const locale of locales) {
-    languages[locale] = `${siteConfig.url}/${locale}${path}`;
-  }
-  languages["x-default"] = `${siteConfig.url}/${defaultLocale}${path}`;
-  return { languages };
-}
 
 function priorityFor(path: string): number {
   if (path === "") return 1;
@@ -56,7 +47,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     locales.map((locale) => ({
       url: `${siteConfig.url}/${locale}${entry.path}`,
       lastModified: entry.lastModified,
-      alternates: alternates(entry.path),
+      alternates: { languages: localeAlternates(entry.path) },
       changeFrequency: entry.path === "" ? "weekly" : "monthly",
       priority: priorityFor(entry.path),
     })),

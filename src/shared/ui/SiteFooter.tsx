@@ -1,10 +1,11 @@
 import Link from "next/link";
 
-import { mainNav, socialLinks } from "@/shared/config/site";
+import { mainNav } from "@/shared/config/site";
 import { localizedHref, type Locale } from "@/shared/i18n/config";
 import { getDictionary } from "@/shared/i18n/get-dictionary";
 
 import { Container } from "./Container";
+import { SocialLinks } from "./SocialLinks";
 import { Text } from "./Text";
 
 export interface SiteFooterProps {
@@ -45,24 +46,7 @@ export async function SiteFooter({ locale }: SiteFooterProps) {
             ))}
           </nav>
 
-          <ul className="flex flex-wrap items-center gap-x-6 gap-y-2">
-            {socialLinks.map((social) => {
-              const isExternal = social.href.startsWith("http");
-              return (
-                <li key={social.key}>
-                  <a
-                    href={social.href}
-                    {...(isExternal
-                      ? { target: "_blank", rel: "noopener noreferrer" }
-                      : {})}
-                    className="text-small text-muted-foreground transition-colors duration-fast hover:text-foreground"
-                  >
-                    {social.label}
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
+          <SocialLinks variant="inline" />
         </div>
 
         <Text size="small" tone="muted">

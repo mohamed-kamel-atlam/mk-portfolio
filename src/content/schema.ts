@@ -16,7 +16,7 @@ const localeSchema = z.enum(locales as unknown as [Locale, ...Locale[]]);
 // ISO date string so authors can write dates naturally (CONTENT_MODEL §2.2).
 const isoDate = z.preprocess(
   (value) => (value instanceof Date ? value.toISOString().slice(0, 10) : value),
-  z.string(),
+  z.string().regex(/^\d{4}-\d{2}-\d{2}$/, "Date must be ISO YYYY-MM-DD"),
 );
 
 /** Fields shared by every content type (CONTENT_MODEL.md §2.2). */

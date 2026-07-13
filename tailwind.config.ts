@@ -40,6 +40,7 @@ const config: Config = {
         "danger-foreground": "var(--color-danger-foreground)",
         info: "var(--color-info)",
         "info-foreground": "var(--color-info-foreground)",
+        overlay: "var(--color-overlay)",
       },
       // Steps mirror --space-* (the 8-pt grid) exactly; each equals its Tailwind
       // default, but is re-pointed at the token so the two never diverge.

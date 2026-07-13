@@ -12,6 +12,7 @@ import {
   type Locale,
 } from "@/shared/i18n/config";
 import { getThemeInitScript } from "@/shared/lib/theme-script";
+import { localeAlternates } from "@/shared/lib/seo";
 import { AppProviders } from "@/shared/providers";
 import { ScrollProgress, SiteFooter, SiteHeader } from "@/shared/ui";
 
@@ -44,12 +45,6 @@ export async function generateMetadata({
   const { locale } = await params;
   const active: Locale = isLocale(locale) ? locale : defaultLocale;
 
-  // Self-canonical + hreflang alternates incl. x-default (INTERNATIONALIZATION §6).
-  const languages: Record<string, string> = Object.fromEntries(
-    locales.map((code) => [code, `${siteConfig.url}/${code}`]),
-  );
-  languages["x-default"] = `${siteConfig.url}/${defaultLocale}`;
-
   return {
     metadataBase: new URL(siteConfig.url),
     title: { default: siteConfig.title, template: `%s — ${siteConfig.name}` },
@@ -66,7 +61,7 @@ export async function generateMetadata({
     },
     alternates: {
       canonical: `${siteConfig.url}/${active}`,
-      languages,
+      languages: localeAlternates(""),
     },
     openGraph: {
       type: "website",

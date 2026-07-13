@@ -1,5 +1,4 @@
-import { socialLinks } from "@/shared/config/site";
-import { Heading, Text } from "@/shared/ui";
+import { Heading, SocialLinks, Text } from "@/shared/ui";
 
 export interface ContactInfoProps {
   title: string;
@@ -19,24 +18,7 @@ export function ContactInfo({ title, subtitle }: ContactInfoProps) {
       <Text tone="muted" className="text-pretty">
         {subtitle}
       </Text>
-      <ul className="flex flex-col gap-3">
-        {socialLinks.map((social) => {
-          const isExternal = social.href.startsWith("http");
-          return (
-            <li key={social.key}>
-              <a
-                href={social.href}
-                {...(isExternal
-                  ? { target: "_blank", rel: "noopener noreferrer" }
-                  : {})}
-                className="text-body text-muted-foreground underline-offset-4 transition-colors duration-fast hover:text-foreground hover:underline"
-              >
-                {social.label}
-              </a>
-            </li>
-          );
-        })}
-      </ul>
+      <SocialLinks variant="stacked" />
     </aside>
   );
 }

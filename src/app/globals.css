@@ -169,7 +169,9 @@
     --color-border: var(--neutral-800);
     --color-muted: var(--neutral-800);
     --color-muted-foreground: var(--neutral-400);
-    --color-accent: var(--accent-500);
+    /* accent-400 (not -500): keeps small accent text — e.g. the caption eyebrow
+       on a surface-muted band — above WCAG AA 4.5:1 (COLOR_SYSTEM.md / QAT-2). */
+    --color-accent: var(--accent-400);
     --color-accent-foreground: var(--neutral-950);
     --color-success: #3fb37a;
     --color-success-foreground: var(--neutral-950);
@@ -179,6 +181,8 @@
     --color-danger-foreground: var(--neutral-950);
     --color-info: #5b9df6;
     --color-info-foreground: var(--neutral-950);
+    /* Scrim behind modals/sheets — theme-agnostic, so declared once here. */
+    --color-overlay: rgb(0 0 0 / 0.5);
   }
 
   /* ---- Tier 2: semantic tokens — LIGHT theme (COLOR_SYSTEM.md §3.2) ----

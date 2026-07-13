@@ -34,11 +34,14 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
   return (
     <Section>
       <Container className="flex flex-col gap-10">
-        <div className="flex flex-col gap-3">
-          <Heading level={1} size="h1">
+        <div className="flex max-w-2xl flex-col gap-4">
+          <p className="text-caption uppercase text-accent">
+            {t.projectsPage.eyebrow}
+          </p>
+          <Heading level={1} size="display" className="text-balance">
             {t.projectsPage.title}
           </Heading>
-          <Text size="body-lg" tone="muted" className="max-w-2xl text-pretty">
+          <Text size="body-lg" tone="muted" className="text-pretty">
             {t.projectsPage.intro}
           </Text>
         </div>

@@ -13,7 +13,9 @@
     "close": "Close menu",
     "primary": "Primary",
     "footer": "Footer",
-    "skipToContent": "Skip to content"
+    "skipToContent": "Skip to content",
+    "toggleTheme": "Toggle theme",
+    "switchLanguage": "Switch language"
   },
   "footer": {
     "rights": "All rights reserved."
@@ -110,7 +112,8 @@
     "next": "Next",
     "pager": "Project navigation",
     "viewSource": "View source",
-    "viewLive": "Live demo"
+    "viewLive": "Live demo",
+    "eyebrow": "Selected work"
   },
   "about": {
     "meta": {

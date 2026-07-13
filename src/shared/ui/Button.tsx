@@ -51,7 +51,7 @@ export function Button({
       )}
       {...props}
     >
-      {isLoading ? <Spinner size="sm" /> : null}
+      {isLoading ? <Spinner size="sm" decorative /> : null}
       {children}
     </button>
   );
