@@ -6,7 +6,7 @@ import rehypeSlug from "rehype-slug";
 import remarkGfm from "remark-gfm";
 import type { PluggableList } from "unified";
 
-import { Heading, Text } from "@/shared/ui";
+import { Divider, Heading, Text } from "@/shared/ui";
 
 /**
  * The MDX render path (MDX_PIPELINE §5–6). Content bodies are compiled and
@@ -32,6 +32,41 @@ const components = {
     <Heading level={4} size="h4" {...props} />
   ),
   p: (props: ComponentPropsWithoutRef<"p">) => <Text {...props} />,
+  ul: (props: ComponentPropsWithoutRef<"ul">) => (
+    <ul className="list-disc space-y-2 ps-6 text-muted-foreground" {...props} />
+  ),
+  ol: (props: ComponentPropsWithoutRef<"ol">) => (
+    <ol
+      className="list-decimal space-y-2 ps-6 text-muted-foreground"
+      {...props}
+    />
+  ),
+  a: ({ href, ...props }: ComponentPropsWithoutRef<"a">) => (
+    <a
+      href={href ?? "#"}
+      className="text-accent underline underline-offset-4 hover:no-underline"
+      {...props}
+    />
+  ),
+  blockquote: (props: ComponentPropsWithoutRef<"blockquote">) => (
+    <blockquote
+      className="border-s-2 border-accent bg-surface-muted px-4 py-2 text-muted-foreground"
+      {...props}
+    />
+  ),
+  hr: () => <Divider />,
+  code: (props: ComponentPropsWithoutRef<"code">) => (
+    <code
+      className="rounded-sm bg-surface-muted px-1.5 py-0.5 font-mono text-small"
+      {...props}
+    />
+  ),
+  pre: (props: ComponentPropsWithoutRef<"pre">) => (
+    <pre
+      className="overflow-x-auto rounded-lg border border-border bg-surface-muted p-4 font-mono text-small"
+      {...props}
+    />
+  ),
 };
 
 /**

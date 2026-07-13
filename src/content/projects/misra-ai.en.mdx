@@ -1,0 +1,69 @@
+---
+title: MISRA AI
+summary: An AI-powered data-analysis platform — dataset upload, exploratory analysis, AI predictions, drift detection, and report generation.
+date: 2026-01-15
+order: 1
+featured: true
+role: Lead Front-End Engineer
+techStack:
+  - { name: React, category: framework }
+  - { name: TypeScript, category: language }
+  - { name: Vite, category: tooling }
+  - { name: Redux Toolkit, category: framework }
+  - { name: RTK Query, category: framework }
+  - { name: React Query, category: framework }
+  - { name: Tailwind CSS, category: styling }
+architectureDecisions:
+  - title: Feature-Based Architecture
+    rationale: A team of seven needed to build in parallel without stepping on each other. Organizing by feature domain — each owning its components, state, and API access — kept boundaries explicit and merges clean.
+  - title: Split server and client state
+    rationale: RTK Query and React Query own cached server state; Redux Toolkit owns genuinely client-side UI state. This kept components thin and avoided re-implementing caching by hand.
+  - title: Rendering performance as a first-class concern
+    rationale: Analytical dashboards over large datasets demanded memoization, code splitting, and lazy loading from the start, not as a later optimization pass.
+---
+
+## Overview
+
+MISRA AI is an AI-powered data-analysis platform — the graduation project I led
+as front-end engineer on a team of seven. It lets users upload datasets, run
+exploratory analysis, generate AI-driven predictions, detect data drift, and
+produce reports, all through a single cohesive interface.
+
+## Problem
+
+The product spanned many features — data ingestion, visualization, model
+inference, monitoring, and reporting — built simultaneously by a multi-role
+team. Without a clear frontend architecture, that breadth would have collapsed
+into coupled code, duplicated state, and merge friction.
+
+## Solution
+
+I owned the complete frontend architecture: a feature-based structure backed by
+a reusable component library and design system, a disciplined server/client
+state split, and dashboards tuned for rendering performance over large datasets.
+
+## My Role
+
+As Lead Front-End Engineer I set the architecture, built the shared component
+library, implemented authentication and role-based access control against the
+identity APIs, and integrated the REST and AI/ML service endpoints. I drove the
+team's GitHub Flow — pull requests, code reviews — and coordinated delivery in
+Jira.
+
+## Architecture Decisions
+
+The structured decisions above (feature-based architecture, server/client state
+split, performance-first dashboards) were the load-bearing calls. Each was made
+to let a large team move fast without accumulating architectural debt.
+
+## Challenges
+
+Rendering large analytical datasets smoothly was the hardest problem. Profiling
+guided targeted memoization, virtualized/lazy rendering, and code splitting so
+interaction stayed responsive as data volume grew.
+
+## Lessons Learned
+
+Architecture is a team enabler, not a personal preference: the feature
+boundaries and shared design system were what actually let seven people ship in
+parallel. Investing in that structure early paid back every sprint.

@@ -1,0 +1,53 @@
+---
+title: M&N Media
+summary: A responsive social platform — accounts, image posts, comments, likes, and profiles, powered by a RESTful API.
+date: 2026-04-06
+order: 5
+featured: true
+role: Front-End Engineer
+github: https://github.com/mohamed-kamel-atlam/Social-Media-Project
+liveDemo: https://mohamed-kamel-atlam.github.io/Social-Media-Project/
+techStack:
+  - { name: React, category: framework }
+  - { name: JavaScript, category: language }
+  - { name: REST APIs, category: infra }
+---
+
+## Overview
+
+M&N Media is a modern, responsive social media web application that allows users to create accounts, share posts with images, interact through comments, and explore other users' profiles — all powered by a RESTful API. It was built as a frontend-only project using vanilla JavaScript and Bootstrap 5, connected to the [Tarmeez Academy API](https://tarmeezacademy.com).
+
+## Features
+
+- **Authentication** — register and login with JWT token support
+- **Posts** — create, edit, and delete your own posts
+- **Image Upload** — attach images to posts and profile pictures
+- **Comments** — add and view comments on any post
+- **User Profiles** — view profile details and user-specific posts
+- **Infinite Scroll** — auto-load more posts as you scroll
+- **Tags** — posts support colorful tag badges
+- **Responsive Design** — fully responsive across all devices
+
+## Architecture
+
+The app is organized around three core pages — a home feed, a post-details view, and a user profile view — backed by a shared set of JavaScript modules handling the navbar/modals, authentication, the post feed, post creation/editing, post details with comments, and profile data. Session state (including the JWT token) is kept in `localStorage`, and Axios is used as the HTTP client for all API communication.
+
+## REST API Integration
+
+The frontend communicates with the **Tarmeez Academy REST API** for all data operations, including:
+
+- Registering, logging in, logging out, and updating the authenticated user's profile
+- Fetching users, a specific user's profile, and a user's posts
+- Fetching, creating, updating, and deleting posts (with pagination)
+- Adding comments to posts
+- Fetching tags and the posts associated with a tag
+
+Protected endpoints require a `Bearer` token in the `Authorization` header, so the client attaches the stored JWT to authenticated requests and handles logged-in vs. logged-out UI states accordingly.
+
+## Design & UX
+
+The UI is built with Bootstrap 5.3 and Bootstrap Icons on top of custom CSS for the layout, cards, and post feed. The home feed loads posts incrementally via infinite scroll rather than pagination controls, and tags render as colorful badges to make post categorization scannable at a glance. The layout is fully responsive across devices.
+
+## Challenges
+
+Since the project is frontend-only, all state that would normally live server-side — session/auth state, optimistic UI updates for posts and comments — had to be managed on the client using `localStorage` and careful coordination between the shared DOM utilities and each page's script. Loading a post feed efficiently also meant implementing infinite scroll against a paginated API rather than fetching everything up front.

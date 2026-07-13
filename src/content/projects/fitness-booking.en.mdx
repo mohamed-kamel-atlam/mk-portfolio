@@ -1,0 +1,83 @@
+---
+title: Fitness Booking System
+summary: A gym management and scheduling platform — membership management, booking flows, and role-aware dashboards.
+date: 2025-06-01
+order: 3
+featured: true
+role: Front-End Engineer
+github: https://github.com/mohamed-kamel-atlam/Fitness_Booking_System
+techStack:
+  - { name: React, category: framework }
+  - { name: TypeScript, category: language }
+  - { name: Tailwind CSS, category: styling }
+  - { name: Redux Toolkit, category: framework }
+architectureDecisions:
+  - title: Normalized Redux store
+    rationale: Bookings and schedules reference shared entities (members, classes, slots). A normalized store avoided duplication and kept updates consistent across views.
+  - title: Role-aware UI rendering
+    rationale: Members and staff see different actions on the same screens. Gating actions by role at the UI layer, backed by protected routes, kept the experience coherent and safe.
+---
+
+## Overview
+
+Novawell Fitness is a comprehensive fitness management platform designed to streamline the process of booking personal training sessions. The platform connects fitness enthusiasts with qualified trainers, allowing seamless scheduling, profile management, and booking history tracking.
+
+**What it solves:**
+
+- **Scheduling complexity**: eliminates manual scheduling with an intuitive interface for finding available trainers and time slots
+- **Location flexibility**: users can select preferred training areas and branches
+- **Session management**: comprehensive booking history and easy session modifications
+- **User experience**: modern, responsive UI with smooth animations and onboarding
+
+## Features
+
+**Authentication & Authorization** — email-validated registration, JWT-based login with automatic token refresh, password strength requirements, and protected routes for authenticated users.
+
+**Trainer Booking System** — browse trainers by specialization, view profiles and credentials, check real-time availability, and complete a multi-step booking workflow with confirmation, cancellation, and rescheduling.
+
+**Training Management** — multiple training areas/branches, filtering by location and specialization, time slot availability checks, pricing information, and duration selection (30/60/90-minute sessions).
+
+**User Profile** — personal information management, detailed booking history, session status tracking, and profile picture support.
+
+**Marketing & Landing Page** — SEO-optimized landing page with feature highlights, testimonials carousel, pricing, FAQ, and mobile-responsive design.
+
+**User Experience** — smooth GSAP-driven animations, loading states and splash screen, real-time form validation, and accessible, responsive layouts across mobile, tablet, and desktop.
+
+## Architecture
+
+Novawell Fitness follows a modern, component-based architecture with clear separation of concerns:
+
+- **UI & navigation**: React with React Router, organized by feature (auth, booking, website)
+- **State & data**: Redux Toolkit with RTK Query handles both client state and async server-state caching
+- **API layer**: Axios paired with Mock Service Worker (MSW), which intercepts HTTP requests to provide realistic API mocking during development without requiring a live backend
+- **Layout composition**: separate layouts for the booking flow and authenticated user areas
+- **Route protection**: protected routes gate access behind authentication
+
+The booking domain is exposed through RTK Query hooks (`useGetBookingsQuery`, `useCreateBookingMutation`, `useUpdateBookingMutation`, `useCancelBookingMutation`), alongside endpoints for trainers, training areas, and schedules — all mocked through MSW so the frontend could be built and demoed independently of a real backend.
+
+The stack is built on React 19 and TypeScript, bundled with Vite, styled with Tailwind CSS, and animated with GSAP.
+
+## Design & User Experience
+
+A strong emphasis was placed on delivering a clean and intuitive user experience. The entire UI was personally designed and implemented, ensuring consistency across the application, with every component, interaction, and visual element crafted to provide seamless user journeys from landing page to booking confirmation.
+
+**Design process:**
+
+- Prototyped using Google Stitch
+- Built a responsive, modern landing page using Webflow
+- Implemented pixel-perfect React components with attention to typography, spacing, and color theory
+
+**Key design principles:**
+
+- **Consistency**: unified design language across all pages
+- **Accessibility**: WCAG-conscious color contrast and semantic HTML
+- **Responsiveness**: mobile-first design across all devices
+- **Performance**: optimized animations and transitions with GSAP
+- **Clarity**: clear information hierarchy and intuitive navigation
+
+## Future Improvements
+
+- Payment integration (Stripe/PayPal) and membership/package plans
+- Email and SMS notifications, plus calendar integration (Google Calendar, Outlook)
+- Trainer ratings/reviews and advanced filtering
+- Automated test coverage (unit, integration, and E2E)

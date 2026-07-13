@@ -18,6 +18,8 @@ export { IconButton } from "./IconButton";
 export type { IconButtonProps } from "./IconButton";
 export { LanguageSwitcher } from "./LanguageSwitcher";
 export type { LanguageSwitcherProps } from "./LanguageSwitcher";
+export { ProjectCard } from "./ProjectCard";
+export type { ProjectCardProps } from "./ProjectCard";
 export { ScrollProgress } from "./ScrollProgress";
 export { Section } from "./Section";
 export type { SectionProps } from "./Section";

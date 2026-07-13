@@ -1,0 +1,52 @@
+---
+title: Apple Disease Detection
+summary: A computer-vision model that detects diseases in apple plants to enable timely agricultural intervention.
+date: 2024-12-29
+order: 14
+featured: false
+role: AI / ML Engineer
+github: https://github.com/mohamed-kamel-atlam/Apple_disease
+techStack:
+  - { name: Python, category: language }
+  - { name: PyTorch, category: ai }
+  - { name: Computer Vision, category: ai }
+---
+
+## Overview
+
+A deep learning model that detects plant diseases, with a focus on apple diseases, from leaf images. The goal is to make disease diagnosis fast and accessible so that early, timely intervention becomes possible.
+
+## Problem
+
+Undetected plant diseases lead to reduced crop yields and delayed treatment. Early detection helps:
+
+- **Farmers** take timely action, reducing crop losses and supporting more sustainable agriculture through interactive disease diagnosis.
+- **Agricultural experts and researchers** identify diseases in experimental settings and analyze disease prevalence and patterns across plant species.
+- **Students and educators** use the system as an educational resource for understanding plant diseases and applied deep learning techniques.
+
+## Dataset
+
+The dataset is sourced from the New Plant Diseases Dataset, which contains roughly 87.9k images across many plant species. This project uses only the apple subset, comprising 7,780 images.
+
+## Approach / Methodology
+
+**Data preparation**: images are normalized with `transforms.ToTensor()`, and a `DataLoader` is used for efficient batch processing during training.
+
+**Model and training**: a convolutional neural network (CNN) performs the image recognition and classification. Training uses:
+
+- The Adam optimizer, for per-parameter adaptive learning rates.
+- A learning rate schedule controlling the step size at each iteration toward the loss minimum.
+- `CrossEntropyLoss()` as the classification loss function.
+
+**Evaluation**: training progress is tracked via accuracy and loss curves, precision/recall/F1 per epoch, and a confusion matrix, in addition to testing the trained model against held-out images to verify its predictions.
+
+## Results
+
+The model achieved 97% accuracy on the validation dataset and 92.5% accuracy on the test dataset.
+
+## Future Work
+
+- Integrating additional plant-related datasets to improve the model's accuracy and generalization.
+- Deploying on cloud platforms for scalability and increased availability.
+- Incorporating real-time image augmentation and preprocessing to handle varying image qualities and formats.
+- Building a mobile app version for on-the-go plant disease diagnosis.

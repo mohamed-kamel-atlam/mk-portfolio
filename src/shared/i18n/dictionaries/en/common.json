@@ -98,5 +98,18 @@
       "primary": "Start a conversation",
       "secondary": "Browse projects"
     }
+  },
+  "projectsPage": {
+    "title": "Projects",
+    "intro": "Selected work — the engineering behind each interface, not just screenshots.",
+    "back": "All projects",
+    "related": "Related projects",
+    "techStack": "Tech stack",
+    "keyDecisions": "Key decisions",
+    "previous": "Previous",
+    "next": "Next",
+    "pager": "Project navigation",
+    "viewSource": "View source",
+    "viewLive": "Live demo"
   }
 }

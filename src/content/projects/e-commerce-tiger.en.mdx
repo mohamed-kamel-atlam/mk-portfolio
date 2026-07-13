@@ -1,0 +1,56 @@
+---
+title: Tiger E-Commerce
+summary: A complete e-commerce web application with catalog, cart, and checkout flows.
+date: 2026-07-10
+order: 7
+featured: false
+role: Front-End Engineer
+github: https://github.com/mohamed-kamel-atlam/e-commerce-app
+techStack:
+  - { name: React, category: framework }
+  - { name: Vite, category: tooling }
+  - { name: Redux Toolkit, category: framework }
+  - { name: Tailwind CSS, category: styling }
+---
+
+## Overview
+
+Tiger is a complete e-commerce web application featuring a customer-facing storefront alongside an administrative dashboard for managing users, categories, and products.
+
+The front-end was built entirely with React, developed by hand without any AI assistance, representing the first large-scale application built while learning React. The back-end is built with Laravel, based on an open-source project sourced from GitHub and modified to fit the project's requirements.
+
+## Features
+
+- Full storefront experience: product listing, categories, search, cart, and checkout
+- Authentication with a user role/permission system
+- Admin dashboard for managing users, categories, and products with full CRUD support
+- Fully responsive design across mobile and desktop
+- Interactive image gallery on the product details page
+- Toast notifications for user feedback
+- Fast performance powered by Vite
+- Smooth animations and transitions using GSAP and AOS
+
+## Architecture
+
+The project follows a clear separation of concerns across the front-end codebase:
+
+- **Api/** — a centralized layer for all back-end communication using Axios
+- **Components/Website** — components for the public storefront, such as the header, footer, and product card
+- **Components/Dashboard** — components dedicated to the admin dashboard
+- **Components/Loading** — shared loading components such as skeletons and spinners
+- **Contexts/** — manages certain shared state via the Context API
+- **store/** — global state management (cart, user, auth) via Redux Toolkit
+- **Pages/** — the main pages navigated through React Router
+- **Helpers/** — reusable utility functions shared across the app
+
+## State & Data Approach
+
+Global application state — including the shopping cart, user session, and authentication — is managed with Redux Toolkit, while the Context API handles certain narrower, shared pieces of state. All communication with the Laravel back-end is centralized through an Axios-based API layer, keeping data-fetching logic decoupled from the UI components.
+
+## Design & UX
+
+The storefront and dashboard are fully responsive, adapting cleanly between mobile and desktop layouts. The product details page includes an interactive image gallery, loading states are handled with skeleton screens, and toast notifications provide immediate feedback for user actions. GSAP and AOS are used throughout to add smooth animations and scroll-based transitions.
+
+## Highlights
+
+This project marks the first large-scale application built by the developer while learning React, applying concepts such as state management, client-side routing, responsive design, and integration with an external API across two closely paired areas of the app: a public storefront and a full-featured admin dashboard.

@@ -1,0 +1,78 @@
+---
+title: BIO VET System
+summary: A veterinary warehouse and invoice management system — product inventory, customer relationships, and sales transactions.
+date: 2025-12-17
+order: 4
+featured: true
+role: Front-End Engineer
+github: https://github.com/mohamed-kamel-atlam/BIO-VET-SYSTEM
+liveDemo: https://biovet.netlify.app/
+techStack:
+  - { name: HTML5, category: styling }
+  - { name: CSS3, category: styling }
+  - { name: JavaScript, category: language }
+---
+
+## Overview
+
+**BIO VET** is a comprehensive veterinary management system designed to streamline operations for veterinary clinics and businesses. It provides an intuitive interface for managing product inventory, customer relationships, and sales transactions with ease.
+
+Built with a focus on user experience and efficiency, BIO VET empowers veterinary professionals to maintain accurate records, manage stock levels, track customer interactions seamlessly, and generate invoices and sales reports. The application requires no backend server — everything is stored locally in the browser using the LocalStorage API.
+
+## Key Features
+
+- **Product Management** — add, edit, delete, and manage veterinary products with complete pricing and inventory tracking
+- **Customer Management** — maintain comprehensive customer profiles, track invoices, and manage relationships
+- **Advanced Search** — find products by title/price and customers by name/date with instant filtering
+- **Dark/Light Mode** — switch between themes with automatic preference persistence
+- **Local Storage** — secure data storage in the browser with no server dependency
+- **Responsive Design** — works seamlessly on desktop, tablet, and mobile devices
+
+## Products Management
+
+The products module handles the veterinary clinic's inventory with detailed pricing and sales analytics:
+
+- Add products with title, price, quantity, and discount
+- Real-time calculations for total products and profit gains
+- Instant edit and delete of existing entries
+- Smart search by title or price
+- Full table view of all products
+
+The workflow guides the user from the products page, through entering product details (title, price, stored quantity, sale quantity, discount), to auto-calculated remaining stock and profit, before committing the entry to the inventory table.
+
+## Customers Management
+
+The customers module maintains detailed customer records, processes invoices, and tracks transactions:
+
+- Create invoices with multiple products
+- Store customer names and transaction dates
+- Dynamically add items to an invoice
+- Track total price, paid amount, and outstanding balance
+- View, edit, and delete invoices
+- Search by customer name or date
+
+The invoice workflow lets a user enter customer details and a transaction date, add invoice line items one at a time (product name, quantity, price), enter payment information (total price and amount paid), and save the invoice — after which it becomes searchable by name or date.
+
+## Architecture
+
+BIO VET is a vanilla JavaScript (ES6+) application with no frameworks, built around semantic HTML5 and CSS3 with a mobile-first, responsive layout. All persistence is handled client-side through the browser's LocalStorage API, so the app runs entirely without a backend or network dependency. Theme preference (dark/light) is stored and restored automatically, with smooth transitions between modes. Search across both the products and customers modules is case-insensitive and filters results in real time.
+
+## Highlights
+
+Beyond the core CRUD features, the project was built with attention to discoverability and content structure:
+
+- Descriptive title tags and meta descriptions per page
+- Open Graph and Twitter Card meta tags for social sharing
+- Canonical URLs and `index, follow` robots directives
+- A sitemap and robots.txt for search engine crawling
+- Semantic, properly nested heading hierarchy
+
+## Limitations & Future Improvements
+
+Because all data lives in the browser's LocalStorage, the system has natural ceilings that shaped its design trade-offs:
+
+- Storage is typically capped at 5-10 MB per domain, supporting roughly 1,000-2,000 invoices depending on data size — not suitable for large veterinary chains with high daily transaction volume
+- Data is local only: no real-time sync, no multi-device sync, no cloud backup, and no user authentication
+- Large datasets (1,000+ records) can slow down search and filter operations
+
+For larger-scale operations, the natural next steps would be migrating storage to IndexedDB (or an external backend database for enterprise use), adding periodic data export/backup, and introducing archiving for old invoices to keep performance consistent over time.

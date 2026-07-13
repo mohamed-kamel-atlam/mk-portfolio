@@ -28,15 +28,28 @@ function sortItems<T extends ContentType>(
   });
 }
 
-/** All non-draft items of a type for a locale, ordered. */
+/**
+ * All non-draft items of a type for a locale, ordered. One item per slug:
+ * prefer the requested locale, else fall back to the default locale (MDX_PIPELINE
+ * §8), so a listing is complete even when some items aren't translated yet.
+ */
 export async function listContent<T extends ContentType>(
   type: T,
   locale: Locale,
 ): Promise<ContentItem<T>[]> {
-  const all = await loadCollection(type);
-  return sortItems(
-    all.filter((e) => e.locale === locale && !e.frontmatter.draft),
-  );
+  const all = (await loadCollection(type)).filter((e) => !e.frontmatter.draft);
+  const slugs = [...new Set(all.map((e) => e.slug))];
+  const items = slugs
+    .map((slug) => {
+      const forSlug = all.filter((e) => e.slug === slug);
+      return (
+        forSlug.find((e) => e.locale === locale) ??
+        forSlug.find((e) => e.locale === defaultLocale) ??
+        forSlug[0]
+      );
+    })
+    .filter((e): e is ContentItem<T> => e !== undefined);
+  return sortItems(items);
 }
 
 /** Featured members of a collection (`frontmatter.featured === true`). */

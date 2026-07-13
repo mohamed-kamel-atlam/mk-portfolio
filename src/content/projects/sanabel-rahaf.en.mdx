@@ -1,0 +1,71 @@
+---
+title: Sanabel Rahaf
+summary: An end-to-end product and order management platform for a Saudi sweets company — catalog, order processing, and operations.
+date: 2025-10-01
+order: 2
+featured: true
+role: Full-Stack Developer
+github: https://github.com/mohamed-kamel-atlam/snabel-rahaf
+liveDemo: https://snabel-rahaf.vercel.app
+techStack:
+  - { name: React, category: framework }
+  - { name: TypeScript, category: language }
+  - { name: Vite, category: tooling }
+  - { name: NestJS, category: infra }
+  - { name: REST APIs, category: infra }
+architectureDecisions:
+  - title: One person, both sides of the contract
+    rationale: Owning API design and frontend data flow together let me shape endpoints around real UI needs, keeping velocity high and avoiding round-trips between separate teams.
+  - title: Feature-based frontend with reusable components
+    rationale: A commercial product needs to grow; a feature-based structure with shared components kept catalog, orders, and operations independently extensible.
+---
+
+## Overview
+
+Snabel Rahaf is an e-commerce platform for a Saudi sweets company, built as a NestJS + MongoDB backend paired with a React + Vite frontend. It provides a public storefront for product discovery, cart, wishlist, checkout, profile, and reviews, alongside an admin dashboard for managing users, categories, products, carts, coupons, reviews, and orders.
+
+## Problem / What It Solves
+
+The platform gives the business a complete online storefront and back-office system in one codebase: customers browse the catalog, manage a cart and wishlist, apply coupons, and check out, while staff manage catalog data, orders, and customer-facing content through a dedicated admin dashboard, all backed by a single authenticated API.
+
+## Features
+
+- Public catalog browsing with categories, product details, search, sale highlights, and best-selling products
+- Auth flows for login, register, current-user profile, and logout
+- Cart management with quantity updates, coupon application, and totals
+- Wishlist management with add, remove, clear, and retrieve flows
+- Checkout and order management with payment method and shipping address capture
+- Product reviews with per-product averages and ownership checks
+- Admin dashboard CRUD for catalog, users, coupons, carts, reviews, and orders
+- Cloudinary-backed image uploads for products and categories
+
+## Architecture
+
+The system is split into a NestJS API and a React frontend, communicating over a versioned REST API (`api/v1`):
+
+- **Frontend**: a route-driven React application with nested layouts (auth, website, info, and dashboard areas) and Redux Toolkit state slices for data and UI state
+- **Backend**: a modular NestJS application organized by domain, using Mongoose models, JWT guards, and role-based guards to separate storefront and admin capabilities
+- **Data**: MongoDB collections for users, refresh tokens, categories, products, carts, wishlists, coupons, reviews, and orders
+- **Media**: Cloudinary handles storage for uploaded product and category images
+
+The frontend talks to the backend through an Axios client, and the backend enforces authentication and authorization at the API boundary rather than in the UI.
+
+## Stack Notes
+
+The frontend is built with React 19, TypeScript, and Vite, using Redux Toolkit and React Router for state and navigation, Tailwind CSS for styling, Formik and Yup for forms and validation, and GSAP, Swiper, and Leaflet for richer interactions. The backend runs on NestJS 11 with Mongoose over MongoDB, JWT and Passport for authentication, bcrypt for password hashing, and Cloudinary with Multer for image uploads.
+
+## Design & UX
+
+The storefront is organized around distinct layouts for browsing, checkout, and account areas, keeping informational pages, shopping flows, and profile management visually and structurally separate from the admin dashboard. The admin dashboard mirrors the storefront's domain model, giving staff CRUD control over the same catalog, order, and review data that customers interact with.
+
+## Highlights
+
+- Clear separation between storefront and admin concerns while sharing a single domain model and API
+- Role-based authorization on top of JWT authentication protects admin-only operations
+- Cloudinary integration offloads image storage and delivery from the application servers
+- Coupon and review logic is handled server-side, including per-product review averages and ownership checks
+
+## Future Improvements
+
+- Move the frontend's hard-coded API base URL to a runtime-configurable environment variable
+- Add CI and containerized deployment (Docker) for more reproducible builds

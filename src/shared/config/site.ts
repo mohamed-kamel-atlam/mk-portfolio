@@ -52,16 +52,17 @@ export interface SocialLink {
   href: string;
 }
 
-/**
- * Social links. v1.0.0 placeholder handles keyed to the site domain — replace
- * with the real profiles before launch.
- */
+/** Social links. */
 export const socialLinks: readonly SocialLink[] = [
-  { key: "github", label: "GitHub", href: "https://github.com/mohamedkamel" },
+  {
+    key: "github",
+    label: "GitHub",
+    href: "https://github.com/mohamed-kamel-atlam",
+  },
   {
     key: "linkedin",
     label: "LinkedIn",
-    href: "https://www.linkedin.com/in/mohamedkamel",
+    href: "https://www.linkedin.com/in/mohamed-atlam-597496290",
   },
-  { key: "email", label: "Email", href: "mailto:hello@mohamedkamel.dev" },
+  { key: "email", label: "Email", href: "mailto:mohamedatlam1710@gmail.com" },
 ] as const;
