@@ -15,9 +15,10 @@ export const interactiveBase =
   "inline-flex select-none items-center justify-center gap-2 rounded-md font-medium transition duration-fast motion-safe:hover:-translate-y-px motion-safe:active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50";
 
 export const interactiveVariants = {
-  primary: "bg-accent text-accent-foreground hover:opacity-90 hover:shadow-md",
+  primary:
+    "bg-accent text-accent-foreground hover:opacity-90 hover:shadow-accent",
   secondary:
-    "border border-border bg-surface text-foreground hover:border-accent hover:bg-muted",
+    "border border-border bg-surface text-foreground hover:border-accent hover:bg-muted hover:shadow-sm",
   ghost: "text-foreground hover:bg-muted",
   danger: "bg-danger text-danger-foreground hover:opacity-90 hover:shadow-md",
 } as const;

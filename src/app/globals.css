@@ -96,12 +96,17 @@
     --radius-2xl: 1.5rem;
     --radius-full: 9999px;
 
-    /* Shadow (§4.3) — soft, alpha-based, compose over any surface */
+    /* Shadow (§4.3) — soft, LAYERED, alpha-based (a tight contact shadow + a
+       soft diffuse one), so elevated surfaces read as premium depth rather than
+       a single hard drop. Kept low-alpha; never a heavy black. */
     --shadow-none: none;
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.24);
-    --shadow-md: 0 4px 12px -2px rgb(0 0 0 / 0.32);
-    --shadow-lg: 0 12px 32px -4px rgb(0 0 0 / 0.4);
-    --shadow-xl: 0 24px 64px -8px rgb(0 0 0 / 0.48);
+    --shadow-sm: 0 1px 2px -1px rgb(0 0 0 / 0.18), 0 1px 3px 0 rgb(0 0 0 / 0.1);
+    --shadow-md:
+      0 2px 4px -2px rgb(0 0 0 / 0.2), 0 8px 20px -6px rgb(0 0 0 / 0.24);
+    --shadow-lg:
+      0 4px 8px -4px rgb(0 0 0 / 0.22), 0 18px 44px -10px rgb(0 0 0 / 0.34);
+    --shadow-xl:
+      0 8px 18px -8px rgb(0 0 0 / 0.26), 0 36px 72px -16px rgb(0 0 0 / 0.42);
 
     /* Z-index ladder (§4.5) */
     --z-behind: -1; /* decorative backdrops, below base content */
@@ -274,6 +279,27 @@
     --bg-glow-opacity: 0.6;
     --bg-noise-opacity: 0.035;
     --bg-grid-opacity: 0.4;
+    /* Soft edge vignette for the global backdrop — darkens toward the corners
+       to seat content, almost imperceptible. */
+    --bg-vignette: radial-gradient(
+      130% 130% at 50% 30%,
+      transparent 45%,
+      color-mix(in srgb, var(--navy-950) 55%, transparent) 100%
+    );
+
+    /* Translucent header fill for the scrolled "glass" state (re-resolves per
+       theme from --color-background). */
+    --color-header: color-mix(
+      in srgb,
+      var(--color-background) 72%,
+      transparent
+    );
+
+    /* Accent-tinted, layered soft glow for primary controls on hover (a premium
+       lift, never neon — theme-adaptive via --color-accent). */
+    --shadow-accent:
+      0 4px 16px -4px color-mix(in srgb, var(--color-accent) 45%, transparent),
+      0 2px 6px -2px color-mix(in srgb, var(--color-accent) 35%, transparent);
   }
 
   /* ---- Tier 2: semantic tokens — LIGHT theme (COLOR_SYSTEM.md §3.2) ----
@@ -304,6 +330,12 @@
     --bg-glow-opacity: 0.35;
     --bg-noise-opacity: 0.025;
     --bg-grid-opacity: 0.5;
+    /* Very subtle warm vignette on the light canvas. */
+    --bg-vignette: radial-gradient(
+      130% 130% at 50% 30%,
+      transparent 55%,
+      color-mix(in srgb, var(--warm-200) 45%, transparent) 100%
+    );
   }
 
   /* ---- Locale-aware sans stack (TYPOGRAPHY.md §4) ----
@@ -436,5 +468,19 @@
   /* Long-form readable measure (TYPOGRAPHY.md → Usage). */
   .container-prose {
     max-width: var(--container-prose);
+  }
+
+  /* ---- Muted section band (DESIGN_LANGUAGE → sections flow, not hard borders) ----
+     A `surface-muted` band whose background fades to transparent at its top and
+     bottom edges, so the global backdrop shows through the seam and adjacent
+     sections blend instead of stepping. Content sits above and is unaffected. */
+  .section-muted {
+    background-image: linear-gradient(
+      to bottom,
+      transparent,
+      var(--color-surface-muted) 6%,
+      var(--color-surface-muted) 94%,
+      transparent
+    );
   }
 }

@@ -14,6 +14,7 @@ export {
   GlowLayer,
   GridLayer,
   NoiseLayer,
+  VignetteLayer,
   GradientLayer,
   type GlowLayerProps,
   type GlowPosition,

@@ -18,7 +18,7 @@ export async function CurrentFocus({ locale }: CurrentFocusProps) {
       title={section.title}
       intro={section.intro}
       items={section.items}
-      className="bg-surface-muted"
+      className="section-muted"
     />
   );
 }

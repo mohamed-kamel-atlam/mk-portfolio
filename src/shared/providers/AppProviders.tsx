@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 
+import { DevToolsNoiseFilter } from "./DevToolsNoiseFilter";
 import { ThemeProvider } from "./ThemeProvider";
 
 export interface AppProvidersProps {
@@ -19,5 +20,11 @@ export interface AppProvidersProps {
  * state, not a client provider (INTERNATIONALIZATION.md §5).
  */
 export function AppProviders({ children }: AppProvidersProps) {
-  return <ThemeProvider>{children}</ThemeProvider>;
+  return (
+    <ThemeProvider>
+      {/* Dev-only: filters a known React DevTools console bug (see the file). */}
+      <DevToolsNoiseFilter />
+      {children}
+    </ThemeProvider>
+  );
 }

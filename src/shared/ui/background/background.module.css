@@ -31,7 +31,7 @@
   inset-block-start: -14rem;
   inset-inline-start: -6rem;
   background: var(--bg-aurora-1);
-  animation: aurora-drift-a 38s var(--ease-standard) infinite alternate;
+  animation: aurora-drift-a 30s var(--ease-standard) infinite alternate;
 }
 
 .blobB {
@@ -40,7 +40,7 @@
   inset-block-start: -10rem;
   inset-inline-end: -8rem;
   background: var(--bg-aurora-2);
-  animation: aurora-drift-b 46s var(--ease-standard) infinite alternate;
+  animation: aurora-drift-b 36s var(--ease-standard) infinite alternate;
 }
 
 .blobC {
@@ -49,7 +49,7 @@
   inset-block-end: -16rem;
   inset-inline-start: 30%;
   background: var(--bg-aurora-1);
-  animation: aurora-drift-c 52s var(--ease-standard) infinite alternate;
+  animation: aurora-drift-c 42s var(--ease-standard) infinite alternate;
 }
 
 /* Translate-only (no scale): scaling a gradient-filled box repaints it every
@@ -89,20 +89,27 @@
   will-change: transform;
 }
 
+/* Size is fixed in `rem` (not `vh`) and the offset is a `transform`, so nothing
+   about these full-bleed glows depends on the viewport *height*. The layout box
+   never reflows when viewport metrics resolve mid-load (e.g. under Lighthouse's
+   viewport emulation), so the huge decorative layer cannot register CLS. As
+   ambient radial light its exact rem size is visually indistinguishable from the
+   old vh sizing at any realistic screen height. Centered on the viewport edge
+   via the transform, which stays correct in RTL (translateX is symmetric). */
 .glowTop {
-  inset-block-start: -30vh;
+  inset-block-start: 0;
   inset-inline-start: 50%;
   inline-size: min(90rem, 120vw);
-  block-size: 60vh;
-  transform: translateX(-50%);
+  block-size: 36rem;
+  transform: translate(-50%, -50%);
 }
 
 .glowBottom {
-  inset-block-end: -34vh;
+  inset-block-end: 0;
   inset-inline-start: 50%;
   inline-size: min(80rem, 110vw);
-  block-size: 56vh;
-  transform: translateX(-50%);
+  block-size: 34rem;
+  transform: translate(-50%, 50%);
 }
 
 .glowCenter {
@@ -165,6 +172,14 @@
   opacity: var(--bg-noise-opacity);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size: 180px 180px;
+}
+
+/* ---- Vignette ----
+   Soft edge-darkening for the global backdrop; seats content, near-invisible. */
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: var(--bg-vignette);
 }
 
 /* ---- Gradient wash presets ---- */

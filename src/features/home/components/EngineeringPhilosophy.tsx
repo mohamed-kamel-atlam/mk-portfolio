@@ -23,7 +23,7 @@ export async function EngineeringPhilosophy({
   const section = t.home.philosophy;
 
   return (
-    <Section className="bg-surface-muted">
+    <Section className="section-muted">
       <Container className="flex flex-col gap-10">
         <SectionHeading
           eyebrow={section.eyebrow}

@@ -6,6 +6,7 @@ import { getDictionary } from "@/shared/i18n/get-dictionary";
 
 import { Container } from "./Container";
 import { DesktopNav, type NavLinkItem } from "./DesktopNav";
+import { HeaderShell } from "./HeaderShell";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { MobileNav } from "./MobileNav";
 import { ThemeToggle } from "./ThemeToggle";
@@ -31,14 +32,14 @@ export async function SiteHeader({ locale }: SiteHeaderProps) {
   }));
 
   return (
-    <header className="sticky top-0 z-sticky border-b border-border bg-background">
+    <HeaderShell>
       <a
         href="#main-content"
         className="sr-only rounded-md bg-surface px-4 py-2 text-foreground focus:not-sr-only focus:absolute focus:start-4 focus:top-2 focus:z-tooltip"
       >
         {t.nav.skipToContent}
       </a>
-      <Container className="flex h-16 items-center justify-between gap-4">
+      <Container className="flex h-16 items-center justify-between gap-4 transition-[height] duration-normal ease-standard group-data-[scrolled=true]/header:h-14">
         <Link
           href={localizedHref(locale, "")}
           className="text-h4 font-semibold text-foreground"
@@ -70,6 +71,6 @@ export async function SiteHeader({ locale }: SiteHeaderProps) {
           />
         </div>
       </Container>
-    </header>
+    </HeaderShell>
   );
 }

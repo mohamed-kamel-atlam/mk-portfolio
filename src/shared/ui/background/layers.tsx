@@ -69,6 +69,11 @@ export function NoiseLayer({ className }: LayerProps) {
   return <div aria-hidden="true" className={cn(styles.noise, className)} />;
 }
 
+/** Soft edge vignette that seats content on the backdrop. */
+export function VignetteLayer({ className }: LayerProps) {
+  return <div aria-hidden="true" className={cn(styles.vignette, className)} />;
+}
+
 export type GradientPreset =
   | "primary"
   | "secondary"

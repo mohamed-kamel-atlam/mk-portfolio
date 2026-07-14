@@ -21,7 +21,7 @@ export async function CoreValues({ locale }: CoreValuesProps) {
   const section = t.about.values;
 
   return (
-    <Section className="bg-surface-muted">
+    <Section className="section-muted">
       <Container className="flex flex-col gap-10">
         <SectionHeading
           eyebrow={section.eyebrow}

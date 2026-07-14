@@ -41,6 +41,7 @@ const config: Config = {
         info: "var(--color-info)",
         "info-foreground": "var(--color-info-foreground)",
         overlay: "var(--color-overlay)",
+        header: "var(--color-header)",
       },
       // Steps mirror --space-* (the 8-pt grid) exactly; each equals its Tailwind
       // default, but is re-pointed at the token so the two never diverge.
@@ -73,6 +74,7 @@ const config: Config = {
         md: "var(--shadow-md)",
         lg: "var(--shadow-lg)",
         xl: "var(--shadow-xl)",
+        accent: "var(--shadow-accent)",
       },
       zIndex: {
         behind: "var(--z-behind)",

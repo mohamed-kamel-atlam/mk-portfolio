@@ -12,6 +12,16 @@
 // FeaturedProjects.tsx. The remaining data below backs sections not yet migrated
 // to content collections.
 
+/** Hero tech-stack badges — proper nouns, so not localized. Kept short. */
+export const heroTech = [
+  "React",
+  "Next.js",
+  "TypeScript",
+  "Tailwind CSS",
+  "Redux Toolkit",
+  "RTK Query",
+] as const;
+
 export const techGroups = [
   { key: "framework", items: ["Next.js", "React"] },
   { key: "language", items: ["TypeScript"] },

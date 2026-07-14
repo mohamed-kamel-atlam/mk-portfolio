@@ -28,7 +28,7 @@ export async function AboutExperience({ locale }: AboutExperienceProps) {
   const lastIndex = items.length - 1;
 
   return (
-    <Section className="bg-surface-muted">
+    <Section className="section-muted">
       <Container className="flex flex-col gap-10">
         <SectionHeading
           eyebrow={section.eyebrow}

@@ -21,11 +21,24 @@
     "rights": "All rights reserved."
   },
   "hero": {
-    "availability": "Available for new opportunities",
-    "headline": "Frontend engineering for premium AI products.",
-    "subheadline": "I design, architect, and build production-grade web applications — with the performance, accessibility, and craft of a modern SaaS product.",
+    "status": "Available for full-time",
+    "eyebrowLead": "Hi, I'm ",
+    "name": "Mohamed Kamel",
+    "headlineLead": "Frontend Engineer building ",
+    "headlineAccent": "modern AI & SaaS",
+    "headlineTail": " experiences.",
+    "roles": [
+      "Frontend Engineer",
+      "React Specialist",
+      "Next.js Developer",
+      "AI SaaS Builder",
+      "UI Engineering Enthusiast"
+    ],
+    "description": "I design and build fast, accessible, production-grade web applications — from architecture to the final pixel.",
     "ctaPrimary": "View projects",
-    "ctaSecondary": "Get in touch"
+    "ctaSecondary": "Get in touch",
+    "imageAlt": "Portrait of Mohamed Kamel",
+    "scroll": "Scroll to explore"
   },
   "home": {
     "projects": {
