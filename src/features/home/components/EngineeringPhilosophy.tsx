@@ -1,3 +1,11 @@
+import {
+  Accessibility,
+  Compass,
+  Feather,
+  Gauge,
+  type LucideIcon,
+} from "lucide-react";
+
 import { type Locale } from "@/shared/i18n/config";
 import { getDictionary } from "@/shared/i18n/get-dictionary";
 import {
@@ -8,13 +16,22 @@ import {
   SectionHeading,
   Text,
 } from "@/shared/ui";
+import { GlowLayer } from "@/shared/ui/background";
 import { RevealGroup } from "@/shared/ui/motion";
 
-import { philosophyPrinciples } from "../content";
+import { philosophyPrinciples, type PhilosophyKey } from "../content";
 
 export interface EngineeringPhilosophyProps {
   locale: Locale;
 }
+
+/** An icon per principle, so each conviction reads at a glance. */
+const PRINCIPLE_ICON: Record<PhilosophyKey, LucideIcon> = {
+  engineering: Compass,
+  performance: Gauge,
+  accessibility: Accessibility,
+  simplicity: Feather,
+};
 
 /**
  * Engineer identity: a first-person statement (the architecture mindset) leading
@@ -29,9 +46,10 @@ export async function EngineeringPhilosophy({
   const section = t.home.philosophy;
 
   return (
-    <Section className="section-muted">
+    <Section className="section-muted relative isolate overflow-hidden">
+      <GlowLayer position="top" />
       <Container>
-        <RevealGroup className="flex flex-col gap-12">
+        <RevealGroup variant="scale" className="flex flex-col gap-12">
           <SectionHeading
             eyebrow={section.eyebrow}
             title={section.title}
@@ -46,12 +64,22 @@ export async function EngineeringPhilosophy({
           <div className="grid gap-6 sm:grid-cols-2">
             {philosophyPrinciples.map((key) => {
               const item = section.items[key];
+              const Icon = PRINCIPLE_ICON[key];
               return (
-                <Card key={key} className="flex flex-col gap-2">
+                <Card
+                  key={key}
+                  interactive
+                  className="group/principle flex flex-col gap-3"
+                >
+                  <span className="inline-flex size-10 items-center justify-center rounded-lg border border-border bg-surface-muted text-accent transition-colors duration-fast group-hover/principle:border-accent">
+                    <Icon aria-hidden="true" className="size-5" />
+                  </span>
                   <Heading level={3} size="h4">
                     {item.title}
                   </Heading>
-                  <Text tone="muted">{item.description}</Text>
+                  <Text tone="muted" className="text-pretty">
+                    {item.description}
+                  </Text>
                 </Card>
               );
             })}

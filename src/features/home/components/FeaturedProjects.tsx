@@ -8,6 +8,7 @@ import {
   Section,
   SectionHeading,
 } from "@/shared/ui";
+import { GlowLayer } from "@/shared/ui/background";
 import { RevealGroup } from "@/shared/ui/motion";
 
 export interface FeaturedProjectsProps {
@@ -27,9 +28,10 @@ export async function FeaturedProjects({ locale }: FeaturedProjectsProps) {
   const projects = await featuredContent("projects", locale);
 
   return (
-    <Section>
+    <Section className="relative isolate overflow-hidden">
+      <GlowLayer position="top" />
       <Container>
-        <RevealGroup className="flex flex-col gap-10">
+        <RevealGroup variant="up" className="flex flex-col gap-10">
           <SectionHeading
             eyebrow={section.eyebrow}
             title={section.title}

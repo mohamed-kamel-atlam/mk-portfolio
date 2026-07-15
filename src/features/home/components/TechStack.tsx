@@ -40,7 +40,7 @@ export async function TechStack({ locale }: TechStackProps) {
   return (
     <Section className="section-muted">
       <Container>
-        <RevealGroup className="flex flex-col gap-12">
+        <RevealGroup variant="fade" className="flex flex-col gap-12">
           <SectionHeading
             eyebrow={section.eyebrow}
             title={section.title}
@@ -50,9 +50,12 @@ export async function TechStack({ locale }: TechStackProps) {
             {techGroups.map((group) => {
               const GroupIcon = GROUP_META[group.key].icon;
               return (
-                <div key={group.key} className="flex flex-col gap-4">
+                <div
+                  key={group.key}
+                  className="group/skill flex flex-col gap-4"
+                >
                   <div className="flex items-center gap-3">
-                    <span className="inline-flex size-9 items-center justify-center rounded-lg border border-border bg-surface text-accent">
+                    <span className="inline-flex size-9 items-center justify-center rounded-lg border border-border bg-surface text-accent transition-colors duration-fast group-hover/skill:border-accent">
                       <GroupIcon aria-hidden="true" className="size-4" />
                     </span>
                     <Text
@@ -72,7 +75,7 @@ export async function TechStack({ locale }: TechStackProps) {
                         <li key={item}>
                           <Badge
                             variant="outline"
-                            className="text-muted-foreground"
+                            className="text-muted-foreground transition-colors duration-fast hover:border-accent hover:text-foreground"
                           >
                             <Icon aria-hidden="true" className="size-3.5" />
                             {item}

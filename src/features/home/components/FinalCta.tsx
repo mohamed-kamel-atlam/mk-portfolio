@@ -33,7 +33,10 @@ export async function FinalCta({ locale }: FinalCtaProps) {
           elevation={2}
           className="relative flex flex-col items-center gap-8 text-center"
         >
-          <RevealGroup className="flex flex-col items-center gap-6">
+          <RevealGroup
+            variant="scale"
+            className="flex flex-col items-center gap-6"
+          >
             <div className="flex flex-col gap-3">
               <Heading level={2} size="h1" className="text-balance">
                 {section.title}

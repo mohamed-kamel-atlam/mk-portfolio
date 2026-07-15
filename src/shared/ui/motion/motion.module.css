@@ -60,6 +60,35 @@
   transition-delay: calc(4 * var(--reveal-step));
 }
 
+/* Variants — one system, varied per section. Base above is `up` (fade + rise);
+   these override only what differs, so the stagger + timing stay consistent. */
+
+/* fade: opacity only, no travel */
+.revealGroup[data-variant="fade"][data-reveal="hidden"] > * {
+  transform: none;
+}
+
+/* scale: fade + a subtle settle (never from 0) */
+.revealGroup[data-variant="scale"][data-reveal="hidden"] > * {
+  transform: scale(0.98);
+}
+
+/* mask: a one-shot clip-path wipe from the bottom edge (single transition, not a
+   loop — negligible paint). Falls back to a plain fade under reduced motion.
+   CAVEAT: clip-path clips overflow, so the visible-state `inset(0)` will clip a
+   child's hover lift / focus ring / shadow. Do NOT use `mask` on a group whose
+   direct children are interactive (buttons, links) — use `scale`/`up`/`fade`. */
+.revealGroup[data-variant="mask"][data-reveal="hidden"] > * {
+  transform: none;
+  clip-path: inset(0 0 100% 0);
+}
+.revealGroup[data-variant="mask"][data-reveal="visible"] > * {
+  clip-path: inset(0 0 0 0);
+  transition:
+    opacity var(--duration-slow) var(--ease-decelerate),
+    clip-path var(--duration-slow) var(--ease-decelerate);
+}
+
 /* ---- Animated underline ----
    Grows from the reading-start edge on hover/focus; mirrors in RTL. */
 .underline {
