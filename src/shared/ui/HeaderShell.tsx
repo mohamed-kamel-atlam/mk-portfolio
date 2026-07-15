@@ -32,7 +32,9 @@ export function HeaderShell({ children }: HeaderShellProps) {
       className={cn(
         "group/header sticky top-0 z-sticky border-b border-transparent",
         "transition-[background-color,border-color,box-shadow] duration-normal ease-standard",
-        "data-[scrolled=true]:border-border data-[scrolled=true]:bg-header data-[scrolled=true]:shadow-sm data-[scrolled=true]:backdrop-blur-md",
+        // Translucent flat fill (no backdrop-filter): avoids re-blurring the
+        // scrolled-under region every frame — the biggest scroll-jank source.
+        "data-[scrolled=true]:border-border data-[scrolled=true]:bg-header data-[scrolled=true]:shadow-sm",
       )}
     >
       {children}

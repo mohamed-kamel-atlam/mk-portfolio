@@ -22,7 +22,6 @@
   position: absolute;
   border-radius: var(--radius-full);
   opacity: var(--bg-aurora-opacity);
-  will-change: transform;
 }
 
 .blobA {
@@ -86,7 +85,13 @@
   position: absolute;
   opacity: var(--bg-glow-opacity);
   background: var(--bg-glow);
-  will-change: transform;
+}
+
+/* Pause the ambient aurora/glow drift when the tab is hidden (flag set by
+   AnimationGate) — no compositor work for a page nobody is looking at. */
+:global([data-anim-paused]) .blob,
+:global([data-anim-paused]) .glow {
+  animation-play-state: paused;
 }
 
 /* CLS-proof positioning. The layout box is pinned to a FIXED corner (rem size,

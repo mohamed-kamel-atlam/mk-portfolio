@@ -54,41 +54,9 @@
 
 /* ---- Magnetic ----
    The client sets an inline transform on pointer move; this owns the smooth
-   settle-back transition only. */
+   settle-back transition only. No permanent `will-change`: promoting a layer
+   for the whole session to serve an occasional hover pull wastes GPU memory —
+   the transition composites fine on demand. */
 .magnetic {
   transition: transform var(--duration-normal) var(--ease-standard);
-  will-change: transform;
-}
-
-/* ---- Cursor glow ----
-   A soft accent light following the pointer inside a surface. The client sets
-   --glow-x / --glow-y; the glow fades in on hover. Decorative but scoped and
-   pointer-driven, so it never distracts from static content. */
-.cursorGlow {
-  position: relative;
-}
-.cursorGlow::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: var(--z-behind);
-  border-radius: inherit;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity var(--duration-normal) var(--ease-standard);
-  background: radial-gradient(
-    16rem 16rem at var(--glow-x, 50%) var(--glow-y, 50%),
-    color-mix(in srgb, var(--color-accent) 16%, transparent),
-    transparent 60%
-  );
-}
-.cursorGlow:hover::before {
-  opacity: 1;
-}
-
-/* ---- Parallax ----
-   The client sets the transform inline; this owns the smooth transition. */
-.parallax {
-  transition: transform var(--duration-normal) var(--ease-standard);
-  will-change: transform;
 }

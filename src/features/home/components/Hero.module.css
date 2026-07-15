@@ -55,6 +55,20 @@
 /* Downward scroll cue — a nudge, never a bounce. */
 .scrollCue {
   animation: scroll-cue 2.4s var(--ease-standard) infinite;
+  transition: opacity var(--duration-normal) var(--ease-standard);
+}
+
+/* Retire the scroll cue once the visitor has scrolled (it has done its job),
+   and pause the hero's ambient motion when the tab is hidden — both flags set
+   by AnimationGate, so nothing animates needlessly. */
+:global([data-scrolled-once]) .scrollCue {
+  opacity: 0;
+  animation: none;
+}
+:global([data-anim-paused]) .profileFloat,
+:global([data-anim-paused]) .profileGlow,
+:global([data-anim-paused]) .scrollCue {
+  animation-play-state: paused;
 }
 
 @keyframes hero-float {

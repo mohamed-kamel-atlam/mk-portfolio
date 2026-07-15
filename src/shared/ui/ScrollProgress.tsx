@@ -1,17 +1,17 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 
 /**
  * A thin reading-progress bar fixed to the top of the viewport. Decorative
  * (`aria-hidden`) — it conveys no information not already available from
- * scrolling. Progress drives a `scaleX` transform (a genuinely dynamic,
- * non-design value — the one inline-style exception in CODING_STANDARDS §8);
- * the fill origin is the inline-start, mirroring in RTL. Updates are throttled
- * to one per animation frame.
+ * scrolling. Progress drives a `scaleX` transform written **imperatively** to
+ * the fill element inside a single `requestAnimationFrame` per scroll — so
+ * scrolling never triggers a React re-render (PERFORMANCE.md: no React work on
+ * the scroll path). The fill origin is the inline-start, mirroring in RTL.
  */
 export function ScrollProgress() {
-  const [progress, setProgress] = useState(0);
+  const barRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let frame = 0;
@@ -20,7 +20,9 @@ export function ScrollProgress() {
       frame = requestAnimationFrame(() => {
         const el = document.documentElement;
         const scrollable = el.scrollHeight - el.clientHeight;
-        setProgress(scrollable > 0 ? el.scrollTop / scrollable : 0);
+        const progress = scrollable > 0 ? el.scrollTop / scrollable : 0;
+        const bar = barRef.current;
+        if (bar) bar.style.transform = `scaleX(${progress})`;
       });
     };
     update();
@@ -39,8 +41,9 @@ export function ScrollProgress() {
       className="pointer-events-none fixed inset-x-0 top-0 z-sticky h-0.5"
     >
       <div
+        ref={barRef}
         className="h-full w-full origin-left bg-accent rtl:origin-right"
-        style={{ transform: `scaleX(${progress})` }}
+        style={{ transform: "scaleX(0)" }}
       />
     </div>
   );

@@ -13,8 +13,8 @@ export interface UseInViewOptions {
 
 /**
  * Observe when an element enters the viewport. A single IntersectionObserver
- * wrapper reused by every scroll-driven primitive (Reveal, CountUp, Typewriter),
- * so the observer logic lives in one place. Degrades to immediately-in-view when
+ * wrapper reused by scroll-driven primitives (e.g. Reveal), so the observer
+ * logic lives in one place. Degrades to immediately-in-view when
  * IntersectionObserver is unavailable (content never stays hidden).
  */
 export function useInView<T extends Element = HTMLDivElement>(

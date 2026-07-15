@@ -287,11 +287,13 @@
       color-mix(in srgb, var(--navy-950) 55%, transparent) 100%
     );
 
-    /* Translucent header fill for the scrolled "glass" state (re-resolves per
-       theme from --color-background). */
+    /* Translucent header/overlay fill (re-resolves per theme from
+       --color-background). Kept mostly opaque so it reads cleanly WITHOUT a
+       backdrop-filter — a solid-ish translucent bar avoids the per-frame re-blur
+       that `backdrop-filter` costs during scroll (PERFORMANCE.md). */
     --color-header: color-mix(
       in srgb,
-      var(--color-background) 72%,
+      var(--color-background) 90%,
       transparent
     );
 

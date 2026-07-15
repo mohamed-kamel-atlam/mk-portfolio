@@ -23,7 +23,7 @@ export function ProjectLogo({ logo, name, className }: ProjectLogoProps) {
   return (
     <span
       className={cn(
-        "inline-flex size-11 items-center justify-center overflow-hidden rounded-xl border border-border bg-header shadow-sm backdrop-blur-md",
+        "inline-flex size-11 items-center justify-center overflow-hidden rounded-xl border border-border bg-header shadow-sm",
         className,
       )}
     >
@@ -33,6 +33,7 @@ export function ProjectLogo({ logo, name, className }: ProjectLogoProps) {
           alt={logo.alt}
           width={logo.width}
           height={logo.height}
+          sizes="28px"
           className="size-7 object-contain"
         />
       ) : (
