@@ -26,8 +26,8 @@
 }
 
 .blobA {
-  inline-size: clamp(20rem, 55vw, 46rem);
-  block-size: clamp(20rem, 55vw, 46rem);
+  inline-size: 42rem;
+  block-size: 42rem;
   inset-block-start: -14rem;
   inset-inline-start: -6rem;
   background: var(--bg-aurora-1);
@@ -35,8 +35,8 @@
 }
 
 .blobB {
-  inline-size: clamp(18rem, 48vw, 40rem);
-  block-size: clamp(18rem, 48vw, 40rem);
+  inline-size: 36rem;
+  block-size: 36rem;
   inset-block-start: -10rem;
   inset-inline-end: -8rem;
   background: var(--bg-aurora-2);
@@ -44,8 +44,8 @@
 }
 
 .blobC {
-  inline-size: clamp(18rem, 50vw, 42rem);
-  block-size: clamp(18rem, 50vw, 42rem);
+  inline-size: 38rem;
+  block-size: 38rem;
   inset-block-end: -16rem;
   inset-inline-start: 30%;
   background: var(--bg-aurora-1);
@@ -89,27 +89,28 @@
   will-change: transform;
 }
 
-/* Size is fixed in `rem` (not `vh`) and the offset is a `transform`, so nothing
-   about these full-bleed glows depends on the viewport *height*. The layout box
-   never reflows when viewport metrics resolve mid-load (e.g. under Lighthouse's
-   viewport emulation), so the huge decorative layer cannot register CLS. As
-   ambient radial light its exact rem size is visually indistinguishable from the
-   old vh sizing at any realistic screen height. Centered on the viewport edge
-   via the transform, which stays correct in RTL (translateX is symmetric). */
+/* CLS-proof positioning. The layout box is pinned to a FIXED corner (rem size,
+   physical `left: 0` / edge inset — never a `%`/`vw`/`vh` layout value), and ALL
+   centering happens in `transform` (`calc(50vw - 50%)` etc.). Transform-driven
+   movement is excluded from layout-shift accounting, so even when the viewport
+   resolves/resizes mid-load (Lighthouse's cold emulation), the box's layout
+   position never changes and this huge decorative layer cannot register CLS.
+   `left` is intentionally physical: the glow is horizontally symmetric, so its
+   centered position is identical in LTR and RTL. */
 .glowTop {
-  inset-block-start: 0;
-  inset-inline-start: 50%;
-  inline-size: min(90rem, 120vw);
+  top: 0;
+  left: 0;
+  inline-size: 90rem;
   block-size: 36rem;
-  transform: translate(-50%, -50%);
+  transform: translate(calc(50vw - 50%), -50%);
 }
 
 .glowBottom {
-  inset-block-end: 0;
-  inset-inline-start: 50%;
-  inline-size: min(80rem, 110vw);
+  bottom: 0;
+  left: 0;
+  inline-size: 80rem;
   block-size: 34rem;
-  transform: translate(-50%, 50%);
+  transform: translate(calc(50vw - 50%), 50%);
 }
 
 .glowCenter {

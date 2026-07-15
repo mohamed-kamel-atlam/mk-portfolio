@@ -45,17 +45,44 @@ const techStackItem = z.object({
     .optional(),
 });
 
-const galleryImage = z.object({
+/**
+ * A described image at the data layer: source + REQUIRED `alt` (accessibility
+ * contract, QAT-2) and REQUIRED intrinsic `width`/`height` (layout stability,
+ * QAT-1). Shared by every image-bearing frontmatter field so the a11y + CLS
+ * discipline is defined once (CONTENT_MODEL §3.1).
+ */
+const imageAsset = z.object({
   src: z.string(),
-  alt: z.string(), // required — accessibility contract (QAT-2)
-  width: z.number(), // required — layout stability (QAT-1)
+  alt: z.string(),
+  width: z.number(),
   height: z.number(),
+});
+
+const galleryImage = imageAsset.extend({
   caption: z.string().optional(),
 });
+
+/**
+ * Project lifecycle status — a closed, strongly-typed set (CONTENT_MODEL §3.3):
+ * an unknown value fails validation, and adding a status is a deliberate schema
+ * change here. Each maps to a semantic visual treatment in the status registry
+ * (`features/projects/lib/project-status.ts`), never an ad-hoc badge color.
+ */
+export const projectStatuses = [
+  "production",
+  "completed",
+  "in-progress",
+  "archived",
+  "research",
+] as const;
+
+export type ProjectStatus = (typeof projectStatuses)[number];
 
 export const projectSchema = contentBase.extend({
   role: z.string(),
   techStack: z.array(techStackItem),
+  /** Lifecycle status; drives the semantic status chip on cards. */
+  status: z.enum(projectStatuses).optional(),
   architectureDecisions: z
     .array(z.object({ title: z.string(), rationale: z.string() }))
     .optional(),
@@ -63,10 +90,15 @@ export const projectSchema = contentBase.extend({
   liveDemo: z.string().url().optional(),
   /**
    * Cover image file name in `public/images/projects` (resolve with
-   * `projectCover` from `@/shared/assets`). Optional — prepares cover rendering
-   * without coupling project data to a component.
+   * `projectCover` from `@/shared/assets`). Optional — a project without a cover
+   * renders the intentional generated fallback, never an empty block.
    */
   cover: z.string().optional(),
+  /**
+   * Optional dedicated brand logo (in `public/images/projects`). When absent the
+   * card renders a designed initials monogram, so the logo slot is never empty.
+   */
+  logo: imageAsset.optional(),
   gallery: z.array(galleryImage).optional(),
   caseStudy: z.string().optional(),
   relatedArticles: z.array(z.string()).optional(),

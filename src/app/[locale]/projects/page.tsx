@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 
-import { getProjects, ProjectsGrid } from "@/features/projects";
+import {
+  buildProjectCardLabels,
+  getProjects,
+  ProjectsGrid,
+} from "@/features/projects";
 import { defaultLocale, isLocale, type Locale } from "@/shared/i18n/config";
 import { getDictionary } from "@/shared/i18n/get-dictionary";
 import { buildRouteMetadata } from "@/shared/lib/seo";
@@ -31,21 +35,27 @@ export default async function ProjectsPage({ params }: ProjectsPageProps) {
   const t = await getDictionary(active);
   const projects = await getProjects(active);
 
+  const p = t.projectsPage;
+  const labels = buildProjectCardLabels(p);
+
   return (
     <Section>
       <Container className="flex flex-col gap-10">
         <div className="flex max-w-2xl flex-col gap-4">
-          <p className="text-caption uppercase text-accent">
-            {t.projectsPage.eyebrow}
-          </p>
+          <p className="text-caption uppercase text-accent">{p.eyebrow}</p>
           <Heading level={1} size="display" className="text-balance">
-            {t.projectsPage.title}
+            {p.title}
           </Heading>
           <Text size="body-lg" tone="muted" className="text-pretty">
-            {t.projectsPage.intro}
+            {p.intro}
           </Text>
         </div>
-        <ProjectsGrid projects={projects} locale={active} />
+        <ProjectsGrid
+          projects={projects}
+          locale={active}
+          labels={labels}
+          emptyLabel={p.empty}
+        />
       </Container>
     </Section>
   );

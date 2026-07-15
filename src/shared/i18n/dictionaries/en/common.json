@@ -126,7 +126,19 @@
     "pager": "Project navigation",
     "viewSource": "View source",
     "viewLive": "Live demo",
-    "eyebrow": "Selected work"
+    "eyebrow": "Selected work",
+    "status": {
+      "production": "Production",
+      "completed": "Completed",
+      "in-progress": "In Progress",
+      "archived": "Archived",
+      "research": "Research"
+    },
+    "coverAlt": "{project} — cover image",
+    "viewLiveAria": "Live demo of {project}",
+    "viewSourceAria": "View source of {project}",
+    "moreTech": "+{count} more technologies",
+    "empty": "No projects to show yet."
   },
   "about": {
     "meta": {

@@ -7,6 +7,11 @@
 export const ASSET_DIR = {
   profile: "/images/profile",
   projects: "/images/projects",
+  /** Project cover screenshots — kept separate from logos (never mixed). */
+  projectCovers: "/images/projects/covers",
+  /** Dedicated project brand logos — a separate concept from cover screenshots,
+   *  alongside the other brand logos under `/logos`. */
+  projectLogos: "/logos/projects",
   projectGallery: "/images/projects/gallery",
   blog: "/images/blog",
   logosTech: "/logos/tech",

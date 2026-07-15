@@ -227,11 +227,19 @@ interface ProjectFrontmatter extends ContentBase {
   role: string;
   /** Structured tech stack; rendered by TechList/StackList. */
   techStack: TechStackItem[];
+  /** Lifecycle status — a closed set; drives the semantic status chip on cards. */
+  status?: "production" | "completed" | "in-progress" | "archived" | "research";
   /** Named, structured architecture decisions; long-form rationale in body. */
   architectureDecisions?: Array<{ title: string; rationale: string }>;
   /** External links (FR-005). Optional because not every project has both. */
   github?: string;              // absolute URL
   liveDemo?: string;            // absolute URL
+  /** Cover image file name in `public/images/projects`; absent → generated
+   *  initials fallback (cards never show an empty block). */
+  cover?: string;
+  /** Optional dedicated brand logo; absent → an initials monogram. Carries the
+   *  same required a11y + intrinsic-size fields as a GalleryImage. */
+  logo?: { src: string; alt: string; width: number; height: number };
   /** Project media (FR-005 Gallery). */
   gallery?: GalleryImage[];
   /** Relationships — see §4. */
@@ -249,9 +257,9 @@ interface ProjectFrontmatter extends ContentBase {
 
 - **Required frontmatter:** `slug`, `title`, `summary`, `date`, `locale`,
   `role`, `techStack`.
-- **Optional frontmatter:** `order`, `featured`, `draft`, `seo`,
-  `architectureDecisions`, `github`, `liveDemo`, `gallery`, `caseStudy`,
-  `relatedArticles`.
+- **Optional frontmatter:** `order`, `featured`, `draft`, `seo`, `status`,
+  `architectureDecisions`, `github`, `liveDemo`, `cover`, `logo`, `gallery`,
+  `caseStudy`, `relatedArticles`.
 - **Required body sections:** Overview, Problem, Solution, My Role, Folder
   Structure, Architecture Decisions, Challenges, Lessons Learned
   ([PRD → FR-005](../product/PRODUCT_REQUIREMENTS.md)).

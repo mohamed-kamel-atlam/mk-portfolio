@@ -51,12 +51,22 @@ export const BLUR_DATA_URL = blurDataUrl();
 export const PROFILE_IMAGE_SRC = assetPath("profile", "profile.png");
 
 /**
- * A project cover image path. `file` is the cover's file name (with extension)
- * as stored in the project's MDX `cover` frontmatter — the author owns the
- * exact asset, keeping project data in the content layer (content-as-data).
+ * A project **cover screenshot** path (in `public/images/projects/covers`).
+ * `file` is the cover's file name as stored in the project's MDX `cover`
+ * frontmatter — the author owns the exact asset (content-as-data). Covers are a
+ * separate concept from {@link projectLogo}; the two are never mixed.
  */
 export function projectCover(file: string): string {
-  return assetPath("projects", file);
+  return assetPath("projectCovers", file);
+}
+
+/**
+ * A dedicated project **brand logo** path (in `public/images/projects/logos`).
+ * Separate from cover screenshots — a screenshot is never used as a logo. When a
+ * project has no dedicated logo, the card renders an initials monogram instead.
+ */
+export function projectLogo(file: string): string {
+  return assetPath("projectLogos", file);
 }
 
 /** A project gallery image path, namespaced by the project slug. */

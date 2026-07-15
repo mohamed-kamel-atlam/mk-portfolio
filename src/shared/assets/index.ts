@@ -12,6 +12,7 @@ export {
   PROFILE_IMAGE_SRC,
   placeholderImage,
   projectCover,
+  projectLogo,
   projectGalleryImage,
   type ImageAsset,
   type ImageSizePreset,

@@ -1,0 +1,49 @@
+/*
+ * Premium project-card decoration — colocated styles for the parts Tailwind
+ * tokens cannot express cleanly: the cover scrim, the hover lighting wash, and
+ * the generated fallback monogram. Every value resolves to a design token.
+ * Motion is compositor-only (opacity/transform) and gated by `motion-safe` on
+ * the consuming elements; the global reduced-motion rule settles it static.
+ */
+
+/* Top-down scrim so the glassy logo/status chips stay legible over any cover. */
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--color-background) 55%, transparent) 0%,
+    transparent 42%
+  );
+}
+
+/* Accent lighting that warms the cover on hover — the "lighting change". */
+.coverGlow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    120% 80% at 50% 0%,
+    color-mix(in srgb, var(--color-accent) 24%, transparent),
+    transparent 68%
+  );
+}
+
+/* Fallback cover: a designed panel (surface + engineering layers + monogram),
+   never an empty block. The background layers are the shared GradientLayer /
+   GridLayer; this only seats the monogram. */
+.fallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background-color: var(--color-surface-muted);
+}
+
+.monogram {
+  position: relative;
+  font-size: var(--font-size-display);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-display);
+  color: color-mix(in srgb, var(--color-foreground) 42%, transparent);
+}

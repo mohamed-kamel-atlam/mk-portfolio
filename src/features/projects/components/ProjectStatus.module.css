@@ -1,0 +1,69 @@
+/*
+ * Semantic status chip — a soft, refined tint (not a solid generic badge). Each
+ * tone sets a foreground hue and derives its fill + ring from that same hue via
+ * color-mix, so the treatment is consistent and always token-driven. Text label
+ * + icon always accompany the color (WCAG 1.4.1 — never color alone). Values
+ * resolve to semantic tokens only; both themes inherit automatically.
+ */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--status-ring);
+  background-color: var(--status-fill);
+  padding-block: var(--space-1);
+  padding-inline: var(--space-2);
+  color: var(--status-fg);
+  font-size: var(--font-size-caption);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-caption);
+  letter-spacing: var(--tracking-caption);
+  white-space: nowrap;
+}
+
+/* Reset the caption's positive tracking under RTL — it breaks Arabic joins. */
+:global([dir="rtl"]) .chip {
+  letter-spacing: var(--tracking-normal);
+}
+
+.production {
+  --status-fg: var(--color-success);
+  --status-fill: color-mix(in srgb, var(--color-success) 14%, transparent);
+  --status-ring: color-mix(in srgb, var(--color-success) 34%, transparent);
+}
+
+.completed {
+  /* A calm, high-contrast "done" — foreground-neutral, distinct from the green
+     of production and the dim grey of archived. */
+  --status-fg: var(--color-foreground);
+  --status-fill: color-mix(in srgb, var(--color-foreground) 8%, transparent);
+  --status-ring: color-mix(in srgb, var(--color-foreground) 20%, transparent);
+}
+
+.inProgress {
+  --status-fg: var(--color-warning);
+  --status-fill: color-mix(in srgb, var(--color-warning) 16%, transparent);
+  --status-ring: color-mix(in srgb, var(--color-warning) 34%, transparent);
+}
+
+.research {
+  --status-fg: var(--color-info);
+  --status-fill: color-mix(in srgb, var(--color-info) 14%, transparent);
+  --status-ring: color-mix(in srgb, var(--color-info) 32%, transparent);
+}
+
+.archived {
+  --status-fg: var(--color-muted-foreground);
+  --status-fill: color-mix(
+    in srgb,
+    var(--color-muted-foreground) 12%,
+    transparent
+  );
+  --status-ring: color-mix(
+    in srgb,
+    var(--color-muted-foreground) 26%,
+    transparent
+  );
+}

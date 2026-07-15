@@ -126,7 +126,19 @@
     "pager": "تنقّل المشاريع",
     "viewSource": "الكود المصدري",
     "viewLive": "عرض حي",
-    "eyebrow": "أعمال مختارة"
+    "eyebrow": "أعمال مختارة",
+    "status": {
+      "production": "منشور",
+      "completed": "مكتمل",
+      "in-progress": "قيد التنفيذ",
+      "archived": "مؤرشف",
+      "research": "بحثي"
+    },
+    "coverAlt": "{project} — صورة الغلاف",
+    "viewLiveAria": "عرض حي لمشروع {project}",
+    "viewSourceAria": "الكود المصدري لمشروع {project}",
+    "moreTech": "+{count} تقنيات إضافية",
+    "empty": "لا توجد مشاريع لعرضها بعد."
   },
   "about": {
     "meta": {
