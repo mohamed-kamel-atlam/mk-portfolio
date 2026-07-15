@@ -1,3 +1,13 @@
+import {
+  GraduationCap,
+  Lightbulb,
+  Microscope,
+  MessagesSquare,
+  Sparkles,
+  Target,
+  type LucideIcon,
+} from "lucide-react";
+
 import { type Locale } from "@/shared/i18n/config";
 import { getDictionary } from "@/shared/i18n/get-dictionary";
 import {
@@ -8,39 +18,62 @@ import {
   SectionHeading,
   Text,
 } from "@/shared/ui";
+import { RevealGroup } from "@/shared/ui/motion";
 
-import { coreValues } from "../content";
+import { coreValues, type CoreValueKey } from "../content";
 
 export interface CoreValuesProps {
   locale: Locale;
 }
 
-/** The convictions behind the work — drawn from the documented brand values. */
+/** An icon per value, so each trait registers before the text is read. */
+const VALUE_ICON: Record<CoreValueKey, LucideIcon> = {
+  curiosity: Lightbulb,
+  quality: Sparkles,
+  learning: GraduationCap,
+  ownership: Target,
+  communication: MessagesSquare,
+  detail: Microscope,
+};
+
+/** The human character behind the code — the traits a team works alongside. */
 export async function CoreValues({ locale }: CoreValuesProps) {
   const t = await getDictionary(locale);
   const section = t.about.values;
 
   return (
     <Section className="section-muted">
-      <Container className="flex flex-col gap-10">
-        <SectionHeading
-          eyebrow={section.eyebrow}
-          title={section.title}
-          intro={section.intro}
-        />
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {coreValues.map((key) => {
-            const item = section.items[key];
-            return (
-              <Card key={key} className="flex flex-col gap-2">
-                <Heading level={3} size="h4">
-                  {item.title}
-                </Heading>
-                <Text tone="muted">{item.description}</Text>
-              </Card>
-            );
-          })}
-        </div>
+      <Container>
+        <RevealGroup variant="scale" className="flex flex-col gap-12">
+          <SectionHeading
+            eyebrow={section.eyebrow}
+            title={section.title}
+            intro={section.intro}
+          />
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {coreValues.map((key) => {
+              const item = section.items[key];
+              const Icon = VALUE_ICON[key];
+              return (
+                <Card
+                  key={key}
+                  interactive
+                  className="group/value flex flex-col gap-3"
+                >
+                  <span className="inline-flex size-10 items-center justify-center rounded-lg border border-border bg-surface-muted text-accent transition-colors duration-fast group-hover/value:border-accent">
+                    <Icon aria-hidden="true" className="size-5" />
+                  </span>
+                  <Heading level={3} size="h4">
+                    {item.title}
+                  </Heading>
+                  <Text tone="muted" className="text-pretty">
+                    {item.description}
+                  </Text>
+                </Card>
+              );
+            })}
+          </div>
+        </RevealGroup>
       </Container>
     </Section>
   );

@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
 
 import {
+  AboutCta,
   AboutExperience,
   AboutIntro,
   CoreValues,
-  CurrentFocus,
-  EngineeringMindset,
-  FutureGoals,
+  EngineeringPhilosophy,
+  FunFacts,
+  MyProcess,
   PersonJsonLd,
-  SkillsOverview,
-  WorkingPrinciples,
+  TechStack,
 } from "@/features/about";
 import { defaultLocale, isLocale, type Locale } from "@/shared/i18n/config";
 import { getDictionary } from "@/shared/i18n/get-dictionary";
@@ -36,9 +36,10 @@ export async function generateMetadata({
 
 /**
  * About & Experience (FR-004). A thin routing-layer composition: it resolves the
- * locale and assembles the about feature's sections in narrative order. Each is
- * a Server Component owning its own content and layout; `PersonJsonLd` emits the
- * site's identity structured data.
+ * locale and assembles the about feature's sections in narrative order — who I am,
+ * how I engineer, how I work, what I build with, what I've shipped, what I value,
+ * and an invitation to collaborate. Each is a Server Component owning its own
+ * content and layout; `PersonJsonLd` emits the site's identity structured data.
  */
 export default async function AboutPage({ params }: AboutPageProps) {
   const { locale } = await params;
@@ -48,13 +49,13 @@ export default async function AboutPage({ params }: AboutPageProps) {
     <>
       <PersonJsonLd locale={active} />
       <AboutIntro locale={active} />
-      <EngineeringMindset locale={active} />
+      <EngineeringPhilosophy locale={active} />
+      <MyProcess locale={active} />
+      <TechStack locale={active} />
       <AboutExperience locale={active} />
-      <SkillsOverview locale={active} />
       <CoreValues locale={active} />
-      <WorkingPrinciples locale={active} />
-      <CurrentFocus locale={active} />
-      <FutureGoals locale={active} />
+      <FunFacts locale={active} />
+      <AboutCta locale={active} />
     </>
   );
 }

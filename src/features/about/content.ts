@@ -5,19 +5,44 @@
  * touches this file (INTERNATIONALIZATION.md §5).
  *
  * Skill names are drawn from the résumé and are proper nouns, so they are not
- * translated; only their group labels are localized.
+ * translated; only their group labels and descriptions are localized.
  */
 
-/** "What kind of engineer" pillars (Engineering Mindset). */
-export const mindsetPillars = [
-  "product",
-  "architecture",
+/**
+ * Engineering philosophy — the convictions that answer "why trust him with a
+ * complex frontend system". Rendered as an editorial statement plus a card per
+ * principle (EngineeringPhilosophy.tsx), each with its own icon.
+ */
+export const philosophyPrinciples = [
   "performance",
-  "ai",
+  "accessibility",
+  "designSystems",
+  "architecture",
+  "maintainability",
+  "ownership",
 ] as const;
-export type MindsetKey = (typeof mindsetPillars)[number];
+export type PhilosophyKey = (typeof philosophyPrinciples)[number];
 
-/** Skill groups — label localized, items are proper nouns kept in Latin. */
+/**
+ * How a feature goes from ambiguity to production — an ordered, repeatable
+ * workflow (MyProcess.tsx). Order is meaningful and drives the numbered `<ol>`.
+ */
+export const processSteps = [
+  "understand",
+  "research",
+  "architect",
+  "build",
+  "optimize",
+  "review",
+  "deliver",
+] as const;
+export type ProcessStepKey = (typeof processSteps)[number];
+
+/**
+ * Skill groups — label + description localized, items are proper nouns kept in
+ * Latin script. Each group also carries an icon in the component (TechStack.tsx)
+ * so the toolkit reads as intentional capability areas, not a flat badge dump.
+ */
 export const skillGroups = [
   {
     key: "core",
@@ -89,28 +114,24 @@ export const skillGroups = [
 
 export type SkillGroupKey = (typeof skillGroups)[number]["key"];
 
-/** Core values — drawn from the documented Brand Values (BRAND.md). */
+/**
+ * Core values — the human character behind the engineering (the traits a team
+ * works alongside), kept distinct from the {@link philosophyPrinciples} that
+ * govern the code itself, so the two sections never restate each other.
+ */
 export const coreValues = [
-  "excellence",
-  "simplicity",
-  "ownership",
-  "accessibility",
-  "performance",
   "curiosity",
+  "quality",
+  "learning",
+  "ownership",
+  "communication",
+  "detail",
 ] as const;
 export type CoreValueKey = (typeof coreValues)[number];
 
 /**
- * Working principles — the project's own non-negotiable engineering principles
- * (ARCHITECTURE.md §2 / CLAUDE.md), the same convictions this codebase is built
- * on. Rendered in order.
+ * Fun facts — a small, professional row of signals about the person behind the
+ * work (FunFacts.tsx). Kept to concrete, résumé-true facts, never gimmicks.
  */
-export const workingPrinciples = [
-  "documentation",
-  "architecture",
-  "serverFirst",
-  "stateDiscipline",
-  "tokens",
-  "simplicity",
-] as const;
-export type WorkingPrincipleKey = (typeof workingPrinciples)[number];
+export const funFacts = ["ai", "bilingual", "documentation", "craft"] as const;
+export type FunFactKey = (typeof funFacts)[number];

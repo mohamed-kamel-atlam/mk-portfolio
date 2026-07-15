@@ -161,8 +161,14 @@
     },
     "intro": {
       "kicker": "Mohamed Kamel Atlam · Frontend Engineer",
-      "headline": "I build premium, scalable frontends for AI products.",
-      "lead": "I design and engineer production-grade web applications — owning architecture, performance, and accessibility from the first commit to deployment. A background in Artificial Intelligence keeps me fluent in the data-heavy products I build.",
+      "headline": "I engineer premium, scalable frontends for AI products.",
+      "lead": "I design and build production-grade web applications — owning architecture, performance, and accessibility from the first commit to deployment.",
+      "narrative": [
+        "I'm a frontend engineer who thinks in systems, not screens. I care about the parts a user never sees — the component boundaries, the state model, the render path — because those decide whether a product stays fast and maintainable as it grows.",
+        "My background is in Artificial Intelligence, so I'm fluent in the data-heavy dashboards and AI-driven interfaces I build, and comfortable with the real workflows behind them. Right now I'm going deeper into Next.js, backend fundamentals, and AI systems.",
+        "Frontend is where engineering meets the person using it. Getting it right means performance, accessibility, and clarity are treated as requirements — never as polish applied at the end."
+      ],
+      "imageAlt": "Portrait of Mohamed Kamel Atlam",
       "availability": "Open to frontend & AI product roles",
       "location": "Tanta, Egypt",
       "education": "BSc Artificial Intelligence · 2026",
@@ -170,39 +176,77 @@
       "ctaPrimary": "View my work",
       "ctaSecondary": "Get in touch"
     },
-    "mindset": {
-      "eyebrow": "Mindset",
-      "title": "How I think about engineering",
-      "intro": "Not a UI coder — an engineer who owns the system behind the interface.",
+    "philosophy": {
+      "eyebrow": "Philosophy",
+      "title": "How I engineer",
+      "intro": "The convictions that shape every technical decision I make.",
+      "statement": "I don't write UI code — I own the system behind the interface. Every choice is measured against one question: will this keep the product fast, accessible, and easy to change a year from now?",
       "items": {
-        "product": {
-          "title": "Product engineer",
-          "description": "I own products end to end — from planning and architecture through delivery — not just isolated screens."
+        "performance": {
+          "title": "Performance first",
+          "description": "Speed is a feature. I measure, profile, and budget it — Core Web Vitals and bundle size are constraints I design within, never afterthoughts."
+        },
+        "accessibility": {
+          "title": "Accessibility by default",
+          "description": "WCAG AA is the baseline. Semantic HTML, keyboard paths, and focus management are built in from the first commit, not retrofitted."
+        },
+        "designSystems": {
+          "title": "Design systems",
+          "description": "I build with tokens and composable components, so an interface stays visually consistent and a change lands in one place, not fifty."
         },
         "architecture": {
-          "title": "Architecture-oriented",
-          "description": "I design for scale first: clear boundaries, reusable components, and structure that survives a growing team."
+          "title": "Scalable architecture",
+          "description": "Clear boundaries, feature-based structure, and disciplined state — designed to survive a growing codebase and a growing team."
         },
-        "performance": {
-          "title": "Performance-focused",
-          "description": "Fast, lean interfaces are a requirement — measured, profiled, and tuned, never assumed."
+        "maintainability": {
+          "title": "Maintainability & DX",
+          "description": "Code is read far more than it's written. I optimize for the next engineer: typed, documented, and simple to reason about."
         },
-        "ai": {
-          "title": "AI product builder",
-          "description": "I build data-heavy AI dashboards and SaaS experiences, comfortable with the real workflows behind them."
+        "ownership": {
+          "title": "Ownership",
+          "description": "I take responsibility for outcomes, not tickets — from architecture through deployment, monitoring, and the follow-up."
         }
       }
     },
-    "experience": {
-      "eyebrow": "Experience",
-      "title": "Selected experience",
-      "intro": "Real products — a graduation platform, a commercial build, and client work — shipped end to end.",
-      "present": "Present"
+    "process": {
+      "eyebrow": "Process",
+      "title": "How I turn ambiguity into shipped software",
+      "intro": "A repeatable workflow that keeps quality predictable — from the first conversation to production.",
+      "steps": {
+        "understand": {
+          "title": "Understand",
+          "description": "Clarify the problem, the users, and the constraints before touching code — the real requirement is rarely the first one stated."
+        },
+        "research": {
+          "title": "Research",
+          "description": "Survey approaches, prior art, and trade-offs, so the decision is driven by evidence rather than habit."
+        },
+        "architect": {
+          "title": "Architect",
+          "description": "Design the data flow, component boundaries, and state model up front — structure before implementation."
+        },
+        "build": {
+          "title": "Build",
+          "description": "Implement in small, reviewable increments with types and tests, keeping the main branch always shippable."
+        },
+        "optimize": {
+          "title": "Optimize",
+          "description": "Profile and tune rendering, bundle size, and Core Web Vitals — measured against real budgets, not guesses."
+        },
+        "review": {
+          "title": "Review",
+          "description": "Self-review, verify accessibility and edge cases, and invite critique before anything ships."
+        },
+        "deliver": {
+          "title": "Deliver",
+          "description": "Ship with confidence, watch it in production, and fold what I learn back into the next iteration."
+        }
+      }
     },
     "skills": {
-      "eyebrow": "Skills",
-      "title": "Technical toolkit",
-      "intro": "A focused, modern stack chosen for scale, performance, and maintainability.",
+      "eyebrow": "Toolkit",
+      "title": "The stack I build with",
+      "intro": "A focused, modern toolkit chosen for scale, performance, and maintainability — grouped by what each part actually does.",
       "groups": {
         "core": "Frontend core",
         "state": "State management",
@@ -212,91 +256,84 @@
         "performance": "Performance",
         "tooling": "Tools & collaboration",
         "ai": "AI / ML foundations"
+      },
+      "descriptions": {
+        "core": "The foundation — typed, component-driven UIs built with React and Next.js.",
+        "state": "Predictable data flow, from server cache down to local UI state.",
+        "styling": "Token-driven, responsive interfaces with consistent, purposeful motion.",
+        "architecture": "Structure and patterns that keep a codebase scalable and clean.",
+        "apis": "Talking to backends safely — typed, validated, and access-controlled.",
+        "performance": "Techniques that keep interfaces fast under real-world load.",
+        "tooling": "The workflow and tools that ship work smoothly as a team.",
+        "ai": "The AI groundwork behind the data-heavy products I build."
       }
+    },
+    "experience": {
+      "eyebrow": "Experience",
+      "title": "Selected experience",
+      "intro": "Real products, shipped end to end — measured by the problems solved and the value delivered, not the tickets closed.",
+      "present": "Present"
     },
     "values": {
       "eyebrow": "Values",
-      "title": "What I hold to",
-      "intro": "The convictions behind every decision.",
+      "title": "How I work with a team",
+      "intro": "The character behind the code — the traits a team actually works alongside.",
       "items": {
-        "excellence": {
-          "title": "Engineering excellence",
-          "description": "Decisions driven by architecture and evidence, not trends or hype."
+        "curiosity": {
+          "title": "Curiosity",
+          "description": "I ask why until I understand the system, not just the symptom — every project is a chance to learn something I didn't know."
         },
-        "simplicity": {
-          "title": "Simplicity",
-          "description": "The simpler solution wins whenever the choice is hard."
+        "quality": {
+          "title": "Quality",
+          "description": "I hold a high bar and sweat the details others skip, because quality compounds — and so does the lack of it."
+        },
+        "learning": {
+          "title": "Continuous learning",
+          "description": "The stack changes constantly; I keep expanding — currently deeper into Next.js, backend, and AI systems."
         },
         "ownership": {
           "title": "Ownership",
-          "description": "I take responsibility for outcomes, not just tickets — from first commit to production."
+          "description": "I own outcomes end to end, and I don't consider something done until it works in production."
         },
-        "accessibility": {
-          "title": "Accessibility",
-          "description": "WCAG AA is the baseline, not the goal — everyone can use what I build."
+        "communication": {
+          "title": "Communication",
+          "description": "I write clearly, document decisions, and make trade-offs visible so the whole team can move with confidence."
         },
-        "performance": {
-          "title": "Performance",
-          "description": "Speed is a feature; I treat it as a first-class requirement."
-        },
-        "curiosity": {
-          "title": "Continuous learning",
-          "description": "I keep expanding — currently deeper into Next.js, backend, and AI systems."
+        "detail": {
+          "title": "Attention to detail",
+          "description": "Spacing, motion, edge cases, error states — the small things are what separate a good product from a great one."
         }
       }
     },
-    "principles": {
-      "eyebrow": "Principles",
-      "title": "How I work",
-      "intro": "The same non-negotiables this very portfolio is built on.",
+    "funFacts": {
+      "eyebrow": "Beyond the code",
+      "title": "A few things about me",
+      "intro": "Signals that don't fit neatly into a résumé bullet.",
       "items": {
+        "ai": {
+          "label": "AI background",
+          "value": "A BSc in Artificial Intelligence — I build the data-heavy products I studied."
+        },
+        "bilingual": {
+          "label": "Bilingual",
+          "value": "I build and write fluently in English and Arabic, right-to-left included."
+        },
         "documentation": {
-          "title": "Documentation-driven",
-          "description": "The governing decision is written before the code, so intent is explicit."
+          "label": "Docs before code",
+          "value": "This very portfolio was specified in writing before a single line was implemented."
         },
-        "architecture": {
-          "title": "Architecture-first",
-          "description": "Structure and boundaries are designed before implementation begins."
-        },
-        "serverFirst": {
-          "title": "Server-first",
-          "description": "Render on the server by default; ship the client only what must be interactive."
-        },
-        "stateDiscipline": {
-          "title": "State discipline",
-          "description": "Server, then URL, then local — global state only when nothing else fits."
-        },
-        "tokens": {
-          "title": "Tokens over hardcoding",
-          "description": "Every color, space, and type value resolves to a design token — never a magic number."
-        },
-        "simplicity": {
-          "title": "Simplicity when in doubt",
-          "description": "When two paths are close, I take the one that is easier to maintain."
+        "craft": {
+          "label": "Craft-obsessed",
+          "value": "Chasing 100 Lighthouse scores and zero layout shift is a habit, not a chore."
         }
       }
     },
-    "focus": {
-      "eyebrow": "Now",
-      "title": "Current focus",
-      "intro": "Where my attention is today.",
-      "items": [
-        "Deepening Next.js and the App Router for production-grade SSR and RSC.",
-        "Architecting scalable, token-driven design systems.",
-        "Building AI-powered SaaS dashboards around real data workflows.",
-        "Strengthening backend fluency with NestJS and REST API design."
-      ]
-    },
-    "goals": {
-      "eyebrow": "Next",
-      "title": "Where I'm heading",
-      "intro": "The direction of the work ahead.",
-      "items": [
-        "Graduate in 2026 (BSc, Artificial Intelligence) and move into a senior-track frontend role.",
-        "Lead frontend architecture on an AI SaaS product.",
-        "Contribute to design systems and a strong code-review culture.",
-        "Grow full-stack range while staying frontend-deep."
-      ]
+    "cta": {
+      "eyebrow": "Let's build",
+      "title": "Have a complex frontend to build?",
+      "subtitle": "I'm looking for a team where frontend architecture, performance, and craft genuinely matter. If that sounds like yours, let's talk.",
+      "primary": "Start a conversation",
+      "secondary": "See my work"
     },
     "jsonLd": {
       "name": "Mohamed Kamel Atlam",
