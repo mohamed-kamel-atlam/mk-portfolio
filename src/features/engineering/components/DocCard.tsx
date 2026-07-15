@@ -22,7 +22,7 @@ export function DocCard({ href, kindLabel, title, summary }: DocCardProps) {
           <Badge variant="neutral">{kindLabel}</Badge>
         </div>
         <Heading
-          level={3}
+          level={4}
           size="h4"
           className="transition-colors duration-fast group-hover:text-accent"
         >

@@ -345,13 +345,333 @@
   "engineering": {
     "meta": {
       "title": "Engineering",
-      "description": "The engineering behind the portfolio — architecture, rendering strategies, React internals, performance, accessibility, and the workflow that ships it."
+      "description": "The engineering behind the portfolio — how I think about architecture, performance, accessibility, and the decisions and workflow that ship it, with the living docs that back each one."
     },
     "intro": {
       "eyebrow": "Engineering",
-      "title": "The engineering behind the interface.",
-      "lead": "Living documentation of how this site is built — the architecture, the rendering model, and the decisions and workflow behind them. The same docs that govern the code, made public."
+      "title": "I engineer systems, not just screens.",
+      "lead": "What matters to me is the system behind the interface — how it's structured, how it performs, and how it stays maintainable as it grows. Here's how I think about architecture, performance, accessibility, and the decisions behind them — each backed by the living docs that govern this codebase.",
+      "facets": {
+        "problemSolving": {
+          "title": "Problem solving",
+          "description": "I start from the real constraint, not the first feature — the hard part is usually understanding the problem, not typing the code."
+        },
+        "maintainability": {
+          "title": "Maintainability",
+          "description": "Code is read far more than it's written; I optimize for the engineer who touches it next."
+        },
+        "performance": {
+          "title": "Performance",
+          "description": "Speed is a budget I design within — measured against Core Web Vitals, never assumed."
+        },
+        "ux": {
+          "title": "User experience",
+          "description": "The interface is where engineering meets a person — accessibility and clarity are requirements, not polish."
+        },
+        "architecture": {
+          "title": "Architecture",
+          "description": "I design boundaries and data flow before implementation, so the structure survives growth and a bigger team."
+        }
+      }
     },
+    "architecture": {
+      "eyebrow": "Architecture thinking",
+      "title": "How I approach architecture",
+      "intro": "Architecture is a sequence of deliberate decisions, not a diagram drawn once. This is the loop I run for any non-trivial system.",
+      "steps": {
+        "understand": {
+          "title": "Understand requirements",
+          "description": "Pin down the real problem, the users, and the constraints before any structure is drawn."
+        },
+        "modularize": {
+          "title": "Break into modules",
+          "description": "Decompose the system into cohesive units with clear responsibilities and boundaries."
+        },
+        "reusable": {
+          "title": "Design reusable systems",
+          "description": "Turn recurring patterns into composable components and primitives, not one-off code."
+        },
+        "scalability": {
+          "title": "Think about scalability",
+          "description": "Choose structures that hold up as features, data, and the team grow."
+        },
+        "optimize": {
+          "title": "Optimize performance",
+          "description": "Design the render and data path for speed from the start, then measure it."
+        },
+        "review": {
+          "title": "Review",
+          "description": "Check the design against edge cases, accessibility, and the trade-offs it accepts."
+        },
+        "iterate": {
+          "title": "Iterate",
+          "description": "Fold what production teaches back into the architecture — it's never finished at v1."
+        }
+      }
+    },
+    "build": {
+      "eyebrow": "Workflow",
+      "title": "How I build frontend systems",
+      "intro": "The pipeline every change runs, from an open question to something live in production.",
+      "stages": {
+        "research": {
+          "title": "Research",
+          "description": "Survey approaches, prior art, and trade-offs so the decision is informed, not habitual."
+        },
+        "planning": {
+          "title": "Planning",
+          "description": "Define scope, the definition of done, and the risks before writing code."
+        },
+        "architecture": {
+          "title": "Architecture",
+          "description": "Design the data flow, component boundaries, and state model up front."
+        },
+        "implementation": {
+          "title": "Implementation",
+          "description": "Build in small, typed, reviewable increments; keep the main branch shippable."
+        },
+        "optimization": {
+          "title": "Optimization",
+          "description": "Profile and tune rendering, bundle size, and Core Web Vitals against real budgets."
+        },
+        "accessibility": {
+          "title": "Accessibility",
+          "description": "Verify semantics, keyboard paths, focus, and reduced motion — part of done, not after."
+        },
+        "testing": {
+          "title": "Testing",
+          "description": "Cover the logic and the edge cases that matter, and guard against regressions."
+        },
+        "deployment": {
+          "title": "Deployment",
+          "description": "Ship with confidence, watch it in production, and feed what I learn back in."
+        }
+      }
+    },
+    "performance": {
+      "eyebrow": "Performance",
+      "title": "Performance is a feature, not a final pass",
+      "intro": "Speed is designed in and measured, never bolted on. A few of the levers I reach for.",
+      "statement": "I budget performance the way I budget scope: Core Web Vitals are constraints I design within, and every kilobyte of client JavaScript has to justify itself.",
+      "topics": {
+        "rendering": {
+          "title": "Rendering strategy",
+          "description": "Server-render by default; pick SSG, SSR, or ISR per route by what the content actually needs."
+        },
+        "hydration": {
+          "title": "Hydration cost",
+          "description": "Keep interactivity at the leaves — less client JavaScript means less to parse, hydrate, and run."
+        },
+        "streaming": {
+          "title": "Streaming",
+          "description": "Stream server-rendered HTML with Suspense so content paints progressively, not all-or-nothing."
+        },
+        "codeSplitting": {
+          "title": "Code splitting",
+          "description": "Load what a route needs and defer the rest, so the first paint stays lean."
+        },
+        "images": {
+          "title": "Image optimization",
+          "description": "Right-sized, modern formats with explicit dimensions — fast to load and zero layout shift."
+        },
+        "caching": {
+          "title": "Caching",
+          "description": "Cache aggressively at build time and the edge, so repeat work is never paid twice."
+        },
+        "vitals": {
+          "title": "Core Web Vitals",
+          "description": "LCP, CLS, and INP are tracked as targets, not vanity numbers."
+        },
+        "bundle": {
+          "title": "Bundle discipline",
+          "description": "Watch dependency weight — a small feature should never ship a large library."
+        }
+      }
+    },
+    "accessibility": {
+      "eyebrow": "Accessibility",
+      "title": "Accessible by default, not on request",
+      "intro": "WCAG AA is the baseline every interface starts from. Here's what that means in practice.",
+      "statement": "Accessibility isn't a feature added for some users — it's the difference between software that works for everyone and software that quietly excludes people.",
+      "topics": {
+        "semantics": {
+          "title": "Semantic HTML",
+          "description": "The right element first — real headings, lists, buttons, and landmarks carry meaning for free."
+        },
+        "keyboard": {
+          "title": "Keyboard support",
+          "description": "Every interaction works without a mouse, with a visible, logical focus order."
+        },
+        "aria": {
+          "title": "ARIA, sparingly",
+          "description": "ARIA fills the gaps semantics can't — used precisely, never as a substitute for the right element."
+        },
+        "reducedMotion": {
+          "title": "Reduced motion",
+          "description": "Every animation has a calm, honored prefers-reduced-motion fallback."
+        },
+        "contrast": {
+          "title": "Contrast",
+          "description": "Text and UI meet AA contrast in both themes — verified, not eyeballed."
+        },
+        "screenReaders": {
+          "title": "Screen readers",
+          "description": "Content reads in a sensible order, with meaningful names and live updates where needed."
+        }
+      }
+    },
+    "designSystems": {
+      "eyebrow": "Design systems",
+      "title": "Building UI that scales",
+      "intro": "A design system is what keeps a growing interface consistent and cheap to change. This page is built on one.",
+      "statement": "Every color, space, and type value on this site resolves to a token — a hardcoded value is a lintable error, not a style choice.",
+      "topics": {
+        "tokens": {
+          "title": "Tokens",
+          "description": "One source of truth for color, space, type, and motion — themeable and enforceable in CI."
+        },
+        "components": {
+          "title": "Components",
+          "description": "A small set of well-defined primitives that everything else is built from."
+        },
+        "variants": {
+          "title": "Variants",
+          "description": "Controlled options over one-off overrides, so a component stays predictable."
+        },
+        "composition": {
+          "title": "Composition",
+          "description": "Small pieces combined, not deep inheritance — flexibility without complexity."
+        },
+        "consistency": {
+          "title": "Consistency",
+          "description": "The same spacing, motion, and states everywhere, because they come from the same source."
+        },
+        "maintainability": {
+          "title": "Maintainability",
+          "description": "A change lands in one place and propagates — not fifty find-and-replaces."
+        }
+      }
+    },
+    "ai": {
+      "eyebrow": "AI-assisted development",
+      "title": "AI accelerates the work; judgment stays human",
+      "intro": "I use AI tooling daily — deliberately, and with a human owning every decision.",
+      "statement": "AI makes me faster at the mechanical parts. It doesn't decide the architecture, own the trade-offs, or approve the code — that's engineering, and it stays mine.",
+      "practices": {
+        "architecture": {
+          "title": "AI-assisted architecture",
+          "description": "I use AI to pressure-test designs and explore alternatives — then I make the call."
+        },
+        "review": {
+          "title": "AI code review",
+          "description": "A first-pass reviewer for bugs and edge cases, before a human review — never instead of one."
+        },
+        "docsFirst": {
+          "title": "Documentation-first",
+          "description": "The governing decision is written before the code, so the AI and I work from the same intent."
+        },
+        "validation": {
+          "title": "Human validation",
+          "description": "Nothing ships unread — every AI-generated line is understood, tested, and owned."
+        }
+      }
+    },
+    "tools": {
+      "eyebrow": "Tools",
+      "title": "The tools I reach for",
+      "intro": "Grouped by the job they do — chosen deliberately, not collected.",
+      "groups": {
+        "frameworks": "Frameworks",
+        "languages": "Languages",
+        "state": "State",
+        "styling": "Styling",
+        "animation": "Animation",
+        "content": "Content",
+        "quality": "Code quality",
+        "tooling": "Dev tools",
+        "infrastructure": "Infrastructure",
+        "ai": "AI"
+      }
+    },
+    "principles": {
+      "eyebrow": "Principles",
+      "title": "The non-negotiables",
+      "intro": "The convictions this codebase actually enforces — most are checkable in CI, not just aspirations.",
+      "items": {
+        "performance": {
+          "title": "Performance first",
+          "description": "Speed is a requirement with a budget, measured on every build."
+        },
+        "accessibility": {
+          "title": "Accessibility by default",
+          "description": "WCAG AA from the first commit, for everyone."
+        },
+        "serverFirst": {
+          "title": "Server first",
+          "description": "Render on the server by default; ship the client only what must be interactive."
+        },
+        "maintainability": {
+          "title": "Maintainability",
+          "description": "Optimize for the next engineer — typed, documented, simple."
+        },
+        "scalability": {
+          "title": "Scalability",
+          "description": "Structure that holds as the codebase and the team grow."
+        },
+        "ownership": {
+          "title": "Ownership",
+          "description": "Responsible for outcomes end to end, from the decision to production."
+        },
+        "documentation": {
+          "title": "Documentation",
+          "description": "The decision is written before the code — intent is explicit and durable."
+        },
+        "learning": {
+          "title": "Continuous learning",
+          "description": "The stack keeps moving; so do I."
+        }
+      }
+    },
+    "decisions": {
+      "eyebrow": "Decisions",
+      "title": "Engineering decisions",
+      "intro": "A few of the architecture decisions behind this site — the context, the choice, and what it cost. The full ADR log goes deeper.",
+      "docCta": "Read the full ADR log",
+      "tradeoffLabel": "Trade-off",
+      "items": {
+        "appRouter": {
+          "title": "Why the App Router",
+          "explanation": "Server-rendered, localized HTML and top-tier performance were the priorities, with no runtime backend.",
+          "tradeoff": "A real learning curve at the server/client boundary, and deliberate coupling to Next.js."
+        },
+        "serverComponents": {
+          "title": "Why Server Components",
+          "explanation": "Rendering on the server by default ships minimal client JavaScript and maximal edge-deliverable HTML.",
+          "tradeoff": "Engineers must consciously manage the server/client boundary instead of reaching for client state freely."
+        },
+        "tokens": {
+          "title": "Why design tokens",
+          "explanation": "Every design value resolves to a token, so consistency is structural and enforced in CI.",
+          "tradeoff": "Utility-dense markup and a Tailwind theme that must stay in lockstep with the tokens."
+        },
+        "mdx": {
+          "title": "Why MDX for content",
+          "explanation": "Projects, docs, and journal entries are schema-validated MDX — content as data, not hardcoded markup.",
+          "tradeoff": "A small content pipeline to maintain, and two language trees to keep in sync."
+        },
+        "featureFirst": {
+          "title": "Why feature-first architecture",
+          "explanation": "Code is organized by feature with inward-only dependencies, so features stay cohesive as the app grows.",
+          "tradeoff": "Requires real judgment about what is genuinely shared versus feature-specific."
+        }
+      }
+    },
+    "deepDives": {
+      "eyebrow": "Deep dives",
+      "title": "The engineering docs",
+      "intro": "The living documentation that governs this codebase — the same docs the code is held to, made public."
+    },
+    "readMore": "Read the deep dive",
     "groups": {
       "foundations": "Foundations",
       "rendering": "Rendering & React",
@@ -383,6 +703,13 @@
       "career": "Career",
       "decision": "Decision",
       "goal": "Goal"
+    },
+    "cta": {
+      "eyebrow": "Let's talk shop",
+      "title": "Care about how it's built?",
+      "subtitle": "If you're building something where architecture, performance, and craft matter, I'd love to talk through the hard parts.",
+      "primary": "Start a conversation",
+      "secondary": "See the work"
     },
     "article": {
       "back": "All engineering",
