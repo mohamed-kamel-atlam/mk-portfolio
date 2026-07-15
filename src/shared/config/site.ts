@@ -27,7 +27,8 @@ export type SiteConfig = typeof siteConfig;
  * locale-agnostic route appended to the active locale via `localizedHref`.
  * Adding a route is a single entry here (+ its label + its page).
  */
-export type NavKey = "home" | "about" | "projects" | "engineering" | "contact";
+export type NavKey =
+  "home" | "about" | "projects" | "engineering" | "journey" | "contact";
 
 export interface NavItem {
   key: NavKey;
@@ -40,6 +41,7 @@ export const mainNav: readonly NavItem[] = [
   { key: "about", path: "/about" },
   { key: "projects", path: "/projects" },
   { key: "engineering", path: "/engineering" },
+  { key: "journey", path: "/journey" },
   { key: "contact", path: "/contact" },
 ] as const;
 

@@ -17,6 +17,7 @@ const STATIC_PATHS = [
   "/about",
   "/projects",
   "/engineering",
+  "/journey",
   "/contact",
 ] as const;
 

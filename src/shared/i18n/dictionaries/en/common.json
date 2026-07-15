@@ -15,7 +15,8 @@
     "footer": "Footer",
     "skipToContent": "Skip to content",
     "toggleTheme": "Toggle theme",
-    "switchLanguage": "Switch language"
+    "switchLanguage": "Switch language",
+    "journey": "Journey"
   },
   "footer": {
     "rights": "All rights reserved."
@@ -767,5 +768,177 @@
       "Engineering the interface",
       "Finalizing"
     ]
+  },
+  "journey": {
+    "meta": {
+      "title": "Journey",
+      "description": "The story of how I became a frontend engineer — from studying Artificial Intelligence to designing production-grade systems, told year by year."
+    },
+    "hero": {
+      "eyebrow": "The journey",
+      "title": "How I became an engineer.",
+      "lead": "This isn't a résumé — it's the story of how my thinking evolved, from my first Python script to designing production-grade frontend systems. Five years, one throughline: learning to solve problems, not just write code."
+    },
+    "timeline": {
+      "eyebrow": "The timeline",
+      "title": "Year by year",
+      "intro": "Each year was a chapter — a shift in what I was learning and, more importantly, in how I thought about building software.",
+      "labels": {
+        "technologies": "Key technologies",
+        "lesson": "Engineering lesson",
+        "mindset": "Mindset shift"
+      },
+      "milestones": {
+        "2022": {
+          "title": "The beginning of the AI journey",
+          "story": "I started at the Faculty of Artificial Intelligence, focused on Python, programming fundamentals, data structures, data analysis and transformation, and the mathematics behind AI. Before I could build anything, I had to learn how to think.",
+          "lesson": "Learn to think logically before writing a line of code.",
+          "mindset": "Software is about solving problems — not writing syntax."
+        },
+        "2023": {
+          "title": "Machine learning, then a turning point",
+          "story": "I moved into machine learning and deep learning — CNNs, RNNs, computer vision, Arduino projects, model training, and data preprocessing. Curious about the full picture, I tried backend with C# and ASP.NET and realized it wasn't where my passion was. What pulled me in was building interfaces people could actually experience — so late in the year I started with HTML and CSS, and discovered responsive design and animation.",
+          "lesson": "A great user experience is engineered, not decorated.",
+          "mindset": "The interface is where engineering meets the person using it."
+        },
+        "2024": {
+          "title": "All in on the frontend",
+          "story": "I committed fully to frontend development and spent about six months truly mastering JavaScript — the DOM, events, async, the Fetch API, ES6+, and how the browser actually works. I built project after project, then picked up Bootstrap and Tailwind CSS and started shipping complete, responsive sites.",
+          "lesson": "Understand JavaScript deeply and every framework gets easier.",
+          "mindset": "Depth before breadth — fundamentals compound."
+        },
+        "2025": {
+          "title": "Into the React ecosystem",
+          "story": "I entered React — starting small, then moving into larger apps: hooks, routing, state management, and component architecture, with Material UI along the way. I adopted TypeScript and began building production-style apps with React, TypeScript, and Tailwind, learning Git, GitHub, and professional workflows. I built Tiger E-commerce — authentication, protected routes, API integration, a scalable structure — and a Fitness Booking System with mock APIs (MSW) and a real frontend architecture.",
+          "lesson": "Building maintainable systems beats building many features.",
+          "mindset": "Architecture is a feature — structure is what lasts."
+        },
+        "2026": {
+          "title": "Real products, real systems",
+          "story": "I worked on Sanabel Rahaf, a complete Saudi sweets e-commerce platform — owning frontend and backend with NestJS, MongoDB, REST APIs, and authentication. It stopped due to company circumstances, but it became one of my biggest lessons. Then came my graduation project: Next.js, AI dashboards, Docker, Jira, team collaboration, feature-based architecture, and documentation-first development.",
+          "lesson": "The difference between a developer and an engineer is designing systems, not only writing code.",
+          "mindset": "Own the whole system — from the decision to production."
+        }
+      }
+    },
+    "evolution": {
+      "eyebrow": "Evolution",
+      "title": "How my thinking changed",
+      "intro": "The tools changed every year. What really evolved was the way I approach a problem.",
+      "items": {
+        "logic": {
+          "before": "Writing syntax",
+          "after": "Solving problems",
+          "description": "AI taught me to reason about a problem before reaching for code — the logic matters more than the language."
+        },
+        "craft": {
+          "before": "Making it work",
+          "after": "Engineering the experience",
+          "description": "Discovering the frontend reframed the interface as something engineered for a person, not decorated after the fact."
+        },
+        "architecture": {
+          "before": "Shipping features",
+          "after": "Designing systems",
+          "description": "React and TypeScript shifted my focus from how many features I could add to how well the system would hold up."
+        },
+        "systems": {
+          "before": "Being a developer",
+          "after": "Thinking like an engineer",
+          "description": "Owning real products end to end made system design — not syntax — the thing that separates the two."
+        }
+      }
+    },
+    "projects": {
+      "eyebrow": "Projects",
+      "title": "What the work taught me",
+      "intro": "A few projects that changed how I build — each one left a lesson bigger than its codebase.",
+      "linkLabel": "View project",
+      "items": {
+        "tiger": {
+          "title": "Tiger E-commerce",
+          "story": "My first production-style app: authentication, protected routes, API integration, and a scalable folder structure.",
+          "lesson": "Structure decides whether a codebase can grow."
+        },
+        "fitness": {
+          "title": "Fitness Booking System",
+          "story": "Built around mock APIs with MSW, deliberate component organization, and a real frontend architecture.",
+          "lesson": "You can engineer seriously before a backend exists."
+        },
+        "sanabel": {
+          "title": "Sanabel Rahaf",
+          "story": "A commercial Saudi sweets platform where I owned frontend and backend — NestJS, MongoDB, REST APIs, and auth. It stopped for company reasons, but taught me the most.",
+          "lesson": "Shipping under real constraints teaches what tutorials can't."
+        },
+        "graduation": {
+          "title": "Graduation Project",
+          "story": "An AI-dashboard product built with Next.js, Docker, and Jira — feature-based architecture and documentation-first development, as a team.",
+          "lesson": "Process and documentation scale a team, not just code."
+        }
+      }
+    },
+    "challenges": {
+      "eyebrow": "Challenges",
+      "title": "The hard parts — and what they gave me",
+      "intro": "Growth rarely came from the easy wins. These are the moments that actually moved me forward.",
+      "items": {
+        "detour": {
+          "title": "The backend detour",
+          "description": "I spent real time on C# and ASP.NET before admitting backend wasn't my passion. The detour wasn't wasted — it sharpened what I actually wanted to build and how the whole system fits together."
+        },
+        "depth": {
+          "title": "Going deep before wide",
+          "description": "Six months on plain JavaScript felt slow while others jumped straight to frameworks. It turned out to be the best investment I made — every framework since has been easier."
+        },
+        "commercial": {
+          "title": "A project that stopped",
+          "description": "Sanabel Rahaf ended before launch due to company circumstances. Losing a project you own is hard — but shipping under commercial pressure taught me more than any finished tutorial could."
+        }
+      }
+    },
+    "currentFocus": {
+      "eyebrow": "Now",
+      "title": "What I'm mastering today",
+      "intro": "Where my attention is right now — going deeper into the systems behind modern frontends.",
+      "items": {
+        "reactInternals": "React internals",
+        "appRouter": "Next.js App Router",
+        "rendering": "Rendering strategies",
+        "performance": "Performance optimization",
+        "accessibility": "Accessibility",
+        "designSystems": "Design systems",
+        "architecture": "Frontend architecture",
+        "aiAssisted": "AI-assisted development"
+      }
+    },
+    "roadmap": {
+      "eyebrow": "What's next",
+      "title": "Where the journey heads",
+      "intro": "The direction of the work ahead — deeper systems, bigger ownership.",
+      "items": {
+        "graduate": {
+          "title": "Graduate & go senior-track",
+          "description": "Finish the BSc in Artificial Intelligence in 2026 and step into a senior-track frontend role."
+        },
+        "lead": {
+          "title": "Lead frontend architecture",
+          "description": "Own the frontend architecture of an AI SaaS product — from data-heavy dashboards to the design system."
+        },
+        "systems": {
+          "title": "Build systems & culture",
+          "description": "Contribute to design systems and a strong code-review culture — raising the bar for a whole team, not just my own work."
+        },
+        "growth": {
+          "title": "Grow full-stack range",
+          "description": "Keep expanding backend and AI fluency while staying frontend-deep."
+        }
+      }
+    },
+    "cta": {
+      "eyebrow": "The next chapter",
+      "title": "Want to be part of what's next?",
+      "subtitle": "I'm looking for a team where I can keep growing as an engineer and help build something that matters. If that sounds like yours, let's talk.",
+      "primary": "Get in touch",
+      "secondary": "See my work"
+    }
   }
 }
