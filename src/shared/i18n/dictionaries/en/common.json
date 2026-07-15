@@ -44,19 +44,18 @@
     "projects": {
       "eyebrow": "Selected work",
       "title": "Featured projects",
-      "intro": "A few builds that show the engineering behind the interface.",
+      "intro": "Selected builds where the engineering — architecture, performance, accessibility — is the point, not just the screenshot.",
       "cta": "View all projects"
     },
     "tech": {
       "eyebrow": "Toolset",
       "title": "Technologies I build with",
-      "intro": "A focused, modern stack chosen for performance and maintainability.",
+      "intro": "The stack behind fast, accessible, production-grade interfaces — grouped by how I actually use it.",
       "groups": {
-        "framework": "Framework",
-        "language": "Language",
-        "styling": "Styling",
-        "content": "Content",
-        "platform": "Platform"
+        "frontend": "Frontend",
+        "architecture": "Architecture",
+        "ai": "AI Products",
+        "tooling": "Tooling"
       }
     },
     "timeline": {
@@ -99,13 +98,28 @@
           "title": "Simplicity over complexity",
           "description": "The simpler solution wins whenever the choice is hard."
         }
-      }
+      },
+      "statement": "I treat the frontend as a systems problem, not a coat of paint. I design the architecture first — clear boundaries, a token-driven design system, a deliberate server/client split — so interfaces stay fast, accessible, and easy to change as products grow. What matters is the decision behind each pixel: what to build, what to leave out, and why."
     },
     "ai": {
       "eyebrow": "AI workflow",
       "title": "Engineering with AI, deliberately",
-      "intro": "AI accelerates the work; the engineering judgment stays human. Documentation drives the process, and every change is reviewed and verified.",
-      "cta": "Explore the engineering"
+      "intro": "AI accelerates the work; the engineering judgment stays human. Documentation drives the process, decisions are made deliberately, and every change is reviewed and verified before it ships.",
+      "cta": "Explore the engineering",
+      "points": {
+        "documentation": {
+          "title": "Documentation-driven",
+          "description": "Intent is written down before code — the spec drives the build, not the other way around."
+        },
+        "decisions": {
+          "title": "Deliberate decisions",
+          "description": "AI proposes options; I make the architectural call and own the outcome."
+        },
+        "verification": {
+          "title": "Reviewed & verified",
+          "description": "Every change is reviewed and verified against the performance budget before it ships."
+        }
+      }
     },
     "finalCta": {
       "title": "Let's build something exceptional.",

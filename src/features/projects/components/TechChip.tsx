@@ -1,7 +1,6 @@
 import type { ProjectFrontmatter } from "@/content/schema";
 import { cn } from "@/shared/lib/cn";
-
-import { getTechIcon } from "../lib/tech-icons";
+import { getTechIcon } from "@/shared/lib/tech-icons";
 
 type TechItem = ProjectFrontmatter["techStack"][number];
 

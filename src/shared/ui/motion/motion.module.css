@@ -27,6 +27,39 @@
   transition-delay: var(--reveal-delay, 0ms);
 }
 
+/* ---- Staggered group reveal ----
+   One IntersectionObserver (RevealGroup) toggles `data-reveal` on the group; the
+   stagger is pure CSS on the DIRECT children by order, so no per-child JS. Hidden
+   is applied ONLY when the client marks the group off-screen, so SSR / no-JS /
+   reduced-motion render everything visible. `--reveal-step` is the one motion
+   value here (a component token) — snappier than a full duration step. */
+.revealGroup {
+  --reveal-step: 80ms;
+}
+.revealGroup[data-reveal="hidden"] > * {
+  opacity: 0;
+  transform: translateY(var(--space-2));
+}
+.revealGroup[data-reveal="visible"] > * {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity var(--duration-slow) var(--ease-decelerate),
+    transform var(--duration-slow) var(--ease-decelerate);
+}
+.revealGroup[data-reveal="visible"] > *:nth-child(2) {
+  transition-delay: var(--reveal-step);
+}
+.revealGroup[data-reveal="visible"] > *:nth-child(3) {
+  transition-delay: calc(2 * var(--reveal-step));
+}
+.revealGroup[data-reveal="visible"] > *:nth-child(4) {
+  transition-delay: calc(3 * var(--reveal-step));
+}
+.revealGroup[data-reveal="visible"] > *:nth-child(n + 5) {
+  transition-delay: calc(4 * var(--reveal-step));
+}
+
 /* ---- Animated underline ----
    Grows from the reading-start edge on hover/focus; mirrors in RTL. */
 .underline {
