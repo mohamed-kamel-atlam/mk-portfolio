@@ -1,0 +1,27 @@
+/*
+ * Route progress bar — very thin, token-driven. Only opacity (show/hide) and a
+ * scaleX transform (progress) animate, both on the compositor. Timing/easing are
+ * design tokens; the scaleX value is the one dynamic inline style (progress).
+ */
+.track {
+  position: fixed;
+  inset-inline: 0;
+  inset-block-start: 0;
+  z-index: var(--z-toast);
+  block-size: 2px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--duration-normal) var(--ease-standard);
+}
+.track[data-active="true"] {
+  opacity: 1;
+}
+.bar {
+  block-size: 100%;
+  inline-size: 100%;
+  transform-origin: left center;
+  transition: transform var(--duration-normal) var(--ease-standard);
+}
+:global([dir="rtl"]) .bar {
+  transform-origin: right center;
+}

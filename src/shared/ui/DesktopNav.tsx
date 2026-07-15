@@ -5,8 +5,6 @@ import { usePathname } from "next/navigation";
 
 import { cn } from "@/shared/lib/cn";
 
-import styles from "./motion/motion.module.css";
-
 export interface NavLinkItem {
   key: string;
   href: string;
@@ -50,11 +48,13 @@ export function DesktopNav({ items, ariaLabel, className }: DesktopNavProps) {
             href={item.href}
             aria-current={active ? "page" : undefined}
             className={cn(
-              styles.underline,
-              "text-small font-medium transition-colors duration-fast",
+              "relative text-small font-medium transition-colors duration-fast",
+              // Accent underline: persistent for the active page, grow-on-hover
+              // otherwise. Origin flips in RTL so it grows from the reading start.
+              "after:absolute after:inset-x-0 after:-bottom-1 after:h-0.5 after:origin-left after:rounded-full after:bg-accent after:transition-transform after:duration-fast after:content-[''] rtl:after:origin-right",
               active
-                ? "text-foreground"
-                : "text-muted-foreground hover:text-foreground",
+                ? "text-foreground after:scale-x-100"
+                : "text-muted-foreground after:scale-x-0 hover:text-foreground motion-safe:hover:after:scale-x-100",
             )}
           >
             {item.label}

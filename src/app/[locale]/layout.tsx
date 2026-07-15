@@ -11,10 +11,12 @@ import {
   openGraphLocales,
   type Locale,
 } from "@/shared/i18n/config";
-import { getThemeInitScript } from "@/shared/lib/theme-script";
+import { getDictionary } from "@/shared/i18n/get-dictionary";
 import { localeAlternates } from "@/shared/lib/seo";
+import { getSplashInitScript } from "@/shared/lib/splash-script";
+import { getThemeInitScript } from "@/shared/lib/theme-script";
 import { AppProviders } from "@/shared/providers";
-import { ScrollProgress, SiteFooter, SiteHeader } from "@/shared/ui";
+import { RouteProgress, SiteFooter, SiteHeader, Splash } from "@/shared/ui";
 import { ThemeBackground } from "@/shared/ui/background";
 
 import "../globals.css";
@@ -118,6 +120,7 @@ export default async function RootLayout({
 }) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
+  const t = await getDictionary(locale);
 
   return (
     <html
@@ -128,10 +131,12 @@ export default async function RootLayout({
       suppressHydrationWarning
     >
       <body className="flex min-h-dvh flex-col bg-background font-sans text-foreground antialiased">
-        {/* Pre-paint theme resolution — prevents a flash of the wrong theme
-            (ADR-0005). Must run before hydration, hence a raw inline script. */}
+        {/* Pre-paint scripts (run before hydration): resolve theme (ADR-0005)
+            and flag a first visit for the splash. Both touch only an attribute. */}
         <script dangerouslySetInnerHTML={{ __html: getThemeInitScript() }} />
-        {/* Global ambient backdrop (fixed, behind all content). */}
+        <script dangerouslySetInnerHTML={{ __html: getSplashInitScript() }} />
+        {/* Navigation progress bar (client) + global ambient backdrop (fixed). */}
+        <RouteProgress />
         <ThemeBackground />
         <AppProviders>
           <SiteHeader locale={locale} />
@@ -139,8 +144,9 @@ export default async function RootLayout({
             {children}
           </main>
           <SiteFooter locale={locale} />
-          <ScrollProgress />
         </AppProviders>
+        {/* First-visit splash — CSS-gated by `data-splash`; client drives timing. */}
+        <Splash messages={t.splash.messages} loadingLabel={t.splash.loading} />
       </body>
     </html>
   );

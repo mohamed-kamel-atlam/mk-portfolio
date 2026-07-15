@@ -393,5 +393,15 @@
       "title": "Other ways to reach me",
       "subtitle": "Prefer email or social? Find me here."
     }
+  },
+  "splash": {
+    "loading": "Loading",
+    "messages": [
+      "Initializing experience",
+      "Loading components",
+      "Preparing portfolio",
+      "Engineering the interface",
+      "Finalizing"
+    ]
   }
 }

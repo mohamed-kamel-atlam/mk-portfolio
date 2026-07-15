@@ -486,3 +486,19 @@
     );
   }
 }
+
+/* First-visit splash visibility gate — UNLAYERED (top-level) so it reliably wins
+   the cascade over layered utilities and the overlay's own module rules, and
+   unambiguous (plain global selectors, set pre-paint). Hidden by default; shown
+   only when the splash script has set `data-splash` on <html> (first visit).
+   Removing the attribute fades it out (fade timing lives on the module class). */
+.splash-overlay {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+html[data-splash] .splash-overlay {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
