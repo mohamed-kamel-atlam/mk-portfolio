@@ -1,13 +1,3 @@
-/**
- * Shared interactive-control variants. Internal to `shared/ui` (not exported from
- * the barrel): Button, IconButton, and the toggles all consume these so variant
- * styling lives in exactly one place — the "no duplicated variants" rule
- * (CODING_STANDARDS §8). Every class resolves to a design token.
- *
- * Token colors are `var(--color-*)`, so Tailwind alpha modifiers (`/90`) cannot
- * apply; filled variants use `hover:opacity-90` and subtle ones `hover:bg-muted`.
- */
-
 // The interaction language for every button-like control (MOTION_GUIDELINES):
 // token-fast transition; a ≤1px hover lift and a 0.98 press scale, both gated by
 // `motion-safe` so reduced-motion users get the color/elevation feedback only.

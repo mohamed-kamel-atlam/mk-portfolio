@@ -18,15 +18,6 @@ export interface TypewriterProps {
   className?: string;
 }
 
-/**
- * Type text out (or rotate through several strings) when it scrolls into view.
- *
- * Accessibility: the animated text is `aria-hidden` and a stable representative
- * (the single `text`, or the first `word`) is exposed to assistive tech via an
- * `sr-only` copy — screen readers announce it once, never per keystroke. Under
- * reduced motion the full text shows immediately with no looping (per
- * MOTION_GUIDELINES §5); the caret only blinks when motion is allowed.
- */
 export function Typewriter({
   text,
   words,

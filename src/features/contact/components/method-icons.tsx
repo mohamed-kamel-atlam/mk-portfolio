@@ -2,14 +2,6 @@ import type { ReactElement, SVGProps } from "react";
 
 import type { ContactMethodKey } from "../content";
 
-/**
- * Brand/contact glyphs as inline SVG (lucide-react ships no brand marks). Each
- * inherits `currentColor` and is `aria-hidden` — the surrounding link carries the
- * accessible name. Sized via `className`. The WhatsApp mark is monochrome and
- * inherits the accent like every other icon, so it blends with the design system
- * rather than introducing a bright brand green.
- */
-
 function GithubIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>

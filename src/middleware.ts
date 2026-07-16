@@ -8,11 +8,6 @@ import {
   type Locale,
 } from "@/shared/i18n/config";
 
-/**
- * Resolve the locale for a prefix-less request by the precedence in
- * INTERNATIONALIZATION.md §7: persisted override → `Accept-Language` → default.
- * An explicit URL prefix (handled in `middleware`) always outranks all of these.
- */
 function detectLocale(request: NextRequest): Locale {
   const override = request.cookies.get(LOCALE_COOKIE)?.value;
   if (override && isLocale(override)) return override;
@@ -29,12 +24,6 @@ function detectLocale(request: NextRequest): Locale {
   return defaultLocale;
 }
 
-/**
- * Locale routing: requests that already carry a supported locale prefix pass
- * through untouched (the URL is authoritative). Prefix-less requests are
- * redirected to the detected locale's prefixed URL, so every visitor — and every
- * crawler — lands on a canonical, indexable, prefixed path (§7).
- */
 export function middleware(request: NextRequest): NextResponse {
   const { pathname } = request.nextUrl;
 

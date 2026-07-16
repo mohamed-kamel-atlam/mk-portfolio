@@ -21,15 +21,6 @@ export interface FloatingFieldProps {
 const controlBase =
   "w-full rounded-md border border-border bg-surface px-3 text-body text-foreground transition-colors duration-fast focus-visible:border-accent aria-[invalid=true]:border-danger disabled:cursor-not-allowed disabled:opacity-60";
 
-/**
- * A floating-label field for the contact form. The label rests over the empty
- * control and floats up on focus **or** when filled — driven purely by CSS
- * (`focus-within` + `:has(:not(:placeholder-shown))`), so it needs no JS state
- * and stays in sync even after a programmatic reset. A real `<label htmlFor>` is
- * always present, and the caller wires `aria-invalid` / `aria-describedby`, so
- * accessibility never depends on the visual effect. Placeholder is a single
- * space so `:placeholder-shown` tracks emptiness without showing placeholder text.
- */
 export function FloatingField({
   id,
   name,

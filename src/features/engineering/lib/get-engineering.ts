@@ -46,11 +46,6 @@ export interface DocGroup {
   docs: EngineeringDoc[];
 }
 
-/**
- * Group the engineering docs into hub categories by `kind` (data shaping kept
- * out of the view). Empty groups are dropped so the hub only shows real
- * sections. Docs within a group keep the collection's `order`.
- */
 export async function getGroupedDocs(locale: Locale): Promise<DocGroup[]> {
   const docs = await getEngineeringDocs(locale);
   return docGroups

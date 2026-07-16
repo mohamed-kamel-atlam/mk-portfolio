@@ -19,9 +19,11 @@ import {
   Badge,
   Card,
   Container,
+  getTechLogo,
   Heading,
   Section,
   SectionHeading,
+  TechLogo,
 } from "@/shared/ui";
 import { RevealGroup } from "@/shared/ui/motion";
 
@@ -48,11 +50,7 @@ const GROUP_META: Record<
   ai: { icon: Brain, iconCategory: "ai" },
 };
 
-/**
- * Tools (§8) — grouped by the job they do, not dumped as a logo wall. Each group
- * is a card with an icon, a localized label, and iconified chips (names are
- * proper nouns). Reveals with `fade`.
- */
+// Tools — grouped by the job they do; each group a card of logo chips.
 export async function EngineeringTools({ locale }: EngineeringToolsProps) {
   const t = await getDictionary(locale);
   const section = t.engineering.tools;
@@ -66,7 +64,10 @@ export async function EngineeringTools({ locale }: EngineeringToolsProps) {
             title={section.title}
             intro={section.intro}
           />
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <RevealGroup
+            variant="up"
+            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          >
             {toolGroups.map((group) => {
               const GroupIcon = GROUP_META[group.key].icon;
               return (
@@ -85,6 +86,7 @@ export async function EngineeringTools({ locale }: EngineeringToolsProps) {
                   </div>
                   <ul className="flex flex-wrap gap-2">
                     {group.items.map((item) => {
+                      const logo = getTechLogo(item);
                       const Icon = getTechIcon({
                         name: item,
                         category: GROUP_META[group.key].iconCategory,
@@ -95,7 +97,14 @@ export async function EngineeringTools({ locale }: EngineeringToolsProps) {
                             variant="outline"
                             className="text-muted-foreground"
                           >
-                            <Icon aria-hidden="true" className="size-3.5" />
+                            {logo ? (
+                              <TechLogo
+                                name={item}
+                                className="size-3.5 transition-colors duration-fast group-hover/tools:text-[color:var(--brand)]"
+                              />
+                            ) : (
+                              <Icon aria-hidden="true" className="size-3.5" />
+                            )}
                             {item}
                           </Badge>
                         </li>
@@ -105,7 +114,7 @@ export async function EngineeringTools({ locale }: EngineeringToolsProps) {
                 </Card>
               );
             })}
-          </div>
+          </RevealGroup>
         </RevealGroup>
       </Container>
     </Section>

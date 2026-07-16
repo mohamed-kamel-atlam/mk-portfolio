@@ -6,41 +6,23 @@ import { cn } from "@/shared/lib/cn";
 
 import styles from "./motion.module.css";
 
-/**
- * Reveal styles — so sections don't all animate identically while staying one
- * consistent system:
- * - `up`    fade + ≤8px rise (default)
- * - `fade`  fade only (no travel)
- * - `scale` fade + a subtle scale-in (never from 0)
- * - `mask`  a one-shot clip-path wipe from the bottom edge
- */
 export type RevealVariant = "up" | "fade" | "scale" | "mask";
 
 export interface RevealGroupProps {
   children: ReactNode;
   /** Which reveal style to use (default `up`). */
   variant?: RevealVariant;
+  /** Render element — use `ul`/`ol` so a staggered grid keeps list semantics. */
+  as?: "div" | "ul" | "ol";
   className?: string;
 }
 
 type RevealState = "idle" | "hidden" | "visible";
 
-/**
- * Reveals a section's direct children in a gentle staggered sequence as the
- * group scrolls into view. The motion style is chosen per section via
- * {@link RevealVariant}, so the page feels intentional rather than uniform.
- *
- * Perf-minimal by design: **one** IntersectionObserver per group drives the
- * whole stagger through CSS `nth-child` delays — no per-child island, no scroll
- * listener — and the observer disconnects after firing. Robust like {@link
- * Reveal}: it only hides children that start OFF-screen, so SSR, no-JS,
- * reduced-motion and screen readers always get visible content (never
- * `display:none`). The global reduced-motion rule settles the transition
- * instantly.
- */
 export function RevealGroup({
   children,
   variant = "up",
+  as = "div",
   className,
 }: RevealGroupProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -80,14 +62,17 @@ export function RevealGroup({
     return () => observer.disconnect();
   }, []);
 
+  // Cast to a single intrinsic tag so the ref type stays concrete; the runtime
+  // element is still `as` (div/ul/ol), which we only measure via the ref.
+  const Tag = as as "div";
   return (
-    <div
+    <Tag
       ref={ref}
       className={cn(styles.revealGroup, className)}
       data-reveal={state === "idle" ? undefined : state}
       data-variant={variant}
     >
       {children}
-    </div>
+    </Tag>
   );
 }

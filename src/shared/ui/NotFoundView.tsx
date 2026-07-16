@@ -27,15 +27,6 @@ export interface NotFoundViewProps {
   locale: Locale;
 }
 
-/**
- * Branded, localized 404 view — rendered directly by the routes that need it
- * (the locale catch-all for unknown paths, and the project/doc detail pages for
- * unknown slugs). Rendering the view directly, rather than via `notFound()`,
- * is deliberate: the app's root layout lives at `app/[locale]` (no
- * `app/layout.tsx` — ADR-0004), so a `not-found` boundary has no root layout and
- * either fails the build (`app/not-found.tsx`) or is never selected
- * (`app/[locale]/not-found.tsx`). A Server Component; renders inside the app shell.
- */
 export function NotFoundView({ locale }: NotFoundViewProps) {
   const copy = COPY[locale];
 

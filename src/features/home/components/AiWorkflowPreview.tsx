@@ -23,11 +23,6 @@ const POINT_ICON = {
   verification: CircleCheck,
 } as const;
 
-/**
- * The AI-assisted engineering method — framed as decision-making and ownership,
- * not tooling. Three principles (documented → decided → verified) make the
- * approach concrete before linking to the full engineering write-up.
- */
 export async function AiWorkflowPreview({ locale }: AiWorkflowPreviewProps) {
   const t = await getDictionary(locale);
   const section = t.home.ai;
@@ -41,7 +36,11 @@ export async function AiWorkflowPreview({ locale }: AiWorkflowPreviewProps) {
             title={section.title}
             intro={section.intro}
           />
-          <ul className="grid w-full gap-6 sm:grid-cols-3">
+          <RevealGroup
+            variant="up"
+            as="ul"
+            className="grid w-full gap-6 sm:grid-cols-3"
+          >
             {POINT_ORDER.map((key) => {
               const point = section.points[key];
               const Icon = POINT_ICON[key];
@@ -59,7 +58,7 @@ export async function AiWorkflowPreview({ locale }: AiWorkflowPreviewProps) {
                 </li>
               );
             })}
-          </ul>
+          </RevealGroup>
           <ButtonLink
             href={localizedHref(locale, "/engineering")}
             variant="secondary"

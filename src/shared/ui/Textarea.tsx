@@ -4,10 +4,6 @@ import { cn } from "@/shared/lib/cn";
 
 export type TextareaProps = ComponentPropsWithRef<"textarea">;
 
-/**
- * Multi-line text input primitive; shares the {@link Input} visual language.
- * Forwards `ref` (React 19) for imperative focus / form-library integration.
- */
 export function Textarea({ className, ref, ...props }: TextareaProps) {
   return (
     <textarea

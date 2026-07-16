@@ -9,11 +9,6 @@ export interface ContactHeroProps {
   locale: Locale;
 }
 
-/**
- * Contact hero — the page's single `<h1>` and its warm opening, with a primary
- * CTA that jumps to the form and a direct WhatsApp CTA. Server Component; the
- * only motion is one CSS entrance, honored by reduced-motion.
- */
 export async function ContactHero({ locale }: ContactHeroProps) {
   const t = await getDictionary(locale);
   const hero = t.contact.hero;

@@ -26,15 +26,6 @@ export interface HeroProps {
 
 const IMAGE_SIZES = "(min-width: 1024px) 28rem, (min-width: 640px) 60vw, 85vw";
 
-/**
- * Landing hero — the five-second pitch. A Server Component: content ships as HTML
- * and the only client islands are the rotating {@link Typewriter} and the
- * {@link Magnetic} social icons. Entrance is a staggered CSS reveal (zero JS),
- * sequenced badge → greeting → heading → paragraph → buttons → social → chips →
- * image. The ambient backdrop is the global ThemeBackground, so nothing is
- * recreated. Two columns on desktop (content + image) that mirror correctly in
- * RTL because the grid follows the writing direction — no physical ordering.
- */
 export async function Hero({ locale }: HeroProps) {
   const t = await getDictionary(locale);
   const h = t.hero;

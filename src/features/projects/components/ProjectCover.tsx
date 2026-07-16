@@ -21,12 +21,6 @@ export interface ProjectCoverProps {
   className?: string;
 }
 
-/**
- * The card's cover presentation — layered, never a bare image: the media (or a
- * designed engineering-pattern fallback) sits under a scrim and an accent glow
- * that lifts in on hover. The image itself zooms subtly via the `group/card`
- * group. Presentational Server Component.
- */
 export function ProjectCover({
   cover,
   name,

@@ -1,11 +1,5 @@
 import { z } from "zod";
 
-/**
- * Contact validation — the single schema shared by the client form and the
- * Server Action (validation runs on BOTH sides; the server is authoritative).
- * Messages are stable error *keys*, not prose, so the UI can localize them
- * (INTERNATIONALIZATION §5) while the rule lives in exactly one place.
- */
 export const contactSchema = z.object({
   name: z.string().trim().min(2, "nameInvalid").max(100, "nameTooLong"),
   email: z
@@ -38,10 +32,6 @@ export interface ContactState {
 
 export const initialContactState: ContactState = { status: "idle" };
 
-/**
- * A hidden field a real user never sees or fills; a non-empty value marks the
- * submission as a bot (SEC — spam protection without a third-party captcha).
- */
 export const HONEYPOT_FIELD = "company";
 
 /** Flatten a Zod error to the first error key per field. */

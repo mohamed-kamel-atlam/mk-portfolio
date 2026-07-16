@@ -38,12 +38,6 @@ const STEP_ICON: Record<ArchitectureStepKey, LucideIcon> = {
   iterate: RefreshCw,
 };
 
-/**
- * Architecture thinking (§2) — the deliberate loop behind any non-trivial
- * system, rendered as numbered icon cards. The `iterate` step closes back to the
- * start, so the sequence reads as a cycle rather than a one-way list. Links to
- * the architecture deep-dive. Reveals with `up`.
- */
 export async function ArchitectureThinking({
   locale,
 }: ArchitectureThinkingProps) {
@@ -59,7 +53,11 @@ export async function ArchitectureThinking({
             title={section.title}
             intro={section.intro}
           />
-          <ol className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <RevealGroup
+            variant="up"
+            as="ol"
+            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          >
             {architectureSteps.map((key, index) => {
               const item = section.steps[key];
               const Icon = STEP_ICON[key];
@@ -93,7 +91,7 @@ export async function ArchitectureThinking({
                 </li>
               );
             })}
-          </ol>
+          </RevealGroup>
           <DeepDiveLink
             href={localizedHref(locale, "/engineering/architecture")}
             label={t.engineering.readMore}

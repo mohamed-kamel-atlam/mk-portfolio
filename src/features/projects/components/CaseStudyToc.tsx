@@ -10,13 +10,6 @@ export interface CaseStudyTocProps {
   label: string;
 }
 
-/**
- * Sticky "on this page" table of contents for the case study (desktop). A
- * navigation landmark of same-page anchors with a scroll-spy: one
- * IntersectionObserver highlights the section nearest the top, and clicks scroll
- * smoothly (honoring reduced motion). One small client island — scroll tracking
- * genuinely needs the client. The rail uses a logical border so it mirrors in RTL.
- */
 export function CaseStudyToc({ items, label }: CaseStudyTocProps) {
   const [activeId, setActiveId] = useState<string>(items[0]?.id ?? "");
 

@@ -33,13 +33,6 @@ export function generateStaticParams(): LocaleParams[] {
 /** Only the supported locales are valid; any other first segment 404s. */
 export const dynamicParams = false;
 
-/**
- * Base, per-locale SEO. This is the *foundation* — a self-canonical, full
- * `hreflang` set, Open Graph, Twitter card, and crawl directives. The complete
- * per-route metadata, structured data, and generated OG images are layered on at
- * M5 (SEO.md); route segments extend or override this via their own
- * `generateMetadata`.
- */
 export async function generateMetadata({
   params,
 }: {
@@ -94,23 +87,6 @@ export const viewport: Viewport = {
   colorScheme: "dark light",
 };
 
-/**
- * Root layout — the application shell.
- *
- * It is the single place `lang` and `dir` are set on the document
- * (INTERNATIONALIZATION.md §4), and it owns the document shell, fonts, global
- * styles, the pre-paint theme script, and the provider mount point. Because
- * `<html lang/dir>` must know the locale, the App Router root layout lives at
- * this `[locale]` segment (the Next.js i18n pattern) rather than a locale-blind
- * `app/layout.tsx`.
- *
- * It is a **Server Component** that renders only the shell and passes
- * Server-Component `children` through {@link AppProviders} (the sole client
- * boundary). Route segments below stream by default under the App Router's RSC
- * model; each segment adds its own `loading` / `error` boundary when built. The
- * body is intentionally a thin shell so a future header/`<main>`/footer
- * (M3) slots in around `{children}` without touching this file's concerns.
- */
 export default async function RootLayout({
   children,
   params,

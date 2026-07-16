@@ -14,11 +14,6 @@ export interface MagneticProps {
   className?: string;
 }
 
-/**
- * A subtle magnetic pull toward the pointer — for a hero CTA or a social icon.
- * The transform is written imperatively on pointer move (no React re-render) and
- * eased back on leave. Disabled under reduced motion. Wraps inline content.
- */
 export function Magnetic({ children, strength = 6, className }: MagneticProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const reduced = useReducedMotion();

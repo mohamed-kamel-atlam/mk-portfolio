@@ -1,9 +1,5 @@
 import { Container, Section, Skeleton } from "@/shared/ui";
 
-/**
- * Loading skeleton for an engineering article — back link, title, meta, then a
- * prose column of lines matching the reading measure. `aria-busy` region.
- */
 export default function Loading() {
   return (
     <Section aria-busy="true">

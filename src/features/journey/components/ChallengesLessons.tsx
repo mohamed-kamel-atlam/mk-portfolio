@@ -18,10 +18,6 @@ const CHALLENGE_ICON: Record<ChallengeKey, LucideIcon> = {
   commercial: Building2,
 };
 
-/**
- * Challenges & lessons (§5) — the honest turning points and what each one gave
- * back. Reveals with `scale`.
- */
 export async function ChallengesLessons({ locale }: ChallengesLessonsProps) {
   const t = await getDictionary(locale);
   const section = t.journey.challenges;
@@ -35,7 +31,7 @@ export async function ChallengesLessons({ locale }: ChallengesLessonsProps) {
             title={section.title}
             intro={section.intro}
           />
-          <div className="grid gap-6 sm:grid-cols-3">
+          <RevealGroup variant="up" className="grid gap-6 sm:grid-cols-3">
             {challenges.map((key) => (
               <JourneyCard
                 key={key}
@@ -44,7 +40,7 @@ export async function ChallengesLessons({ locale }: ChallengesLessonsProps) {
                 description={section.items[key].description}
               />
             ))}
-          </div>
+          </RevealGroup>
         </RevealGroup>
       </Container>
     </Section>

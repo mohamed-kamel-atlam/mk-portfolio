@@ -2,12 +2,6 @@ import type { ReactElement, SVGProps } from "react";
 
 import type { SocialPlatform } from "@/shared/config/site";
 
-/**
- * Brand/social glyphs as inline SVG (lucide-react ships no brand marks). Each
- * inherits `currentColor` and is `aria-hidden` — the link carries the accessible
- * name. Sized via `className` (e.g. `h-5 w-5`).
- */
-
 function GithubIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" {...props}>

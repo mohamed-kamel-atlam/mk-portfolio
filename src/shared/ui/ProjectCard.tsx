@@ -16,13 +16,6 @@ export interface ProjectCardProps {
   className?: string;
 }
 
-/**
- * Presentational project card — a linked surface used by both the home
- * "featured" section and the projects index. Purely presentational (primitive
- * props, no content-type dependency), so it lives in `shared/ui` and is shared
- * across features without a cross-feature import. The whole card is one link;
- * hover feedback is a token color shift.
- */
 export function ProjectCard({
   href,
   title,

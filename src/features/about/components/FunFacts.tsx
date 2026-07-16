@@ -19,11 +19,6 @@ const FACT_ICON: Record<FunFactKey, LucideIcon> = {
   craft: Award,
 };
 
-/**
- * Fun facts — a compact row of concrete, résumé-true signals about the person
- * behind the work. Cards are static (no hover lift), which lets the `mask` wipe
- * reveal run without clipping, and keeps this a light beat before the CTA.
- */
 export async function FunFacts({ locale }: FunFactsProps) {
   const t = await getDictionary(locale);
   const section = t.about.funFacts;
@@ -37,7 +32,11 @@ export async function FunFacts({ locale }: FunFactsProps) {
             title={section.title}
             intro={section.intro}
           />
-          <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <RevealGroup
+            variant="up"
+            as="ul"
+            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+          >
             {funFacts.map((key) => {
               const item = section.items[key];
               const Icon = FACT_ICON[key];
@@ -57,7 +56,7 @@ export async function FunFacts({ locale }: FunFactsProps) {
                 </li>
               );
             })}
-          </ul>
+          </RevealGroup>
         </RevealGroup>
       </Container>
     </Section>

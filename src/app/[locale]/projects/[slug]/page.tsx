@@ -58,12 +58,6 @@ export async function generateMetadata({
   return buildContentMetadata(project, `/projects/${slug}`);
 }
 
-/**
- * Project detail — a premium engineering case study: a hero, a reading-progress
- * bar and sticky TOC, the numbered story (MDX), then the supporting tech stack
- * and key decisions, and a closing next-project navigation. Server-first; only
- * the progress bar and the TOC scroll-spy are small client islands.
- */
 export default async function ProjectDetailPage({
   params,
 }: ProjectDetailPageProps) {

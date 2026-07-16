@@ -1,12 +1,5 @@
 import { ImageResponse } from "next/og";
 
-/**
- * Apple touch icon (180×180) — generated with `next/og`, so there is no binary
- * asset to maintain and it stays in sync with the brand mark (`icon.svg`). iOS
- * masks/rounds it, so the artwork is full-bleed. Colors are the brand-mark
- * literals (accent-500 M, neutral-50 K on neutral-950) — a data-generated image
- * cannot read CSS variables.
- */
 export const size = { width: 180, height: 180 };
 export const contentType = "image/png";
 

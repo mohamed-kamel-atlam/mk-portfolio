@@ -13,10 +13,6 @@ export interface DocPagerProps {
   labels: { previous: string; next: string; nav: string };
 }
 
-/**
- * Previous/next navigation between engineering docs. Arrows use logical
- * direction (`rtl:-scale-x-100`) so they point the correct way in both scripts.
- */
 export function DocPager({ prev, next, locale, labels }: DocPagerProps) {
   if (!prev && !next) return null;
 

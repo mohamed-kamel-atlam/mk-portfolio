@@ -4,6 +4,7 @@ import Link from "next/link";
 import { localizedHref, type Locale } from "@/shared/i18n/config";
 import { cn } from "@/shared/lib/cn";
 import { Card, Heading, Text } from "@/shared/ui";
+import { RevealGroup } from "@/shared/ui/motion";
 
 import type { Project } from "../lib/get-projects";
 
@@ -62,11 +63,6 @@ function PagerCard({ project, locale, label, direction }: PagerCardProps) {
   );
 }
 
-/**
- * Closing case-study navigation — premium previous/next project cards plus a
- * "back to all projects" link, so the reader always has a next step. Renders the
- * back link even when there is no prev/next.
- */
 export function ProjectPager({
   prev,
   next,
@@ -79,7 +75,7 @@ export function ProjectPager({
       className="flex flex-col gap-8 border-t border-border pt-10"
     >
       {prev || next ? (
-        <div className="grid gap-4 sm:grid-cols-2">
+        <RevealGroup variant="up" className="grid gap-4 sm:grid-cols-2">
           {prev ? (
             <PagerCard
               project={prev}
@@ -100,7 +96,7 @@ export function ProjectPager({
           ) : (
             <span className="hidden sm:block" />
           )}
-        </div>
+        </RevealGroup>
       ) : null}
       <Link
         href={localizedHref(locale, "/projects")}

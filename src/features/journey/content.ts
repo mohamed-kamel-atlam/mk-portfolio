@@ -1,19 +1,3 @@
-/**
- * Engineering-journey structural data — the non-translatable atoms (stable keys,
- * years, proper-noun technology names, and links to real project pages).
- * Translatable copy (stories, lessons, mindset shifts, labels) lives in the
- * `journey` dictionary namespace, keyed by the same identifiers.
- *
- * The facts here — years, technologies, project links — are the source of truth
- * from the documented timeline; the copy sharpens the wording without changing
- * a single fact.
- */
-
-/**
- * The year-chapters of the journey (2022 → 2026). `year` is a number so it can
- * be formatted per locale (Arabic-Indic in AR); `techs` are proper nouns kept in
- * Latin script.
- */
 export const journeyMilestones = [
   {
     key: "2022",
@@ -83,10 +67,6 @@ export const evolutionStages = [
 ] as const;
 export type EvolutionStageKey = (typeof evolutionStages)[number];
 
-/**
- * Major projects and what they taught (§4). `slug` links to the real project
- * page when one exists; `null` renders the card without a link.
- */
 export const journeyProjects = [
   { key: "tiger", slug: "e-commerce-tiger" },
   { key: "fitness", slug: "fitness-booking" },

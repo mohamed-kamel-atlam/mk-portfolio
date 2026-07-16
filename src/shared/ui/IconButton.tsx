@@ -14,8 +14,6 @@ export interface IconButtonProps extends Omit<
   ButtonHTMLAttributes<HTMLButtonElement>,
   "aria-label"
 > {
-  /** Required accessible name — an icon-only control must be labelled
-   *  (DESIGN_SYSTEM → Iconography: icons never replace labels). */
   label: string;
   variant?: InteractiveVariant;
   size?: ButtonSize;
@@ -23,11 +21,6 @@ export interface IconButtonProps extends Omit<
   children: ReactNode;
 }
 
-/**
- * A square, icon-only button. Shares the interactive variant/size scales with
- * {@link Button}. The `label` becomes both the accessible name and the tooltip;
- * the icon itself must be `aria-hidden`.
- */
 export function IconButton({
   label,
   variant = "secondary",

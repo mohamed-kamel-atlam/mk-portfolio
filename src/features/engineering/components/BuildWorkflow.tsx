@@ -33,12 +33,6 @@ const STAGE_ICON: Record<BuildStageKey, LucideIcon> = {
   deployment: Rocket,
 };
 
-/**
- * How I build (§3) — the pipeline every change runs, rendered as a numbered
- * ledger (spec-sheet feel) rather than cards, so it reads distinctly from the
- * architecture cycle above it. Links to the development-workflow doc. Reveals
- * with `fade`.
- */
 export async function BuildWorkflow({ locale }: BuildWorkflowProps) {
   const t = await getDictionary(locale);
   const section = t.engineering.build;
@@ -52,7 +46,11 @@ export async function BuildWorkflow({ locale }: BuildWorkflowProps) {
             title={section.title}
             intro={section.intro}
           />
-          <ol className="flex flex-col divide-y divide-border overflow-hidden rounded-lg border border-border">
+          <RevealGroup
+            variant="up"
+            as="ol"
+            className="flex flex-col divide-y divide-border overflow-hidden rounded-lg border border-border"
+          >
             {buildStages.map((key, index) => {
               const item = section.stages[key];
               const Icon = STAGE_ICON[key];
@@ -85,7 +83,7 @@ export async function BuildWorkflow({ locale }: BuildWorkflowProps) {
                 </li>
               );
             })}
-          </ol>
+          </RevealGroup>
           <DeepDiveLink
             href={localizedHref(locale, "/engineering/development-workflow")}
             label={t.engineering.readMore}

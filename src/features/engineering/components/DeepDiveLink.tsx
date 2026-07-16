@@ -1,11 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
-/**
- * The "read the deep dive" affordance under each overview section — a subtle
- * accent link into the corresponding MDX doc, so the hub summarizes while the
- * doc goes deep. The arrow flips in RTL via a logical rotate.
- */
 export interface DeepDiveLinkProps {
   href: string;
   label: string;

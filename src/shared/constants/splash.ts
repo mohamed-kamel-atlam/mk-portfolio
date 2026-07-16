@@ -1,8 +1,3 @@
-/**
- * Splash-screen constants. The `localStorage` flag makes the splash a
- * once-per-browser first-visit moment: present ⇒ already visited ⇒ never shown
- * again unless the user clears storage.
- */
 export const SPLASH_STORAGE_KEY = "mk:visited";
 
 /** Minimum visible time (ms) so the brand moment reads; reduced-motion is short. */

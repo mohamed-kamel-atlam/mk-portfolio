@@ -7,11 +7,6 @@ export interface ContainerProps extends HTMLAttributes<HTMLElement> {
   as?: "div" | "section" | "main" | "article";
 }
 
-/**
- * Centered, responsive page container — max content width + responsive gutter,
- * all token-driven (DESIGN_TOKENS §4.7 via the `container-page` utility). Layout
- * mirrors automatically in RTL because the utility uses logical padding.
- */
 export function Container({
   as: Tag = "div",
   className,

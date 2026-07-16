@@ -37,14 +37,6 @@ export async function generateMetadata({
   });
 }
 
-/**
- * Engineering Hub (FR-006) — the portfolio's technical front door. A thin
- * routing-layer composition: the mindset hero, the architecture/build workflow,
- * the performance/accessibility/design-system/AI overviews (each linking into
- * its deep-dive MDX doc), the tools, principles, and ADR-style decisions, then
- * the doc directory + development journal, closing on a CTA. Every section is a
- * Server Component that owns its own content and layout.
- */
 export default async function EngineeringPage({
   params,
 }: EngineeringPageProps) {

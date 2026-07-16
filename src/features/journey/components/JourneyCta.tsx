@@ -15,11 +15,6 @@ export interface JourneyCtaProps {
   locale: Locale;
 }
 
-/**
- * Closing CTA (§8) — the journey's forward-looking invitation, mirroring the
- * landing/About/Engineering closers so the site ends on one consistent note.
- * Content reveals with `scale` over a static focal glow.
- */
 export async function JourneyCta({ locale }: JourneyCtaProps) {
   const t = await getDictionary(locale);
   const section = t.journey.cta;

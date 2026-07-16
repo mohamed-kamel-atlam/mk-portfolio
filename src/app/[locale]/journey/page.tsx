@@ -32,14 +32,6 @@ export async function generateMetadata({
   });
 }
 
-/**
- * Engineering Journey — the story of the evolution from AI student to systems-
- * minded frontend engineer, told year by year. A thin routing-layer composition:
- * hero, the milestone timeline, the mindset evolution, the projects that taught
- * the most, the honest challenges, the current focus and future roadmap, and a
- * closing CTA. Every section is a Server Component owning its own content; only
- * the scroll-reveal islands run on the client.
- */
 export default async function JourneyPage({ params }: JourneyPageProps) {
   const { locale } = await params;
   const active: Locale = isLocale(locale) ? locale : defaultLocale;

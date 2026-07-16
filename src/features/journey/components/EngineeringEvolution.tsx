@@ -25,11 +25,6 @@ const STAGE_ICON: Record<EvolutionStageKey, LucideIcon> = {
   systems: Waypoints,
 };
 
-/**
- * Engineering evolution (§3) — the mindset arc distilled into before → after
- * leaps, so the growth reads at a glance rather than being inferred from the
- * timeline. Reveals with `up`.
- */
 export async function EngineeringEvolution({
   locale,
 }: EngineeringEvolutionProps) {
@@ -45,7 +40,7 @@ export async function EngineeringEvolution({
             title={section.title}
             intro={section.intro}
           />
-          <div className="grid gap-6 sm:grid-cols-2">
+          <RevealGroup variant="up" className="grid gap-6 sm:grid-cols-2">
             {evolutionStages.map((key) => {
               const item = section.items[key];
               const Icon = STAGE_ICON[key];
@@ -72,7 +67,7 @@ export async function EngineeringEvolution({
                 </Card>
               );
             })}
-          </div>
+          </RevealGroup>
         </RevealGroup>
       </Container>
     </Section>

@@ -12,18 +12,19 @@
    SSR / no-JS / reduced-motion always render content visible (screen readers,
    too — opacity only, never display:none). */
 .reveal {
+  --reveal-duration: 600ms;
   transition-delay: var(--reveal-delay, 0ms);
 }
 .reveal[data-reveal="hidden"] {
   opacity: 0;
-  transform: translateY(var(--space-2));
+  transform: translateY(var(--space-4));
 }
 .reveal[data-reveal="visible"] {
   opacity: 1;
   transform: none;
   transition:
-    opacity var(--duration-slow) var(--ease-decelerate),
-    transform var(--duration-slow) var(--ease-decelerate);
+    opacity var(--reveal-duration) var(--ease-decelerate),
+    transform var(--reveal-duration) var(--ease-decelerate);
   transition-delay: var(--reveal-delay, 0ms);
 }
 
@@ -35,17 +36,18 @@
    value here (a component token) — snappier than a full duration step. */
 .revealGroup {
   --reveal-step: 80ms;
+  --reveal-duration: 600ms;
 }
 .revealGroup[data-reveal="hidden"] > * {
   opacity: 0;
-  transform: translateY(var(--space-2));
+  transform: translateY(var(--space-4));
 }
 .revealGroup[data-reveal="visible"] > * {
   opacity: 1;
   transform: none;
   transition:
-    opacity var(--duration-slow) var(--ease-decelerate),
-    transform var(--duration-slow) var(--ease-decelerate);
+    opacity var(--reveal-duration) var(--ease-decelerate),
+    transform var(--reveal-duration) var(--ease-decelerate);
 }
 .revealGroup[data-reveal="visible"] > *:nth-child(2) {
   transition-delay: var(--reveal-step);
@@ -56,8 +58,20 @@
 .revealGroup[data-reveal="visible"] > *:nth-child(4) {
   transition-delay: calc(3 * var(--reveal-step));
 }
-.revealGroup[data-reveal="visible"] > *:nth-child(n + 5) {
+.revealGroup[data-reveal="visible"] > *:nth-child(5) {
   transition-delay: calc(4 * var(--reveal-step));
+}
+.revealGroup[data-reveal="visible"] > *:nth-child(6) {
+  transition-delay: calc(5 * var(--reveal-step));
+}
+.revealGroup[data-reveal="visible"] > *:nth-child(7) {
+  transition-delay: calc(6 * var(--reveal-step));
+}
+.revealGroup[data-reveal="visible"] > *:nth-child(8) {
+  transition-delay: calc(7 * var(--reveal-step));
+}
+.revealGroup[data-reveal="visible"] > *:nth-child(n + 9) {
+  transition-delay: calc(8 * var(--reveal-step));
 }
 
 /* Variants — one system, varied per section. Base above is `up` (fade + rise);
@@ -85,8 +99,8 @@
 .revealGroup[data-variant="mask"][data-reveal="visible"] > * {
   clip-path: inset(0 0 0 0);
   transition:
-    opacity var(--duration-slow) var(--ease-decelerate),
-    clip-path var(--duration-slow) var(--ease-decelerate);
+    opacity var(--reveal-duration) var(--ease-decelerate),
+    clip-path var(--reveal-duration) var(--ease-decelerate);
 }
 
 /* ---- Animated underline ----

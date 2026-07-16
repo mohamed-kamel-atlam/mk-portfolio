@@ -47,13 +47,6 @@ export interface ThemeProviderProps {
   children: ReactNode;
 }
 
-/**
- * Owns the theme preference (client/local + persisted state, per ADR-0005) and
- * flips the `data-theme` attribute. It never computes colors in JS — the CSS
- * variables do — so it stays a thin client island around otherwise-server
- * children (server-first preserved: passing Server Components as `children`
- * does not make them client).
- */
 export function ThemeProvider({ children }: ThemeProviderProps) {
   // SSR-safe defaults matching the server-rendered `<html data-theme="dark">`.
   // The pre-paint script has already applied the correct attribute; these

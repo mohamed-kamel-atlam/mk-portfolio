@@ -1,13 +1,3 @@
-/**
- * Home-page structural data — the non-translatable atoms (tech names, tags,
- * route paths, stage/principle keys). Translatable copy lives in the `home`
- * dictionary namespace, keyed by the same identifiers.
- *
- * Project/experience entries are v1.0.0 **placeholders** illustrating the
- * sections; real content moves to the MDX content layer at M4
- * (developer/CONTENT_MODEL.md).
- */
-
 // Featured projects now come from the MDX content engine (@/content); see
 // FeaturedProjects.tsx. The remaining data below backs sections not yet migrated
 // to content collections.
@@ -22,12 +12,6 @@ export const heroTech = [
   "RTK Query",
 ] as const;
 
-/**
- * Skills, grouped by intent rather than raw tech type — the categories a hiring
- * engineer scans for. Labels are localized (home.tech.groups); each group
- * renders with a category icon (TechStack.tsx). Items are proper nouns / concept
- * names, so they are not localized.
- */
 export const techGroups = [
   {
     key: "frontend",

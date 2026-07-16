@@ -23,15 +23,6 @@ import {
   type LucideIcon,
 } from "lucide-react";
 
-/**
- * Technology → monochrome icon mapping. Shared across features (project cards +
- * the landing skills section) so there is one icon vocabulary. Centralized and
- * extensible: a new technology needs one entry in {@link NAME_ICONS} (or none —
- * it falls back to a category icon, then a generic glyph). Icons are Lucide
- * (single-color, inherit `currentColor`), chosen to *read* as the tech
- * (Wind≈Tailwind, Zap≈Vite, Triangle≈Next/Vercel, Flame≈PyTorch, Hexagon≈Nest),
- * so chips communicate at a glance without shipping a rainbow of brand logos.
- */
 export interface TechIconInput {
   name: string;
   category?: string;

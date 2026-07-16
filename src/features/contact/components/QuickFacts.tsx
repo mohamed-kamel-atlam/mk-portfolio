@@ -28,10 +28,6 @@ const FACT_ICON: Record<QuickFactKey, LucideIcon> = {
   relocation: Plane,
 };
 
-/**
- * Quick facts (§6) — the scannable short version, as compact info cards.
- * Reveals with `scale`.
- */
 export async function QuickFacts({ locale }: QuickFactsProps) {
   const t = await getDictionary(locale);
   const section = t.contact.quickFacts;
@@ -45,7 +41,11 @@ export async function QuickFacts({ locale }: QuickFactsProps) {
             title={section.title}
             intro={section.intro}
           />
-          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <RevealGroup
+            variant="up"
+            as="ul"
+            className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+          >
             {quickFacts.map((key) => {
               const Icon = FACT_ICON[key];
               return (
@@ -64,7 +64,7 @@ export async function QuickFacts({ locale }: QuickFactsProps) {
                 </li>
               );
             })}
-          </ul>
+          </RevealGroup>
         </RevealGroup>
       </Container>
     </Section>

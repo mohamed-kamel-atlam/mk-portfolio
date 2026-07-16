@@ -7,12 +7,6 @@ export interface ReadingProgressProps {
   label: string;
 }
 
-/**
- * A thin reading-progress bar for the case study — fills as the reader scrolls
- * through the document. One small client island (scroll position genuinely needs
- * the client); a token-driven `scaleX` transform only, origin mirrored for RTL.
- * `progressbar` role with live values for assistive tech.
- */
 export function ReadingProgress({ label }: ReadingProgressProps) {
   const [progress, setProgress] = useState(0);
 

@@ -6,12 +6,6 @@ import { localeAlternates, socialImage } from "@/shared/lib/seo";
 
 import type { ContentItem, ContentType } from "./schema";
 
-/**
- * Build per-item, per-locale metadata from a content item's frontmatter
- * (MDX_PIPELINE §8: localized SEO). `seo` overrides fall back to title/summary.
- * The route-level SEO contract (OG images, structured data) is layered on at M5
- * per SEO.md; this covers the localized title/description/canonical.
- */
 export function buildContentMetadata<T extends ContentType>(
   item: ContentItem<T>,
   routePath: string,

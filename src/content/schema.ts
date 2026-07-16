@@ -2,13 +2,6 @@ import { z } from "zod";
 
 import { locales, type Locale } from "@/shared/i18n/config";
 
-/**
- * Content schemas (CONTENT_MODEL.md §3). Each is a Zod schema whose **inferred
- * type is the TypeScript type pages consume** — one definition serves both
- * build-time validation and compile-time typing (MDX_PIPELINE.md ED-2), so
- * there is no duplicated schema. Every type extends {@link contentBase}.
- */
-
 // Locale validation mirrors the single source of truth in @/shared/i18n/config.
 const localeSchema = z.enum(locales as unknown as [Locale, ...Locale[]]);
 
@@ -45,12 +38,6 @@ const techStackItem = z.object({
     .optional(),
 });
 
-/**
- * A described image at the data layer: source + REQUIRED `alt` (accessibility
- * contract, QAT-2) and REQUIRED intrinsic `width`/`height` (layout stability,
- * QAT-1). Shared by every image-bearing frontmatter field so the a11y + CLS
- * discipline is defined once (CONTENT_MODEL §3.1).
- */
 const imageAsset = z.object({
   src: z.string(),
   alt: z.string(),
@@ -62,12 +49,6 @@ const galleryImage = imageAsset.extend({
   caption: z.string().optional(),
 });
 
-/**
- * Project lifecycle status — a closed, strongly-typed set (CONTENT_MODEL §3.3):
- * an unknown value fails validation, and adding a status is a deliberate schema
- * change here. Each maps to a semantic visual treatment in the status registry
- * (`features/projects/lib/project-status.ts`), never an ad-hoc badge color.
- */
 export const projectStatuses = [
   "production",
   "completed",
@@ -88,16 +69,7 @@ export const projectSchema = contentBase.extend({
     .optional(),
   github: z.string().url().optional(),
   liveDemo: z.string().url().optional(),
-  /**
-   * Cover image file name in `public/images/projects` (resolve with
-   * `projectCover` from `@/shared/assets`). Optional — a project without a cover
-   * renders the intentional generated fallback, never an empty block.
-   */
   cover: z.string().optional(),
-  /**
-   * Optional dedicated brand logo (in `public/images/projects`). When absent the
-   * card renders a designed initials monogram, so the logo slot is never empty.
-   */
   logo: imageAsset.optional(),
   gallery: z.array(galleryImage).optional(),
   caseStudy: z.string().optional(),
@@ -164,10 +136,6 @@ export const engineeringDocSchema = contentBase.extend({
   relatedProjects: z.array(z.string()).optional(),
 });
 
-/**
- * The collection registry — the single, scalable mapping of content type to its
- * directory and schema. Adding a content type is one entry here plus a folder.
- */
 export const collections = {
   projects: { dir: "projects", schema: projectSchema },
   "case-studies": { dir: "case-studies", schema: caseStudySchema },

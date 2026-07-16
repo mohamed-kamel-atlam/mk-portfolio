@@ -7,11 +7,6 @@ export interface DocTocProps {
   label: string;
 }
 
-/**
- * "On this page" table of contents. A navigation landmark of same-page anchor
- * links; the rail border uses a logical (`border-s`) side so it mirrors in RTL.
- * Rendered only when the article has headings.
- */
 export function DocToc({ items, label }: DocTocProps) {
   if (items.length === 0) return null;
 

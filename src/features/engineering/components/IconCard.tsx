@@ -12,12 +12,6 @@ export interface IconCardProps {
   className?: string;
 }
 
-/**
- * The engineering hub's recurring card: an accent icon badge, an `<h3>`, and a
- * description. Defined once so the overview sections share one visual grammar
- * instead of repeating the same markup. Presentational — copy and icon come from
- * the calling section.
- */
 export function IconCard({
   icon: Icon,
   title,

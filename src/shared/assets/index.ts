@@ -1,9 +1,3 @@
-/**
- * Asset access layer (`@/shared/assets`) — the single import surface for every
- * static-asset path and image convention. Application code resolves paths here
- * instead of hardcoding strings, so `public/` can be reorganized in one place
- * and every image ships with consistent sizing/placeholder conventions.
- */
 export { ASSET_DIR, assetPath, type AssetDir } from "./paths";
 export {
   BLUR_DATA_URL,

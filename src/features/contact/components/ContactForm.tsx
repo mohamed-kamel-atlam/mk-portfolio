@@ -40,14 +40,6 @@ export interface ContactFormProps {
 
 const FIELDS: ContactField[] = ["name", "email", "message"];
 
-/**
- * Contact form (Client Component — genuine local UI state). Validation runs on
- * the client for fast feedback and again on the server (authoritative) via a
- * Server Action. Presentation is upgraded with floating labels and an animated
- * success state; the logic — dual validation, honeypot, focus management — is
- * unchanged. Localized strings are passed as props, so no dictionary ships to
- * the client. Reduced motion is honored (the success icon uses `motion-safe`).
- */
 export function ContactForm({ copy, errors, success }: ContactFormProps) {
   const [state, formAction, isPending] = useActionState(
     submitContact,

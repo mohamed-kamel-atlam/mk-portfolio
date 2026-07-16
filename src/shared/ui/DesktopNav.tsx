@@ -29,12 +29,6 @@ export function useIsActive() {
       : pathname === item.href || pathname.startsWith(`${item.href}/`);
 }
 
-/**
- * Horizontal primary navigation for wider viewports. Client-only for active-link
- * detection via `usePathname`; links use `next/link` (prefetch + client nav).
- * The active link carries `aria-current="page"`; hierarchy is color, not weight
- * jumps, with a token transition.
- */
 export function DesktopNav({ items, ariaLabel, className }: DesktopNavProps) {
   const isActive = useIsActive();
 

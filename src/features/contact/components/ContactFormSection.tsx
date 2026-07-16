@@ -9,11 +9,6 @@ export interface ContactFormSectionProps {
   locale: Locale;
 }
 
-/**
- * Contact form section (§4) — a Server Component that owns the heading and the
- * `#contact-form` anchor (the hero/CTA scroll target), and mounts the form as
- * the page's single client island. Centered for focus; reveals with `up`.
- */
 export async function ContactFormSection({ locale }: ContactFormSectionProps) {
   const t = await getDictionary(locale);
   const c = t.contact;

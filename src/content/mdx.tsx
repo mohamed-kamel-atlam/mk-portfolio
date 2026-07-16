@@ -9,16 +9,6 @@ import type { PluggableList } from "unified";
 import { cn } from "@/shared/lib/cn";
 import { Divider, Heading, Text } from "@/shared/ui";
 
-/**
- * The MDX render path (MDX_PIPELINE §5–6). Content bodies are compiled and
- * rendered **on the server** via `next-mdx-remote/rsc` — no Markdown runtime or
- * highlighter ships to the client (QAT-1). The component map binds MDX output to
- * design-system primitives so content never emits unstyled HTML (QAT-7).
- *
- * Kept out of the `@/content` barrel so these compile dependencies load only in
- * routes that actually render a body (e.g. project/article detail pages).
- */
-
 const components = {
   h1: (props: ComponentPropsWithoutRef<"h1">) => (
     <Heading level={1} size="h1" {...props} />
@@ -81,11 +71,6 @@ const components = {
   ),
 };
 
-/**
- * Remark/rehype pipeline (MDX_PIPELINE §4). Roles: GFM; heading slugs + anchors;
- * external-link safety. Build-time code highlighting and the `next/image` hook
- * are added alongside code/media content (documented roles, added just-in-time).
- */
 const remarkPlugins: PluggableList = [remarkGfm];
 const rehypePlugins: PluggableList = [
   rehypeSlug,

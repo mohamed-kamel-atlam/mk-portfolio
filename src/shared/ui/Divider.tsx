@@ -6,11 +6,6 @@ export interface DividerProps extends HTMLAttributes<HTMLElement> {
   orientation?: "horizontal" | "vertical";
 }
 
-/**
- * A hairline separator. Horizontal renders a semantic `<hr>`; vertical renders a
- * `separator`-role element with the correct `aria-orientation`. Uses the border
- * token so it reads as a calm divider in both themes.
- */
 export function Divider({
   orientation = "horizontal",
   className,

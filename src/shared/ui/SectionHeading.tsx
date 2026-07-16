@@ -11,13 +11,6 @@ export interface SectionHeadingProps {
   className?: string;
 }
 
-/**
- * The shared section-heading pattern — an accent eyebrow, an `<h2>`, and an
- * optional intro. Defined once in `shared/ui` so section layouts are never
- * duplicated across features (home, about, …). Composes the Heading/Text
- * primitives; the eyebrow uses the caption token (tracking resets in RTL) so it
- * reads correctly in both scripts.
- */
 export function SectionHeading({
   eyebrow,
   title,

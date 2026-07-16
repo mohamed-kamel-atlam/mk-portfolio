@@ -8,12 +8,6 @@ import {
   type ContactValues,
 } from "./schema";
 
-/**
- * Deliver a validated message. Wired to a provider (email/webhook) via a
- * server-only env var at deploy time — no secrets in the repo, and the endpoint
- * must be HTTPS. With no provider configured, this is a safe no-op so the form
- * still validates end-to-end. Throws on a failed delivery so the caller reports it.
- */
 async function deliverContact(data: ContactValues): Promise<void> {
   const endpoint = process.env.CONTACT_WEBHOOK_URL;
   if (!endpoint || !endpoint.startsWith("https://")) return;
@@ -28,11 +22,6 @@ async function deliverContact(data: ContactValues): Promise<void> {
   }
 }
 
-/**
- * Contact Server Action (`useActionState` signature). Runs on the server —
- * authoritative validation and spam checks happen here regardless of the client.
- * Returns typed, localizable state; never throws to the client.
- */
 export async function submitContact(
   _prev: ContactState,
   formData: FormData,

@@ -24,14 +24,6 @@ export interface MobileNavProps {
   className?: string;
 }
 
-/**
- * Compact navigation for narrow viewports. Uses a native `<dialog>` opened with
- * `showModal()`, which provides focus-trapping, Escape-to-close, focus return to
- * the trigger, and an inert background for free — the most accessible menu with
- * the least code. Closes on navigation and on backdrop click; body scroll is
- * locked while open. The panel enters from the inline-end and mirrors in RTL via
- * logical `margin-inline-start: auto`.
- */
 export function MobileNav({ items, labels, className }: MobileNavProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const pathname = usePathname();

@@ -52,12 +52,6 @@ function assertUniqueSlugs(
   }
 }
 
-/**
- * Read + validate a collection once (memoized). Server-only (uses `fs`). Every
- * file's frontmatter is validated against the collection's Zod schema; any
- * failure — missing/invalid field, bad enum, or duplicate slug — throws and
- * **fails the build** (MDX_PIPELINE §3.2). No runtime re-validation occurs.
- */
 const loadRaw = cache(
   async (type: ContentType): Promise<ContentItem<ContentType>[]> => {
     const { dir, schema } = collections[type];

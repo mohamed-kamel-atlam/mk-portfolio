@@ -20,12 +20,6 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   fullWidth?: boolean;
 }
 
-/**
- * The primary action control. A shared (server-first) component that forwards
- * native button attributes, so consumers own the behavior (`onClick`, `type`, …)
- * and this owns only presentation. Defaults to `type="button"` to avoid
- * accidental form submits; composes {@link Spinner} for the loading state.
- */
 export function Button({
   variant = "primary",
   size = "md",

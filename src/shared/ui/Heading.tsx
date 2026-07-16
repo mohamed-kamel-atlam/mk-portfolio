@@ -19,11 +19,6 @@ export interface HeadingProps extends HTMLAttributes<HTMLHeadingElement> {
   size?: keyof typeof headingSizes;
 }
 
-/**
- * A heading that separates semantic level from visual size: `level` sets the
- * element for the outline (accessibility), `size` sets the type step. The type
- * token carries weight/line-height/tracking (and resets tracking in RTL).
- */
 export function Heading({
   level,
   size,

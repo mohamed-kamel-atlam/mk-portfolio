@@ -1,11 +1,3 @@
-/**
- * Social platform configuration — the single source of truth for every social
- * channel. The platform *catalog* (`SocialPlatform` + `SOCIAL_LABELS`) is
- * scalable to many networks; `socialLinks` holds only the channels with a real
- * URL, so adding one (X, Medium, Dev.to, a personal site, …) is a single entry.
- * Consumed by the header/footer, the About page, and the Person JSON-LD.
- */
-
 /** Every supported platform. Add a network here, then a `socialLinks` entry. */
 export type SocialPlatform =
   "github" | "linkedin" | "email" | "x" | "medium" | "devto" | "portfolio";
@@ -28,10 +20,6 @@ export interface SocialLink {
   href: string;
 }
 
-/**
- * Active social links — only the platforms with a real destination. To surface
- * another network, add an entry keyed by its {@link SocialPlatform}.
- */
 export const socialLinks: readonly SocialLink[] = [
   {
     key: "github",

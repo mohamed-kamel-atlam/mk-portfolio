@@ -18,10 +18,6 @@ const STAGE_ICON: Record<TimelineStageKey, LucideIcon> = {
   ai: Sparkles,
 };
 
-/**
- * Vertical journey timeline. The marker column (dot + connector) uses flexbox
- * rather than absolute positioning, so it mirrors correctly in RTL.
- */
 export async function ExperienceTimeline({ locale }: ExperienceTimelineProps) {
   const t = await getDictionary(locale);
   const section = t.home.timeline;
@@ -36,7 +32,7 @@ export async function ExperienceTimeline({ locale }: ExperienceTimelineProps) {
             title={section.title}
             intro={section.intro}
           />
-          <ol className="flex flex-col">
+          <RevealGroup variant="up" as="ol" className="flex flex-col">
             {timelineStages.map((key, index) => {
               const item = section.items[key];
               const StageIcon = STAGE_ICON[key];
@@ -68,7 +64,7 @@ export async function ExperienceTimeline({ locale }: ExperienceTimelineProps) {
                 </li>
               );
             })}
-          </ol>
+          </RevealGroup>
         </RevealGroup>
       </Container>
     </Section>

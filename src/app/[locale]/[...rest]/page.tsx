@@ -25,13 +25,6 @@ export async function generateMetadata({
   return { title: TITLE[active], robots: { index: false, follow: false } };
 }
 
-/**
- * Locale catch-all — renders the branded, localized 404 for any path under
- * `/[locale]/…` that matches no real route. More specific routes always win, so
- * this only ever handles genuinely-unknown URLs. Rendered directly (not via a
- * `not-found` boundary, which this app's root-layout placement doesn't support —
- * see {@link NotFoundView}).
- */
 export default async function CatchAllNotFound({ params }: CatchAllProps) {
   const { locale } = await params;
   const active: Locale = isLocale(locale) ? locale : defaultLocale;

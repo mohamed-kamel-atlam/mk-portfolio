@@ -1,6 +1,7 @@
 import { Scale } from "lucide-react";
 
 import { Card, Heading, Text } from "@/shared/ui";
+import { RevealGroup } from "@/shared/ui/motion";
 
 import type { Project } from "../lib/get-projects";
 
@@ -11,11 +12,6 @@ export interface ProjectArchitectureProps {
   id?: string;
 }
 
-/**
- * Structured architecture decisions — the "why" behind the build, surfaced as
- * scannable cards with an accent marker. The engineering-story spine, distinct
- * from the prose narrative.
- */
 export function ProjectArchitecture({
   decisions,
   label,
@@ -30,7 +26,7 @@ export function ProjectArchitecture({
       <Heading level={2} size="h4">
         {label}
       </Heading>
-      <div className="grid gap-4 sm:grid-cols-2">
+      <RevealGroup variant="up" className="grid gap-4 sm:grid-cols-2">
         {decisions.map((decision) => (
           <Card
             key={decision.title}
@@ -48,7 +44,7 @@ export function ProjectArchitecture({
             </Text>
           </Card>
         ))}
-      </div>
+      </RevealGroup>
     </section>
   );
 }

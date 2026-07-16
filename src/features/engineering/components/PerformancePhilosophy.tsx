@@ -35,11 +35,6 @@ const TOPIC_ICON: Record<PerformanceTopicKey, LucideIcon> = {
   bundle: Package,
 };
 
-/**
- * Performance (§4) — the philosophy, not definitions: a first-person statement
- * anchored by an accent rule, then the levers as cards. Links to the performance
- * doc. Reveals with `scale`.
- */
 export async function PerformancePhilosophy({
   locale,
 }: PerformancePhilosophyProps) {
@@ -62,7 +57,10 @@ export async function PerformancePhilosophy({
           >
             {section.statement}
           </Text>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <RevealGroup
+            variant="up"
+            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+          >
             {performanceTopics.map((key) => (
               <IconCard
                 key={key}
@@ -71,7 +69,7 @@ export async function PerformancePhilosophy({
                 description={section.topics[key].description}
               />
             ))}
-          </div>
+          </RevealGroup>
           <DeepDiveLink
             href={localizedHref(locale, "/engineering/performance")}
             label={t.engineering.readMore}

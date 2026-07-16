@@ -17,14 +17,6 @@ export interface AboutExperienceProps {
   locale: Locale;
 }
 
-/**
- * Experience timeline (FR-004). Entries come from the Content layer
- * (`experience` collection) — validated, ordered data, not hardcoded markup.
- * Framed around impact via the section intro; each entry surfaces the problem,
- * the highlights, and the stack. The marker column uses flexbox rather than
- * absolute offsets, so the dot and connector mirror correctly in RTL, and the
- * `up` reveal matches the page's motion vocabulary.
- */
 export async function AboutExperience({ locale }: AboutExperienceProps) {
   const t = await getDictionary(locale);
   const section = t.about.experience;
@@ -40,7 +32,7 @@ export async function AboutExperience({ locale }: AboutExperienceProps) {
             title={section.title}
             intro={section.intro}
           />
-          <ol className="flex flex-col">
+          <RevealGroup variant="up" as="ol" className="flex flex-col">
             {items.map((item, index) => {
               const fm = item.frontmatter;
               const period = formatPeriod(
@@ -117,7 +109,7 @@ export async function AboutExperience({ locale }: AboutExperienceProps) {
                 </li>
               );
             })}
-          </ol>
+          </RevealGroup>
         </RevealGroup>
       </Container>
     </Section>

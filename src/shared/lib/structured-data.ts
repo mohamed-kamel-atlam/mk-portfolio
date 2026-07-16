@@ -1,14 +1,6 @@
 import { siteConfig } from "@/shared/config/site";
 import { localizedHref, type Locale } from "@/shared/i18n/config";
 
-/**
- * Structured-data (JSON-LD) builders (SEO.md §5). Centralized so every page
- * emits schema.org data consistently — same origin, same identity, same URL
- * construction — instead of hand-assembling objects per route. The primary
- * entity is a {@link Person} (this is a personal site); `WebSite` describes the
- * site itself and `BreadcrumbList` gives nested pages their trail.
- */
-
 /** `WebSite` schema — the site entity, published by the person. */
 export function websiteJsonLd(locale: Locale) {
   return {

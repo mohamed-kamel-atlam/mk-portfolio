@@ -32,10 +32,6 @@ const FOCUS_ICON: Record<CurrentFocusKey, LucideIcon> = {
   aiAssisted: Sparkles,
 };
 
-/**
- * Current focus (§6) — what I'm mastering now, as compact capability cards.
- * Reveals with `fade`.
- */
 export async function JourneyCurrentFocus({
   locale,
 }: JourneyCurrentFocusProps) {
@@ -51,7 +47,11 @@ export async function JourneyCurrentFocus({
             title={section.title}
             intro={section.intro}
           />
-          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <RevealGroup
+            variant="up"
+            as="ul"
+            className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
+          >
             {currentFocusItems.map((key) => {
               const Icon = FOCUS_ICON[key];
               return (
@@ -70,7 +70,7 @@ export async function JourneyCurrentFocus({
                 </li>
               );
             })}
-          </ul>
+          </RevealGroup>
         </RevealGroup>
       </Container>
     </Section>

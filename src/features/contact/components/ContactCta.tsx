@@ -15,11 +15,6 @@ export interface ContactCtaProps {
   locale: Locale;
 }
 
-/**
- * Closing CTA (§7) — the page's final impression, mirroring the site's other
- * closers so the ending feels deliberate and consistent. Content reveals with
- * `scale` over a static focal glow.
- */
 export async function ContactCta({ locale }: ContactCtaProps) {
   const t = await getDictionary(locale);
   const section = t.contact.finalCta;

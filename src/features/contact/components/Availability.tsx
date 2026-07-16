@@ -26,10 +26,6 @@ const ITEM_ICON: Record<AvailabilityKey, LucideIcon> = {
   saas: Boxes,
 };
 
-/**
- * Availability (§5) — what I'm open to, with a live "available now" status pill
- * and a card per opportunity type. Reveals with `fade`.
- */
 export async function Availability({ locale }: AvailabilityProps) {
   const t = await getDictionary(locale);
   const section = t.contact.availability;
@@ -52,7 +48,11 @@ export async function Availability({ locale }: AvailabilityProps) {
               intro={section.intro}
             />
           </div>
-          <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          <RevealGroup
+            variant="up"
+            as="ul"
+            className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5"
+          >
             {availabilityItems.map((key) => {
               const Icon = ITEM_ICON[key];
               return (
@@ -71,7 +71,7 @@ export async function Availability({ locale }: AvailabilityProps) {
                 </li>
               );
             })}
-          </ul>
+          </RevealGroup>
         </RevealGroup>
       </Container>
     </Section>

@@ -12,12 +12,6 @@ export interface SiteFooterProps {
   locale: Locale;
 }
 
-/**
- * Site footer — a static Server Component. Reuses the same `mainNav` source as
- * the header (no duplicated links). Social links render as accessible text
- * anchors with external-link safety; the copyright year is resolved at
- * build/render time.
- */
 export async function SiteFooter({ locale }: SiteFooterProps) {
   const t = await getDictionary(locale);
   const year = new Date().getFullYear();

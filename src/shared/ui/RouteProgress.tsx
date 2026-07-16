@@ -7,15 +7,6 @@ import { cn } from "@/shared/lib/cn";
 
 import styles from "./RouteProgress.module.css";
 
-/**
- * A very thin top progress bar for client-side navigations (Linear/Vercel style).
- * It starts when an in-app navigation begins — detected via a capture-phase click
- * on same-origin links plus `popstate` — trickles toward ~90%, then completes and
- * fades once the pathname changes. A short show-delay means instant navigations
- * never flash the bar. Token-driven `scaleX` transform only; one small client
- * island (route progress genuinely needs the client). Decorative (`aria-hidden`)
- * — the route change is already announced by the App Router's built-in announcer.
- */
 export function RouteProgress() {
   const pathname = usePathname();
   const [progress, setProgress] = useState(0);

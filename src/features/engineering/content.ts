@@ -1,13 +1,3 @@
-/**
- * Engineering-hub structural data — the non-translatable atoms (stable keys and
- * proper-noun tool names). Translatable copy lives in the `engineering`
- * dictionary namespace, keyed by the same identifiers. The hub groups the
- * engineering docs into categories by their `kind`; each overview section links
- * into its deep-dive doc by slug.
- *
- * Adding a doc is a content file plus (if a new category) one entry here.
- */
-
 /** Category groups for the doc directory, mapped to the doc `kind` values. */
 export const docGroups = [
   { key: "foundations", kinds: ["architecture", "folder-structure"] },
@@ -101,11 +91,6 @@ export type AiPracticeKey = (typeof aiPractices)[number];
 /** AI tools used, day to day (§7) — proper nouns, not localized. */
 export const aiTools = ["Claude Code", "ChatGPT", "GitHub Copilot"] as const;
 
-/**
- * Tools grouped by the job they do (§8). Labels are localized
- * (engineering.tools.groups); items are proper nouns kept in Latin. Grounded in
- * this project's real stack and the documented toolkit — no logo wall.
- */
 export const toolGroups = [
   { key: "frameworks", items: ["Next.js", "React"] },
   { key: "languages", items: ["TypeScript", "JavaScript"] },

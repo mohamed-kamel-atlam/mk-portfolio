@@ -39,13 +39,6 @@ const MILESTONE_ICON: Record<MilestoneKey, LucideIcon> = {
   "2026": Rocket,
 };
 
-/**
- * The journey timeline (§2) — the centerpiece. A glowing central spine with
- * year-badge nodes and milestone cards that alternate sides on desktop and stack
- * on mobile. Each card reveals as it scrolls into view (one small island each);
- * the spine and badges stay put, so the progression reads as a continuous path.
- * Semantic `<ol>`; RTL-safe via logical properties and grid placement.
- */
 export async function JourneyTimeline({ locale }: JourneyTimelineProps) {
   const t = await getDictionary(locale);
   const section = t.journey.timeline;

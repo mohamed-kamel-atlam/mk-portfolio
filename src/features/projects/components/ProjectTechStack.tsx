@@ -1,5 +1,6 @@
 import { getTechIcon } from "@/shared/lib/tech-icons";
 import { Heading } from "@/shared/ui";
+import { RevealGroup } from "@/shared/ui/motion";
 
 import type { Project } from "../lib/get-projects";
 
@@ -10,11 +11,6 @@ export interface ProjectTechStackProps {
   id?: string;
 }
 
-/**
- * The project's structured tech stack as premium iconified chips. The icon comes
- * from the centralized {@link getTechIcon} mapping, so the stack reads as a set
- * of intentional tools rather than a plain badge list.
- */
 export function ProjectTechStack({
   techStack,
   label,
@@ -29,7 +25,7 @@ export function ProjectTechStack({
       <Heading level={2} size="h4">
         {label}
       </Heading>
-      <ul className="flex flex-wrap gap-2">
+      <RevealGroup variant="up" as="ul" className="flex flex-wrap gap-2">
         {techStack.map((tech) => {
           const Icon = getTechIcon(tech);
           return (
@@ -41,7 +37,7 @@ export function ProjectTechStack({
             </li>
           );
         })}
-      </ul>
+      </RevealGroup>
     </section>
   );
 }

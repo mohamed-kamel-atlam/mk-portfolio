@@ -15,12 +15,6 @@ export interface AboutCtaProps {
   locale: Locale;
 }
 
-/**
- * Closing call to action — the page's conclusion. An elevated, centered card
- * over a single static focal glow mirrors the landing's closing beat, so the
- * story ends on the same deliberate note. Content reveals in a short `scale`
- * stagger; the glow is static to stay within the perf budget.
- */
 export async function AboutCta({ locale }: AboutCtaProps) {
   const t = await getDictionary(locale);
   const section = t.about.cta;

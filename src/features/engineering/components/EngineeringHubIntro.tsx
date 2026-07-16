@@ -18,8 +18,6 @@ export interface EngineeringHubIntroProps {
   locale: Locale;
 }
 
-/** An icon per mindset facet. Facets use non-heading markup so the hero keeps a
- *  single `<h1>` and never skips a heading level. */
 const FACET_ICON: Record<IntroFacetKey, LucideIcon> = {
   problemSolving: Puzzle,
   maintainability: Wrench,
@@ -28,12 +26,6 @@ const FACET_ICON: Record<IntroFacetKey, LucideIcon> = {
   architecture: Boxes,
 };
 
-/**
- * Engineering-hub introduction — the page hero. Holds the single `<h1>` and
- * frames the engineering mindset, then surfaces the mindset facets as compact,
- * non-heading cards. Server Component; the only motion is one CSS entrance,
- * honored by reduced-motion.
- */
 export async function EngineeringHubIntro({
   locale,
 }: EngineeringHubIntroProps) {

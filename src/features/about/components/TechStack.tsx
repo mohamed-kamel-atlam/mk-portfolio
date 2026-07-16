@@ -17,9 +17,11 @@ import {
   Badge,
   Card,
   Container,
+  getTechLogo,
   Heading,
   Section,
   SectionHeading,
+  TechLogo,
   Text,
 } from "@/shared/ui";
 import { RevealGroup } from "@/shared/ui/motion";
@@ -30,10 +32,7 @@ export interface TechStackProps {
   locale: Locale;
 }
 
-/**
- * Per-group header icon + the fallback icon category for that group's chips, so
- * each capability area reads as an intentional domain rather than a badge dump.
- */
+// Header icon + fallback icon category per group.
 const GROUP_META: Record<
   SkillGroupKey,
   { icon: LucideIcon; iconCategory: string }
@@ -48,12 +47,7 @@ const GROUP_META: Record<
   ai: { icon: Brain, iconCategory: "ai" },
 };
 
-/**
- * Tech stack — the toolkit grouped by capability. Each group is a card carrying
- * an icon, a localized label + one-line description, and iconified technology
- * chips (names are proper nouns, kept in Latin). Reveals with `fade` to differ
- * from the neighbouring sections.
- */
+// Tech stack — toolkit grouped by capability, each group a card of logo chips.
 export async function TechStack({ locale }: TechStackProps) {
   const t = await getDictionary(locale);
   const section = t.about.skills;
@@ -67,7 +61,7 @@ export async function TechStack({ locale }: TechStackProps) {
             title={section.title}
             intro={section.intro}
           />
-          <div className="grid gap-6 md:grid-cols-2">
+          <RevealGroup variant="up" className="grid gap-6 md:grid-cols-2">
             {skillGroups.map((group) => {
               const GroupIcon = GROUP_META[group.key].icon;
               return (
@@ -89,6 +83,7 @@ export async function TechStack({ locale }: TechStackProps) {
                   </Text>
                   <ul className="mt-1 flex flex-wrap gap-2">
                     {group.items.map((item) => {
+                      const logo = getTechLogo(item);
                       const Icon = getTechIcon({
                         name: item,
                         category: GROUP_META[group.key].iconCategory,
@@ -99,7 +94,14 @@ export async function TechStack({ locale }: TechStackProps) {
                             variant="outline"
                             className="text-muted-foreground"
                           >
-                            <Icon aria-hidden="true" className="size-3.5" />
+                            {logo ? (
+                              <TechLogo
+                                name={item}
+                                className="size-3.5 transition-colors duration-fast group-hover/skill:text-[color:var(--brand)]"
+                              />
+                            ) : (
+                              <Icon aria-hidden="true" className="size-3.5" />
+                            )}
                             {item}
                           </Badge>
                         </li>
@@ -109,7 +111,7 @@ export async function TechStack({ locale }: TechStackProps) {
                 </Card>
               );
             })}
-          </div>
+          </RevealGroup>
         </RevealGroup>
       </Container>
     </Section>

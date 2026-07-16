@@ -2,13 +2,6 @@ import { cn } from "@/shared/lib/cn";
 
 import styles from "./background.module.css";
 
-/**
- * Background layers — presentational Server Components that render decorative,
- * `aria-hidden` visual layers. Pure CSS (no client JS, no re-renders); motion is
- * compositor-only and honors reduced-motion via the global rule. Each layer
- * fills its positioned parent (`SectionBackground`/`ThemeBackground`).
- */
-
 export interface LayerProps {
   className?: string;
 }

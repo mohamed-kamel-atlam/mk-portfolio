@@ -1,20 +1,18 @@
 import Image from "next/image";
 
+import { RevealGroup } from "@/shared/ui/motion";
+
 import type { Project } from "../lib/get-projects";
 
 export interface ProjectGalleryProps {
   gallery: NonNullable<Project["frontmatter"]["gallery"]>;
 }
 
-/**
- * Project media gallery. Uses `next/image` with the required width/height for
- * layout stability and AVIF/WebP delivery (QAT-1). Renders nothing when empty.
- */
 export function ProjectGallery({ gallery }: ProjectGalleryProps) {
   if (gallery.length === 0) return null;
 
   return (
-    <div className="grid gap-4 sm:grid-cols-2">
+    <RevealGroup variant="up" className="grid gap-4 sm:grid-cols-2">
       {gallery.map((image) => (
         <figure key={image.src} className="flex flex-col gap-2">
           <Image
@@ -31,6 +29,6 @@ export function ProjectGallery({ gallery }: ProjectGalleryProps) {
           ) : null}
         </figure>
       ))}
-    </div>
+    </RevealGroup>
   );
 }

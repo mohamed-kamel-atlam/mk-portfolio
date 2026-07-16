@@ -1,10 +1,5 @@
 import type { GlowPosition, GradientPreset } from "./layers";
 
-/**
- * Background variants — the catalog every page/section chooses from. Each maps
- * to a declarative layer composition (data, not markup), so adding a variant is
- * one entry here and adjusting a section's mood never touches a component.
- */
 export type BackgroundVariant =
   | "default"
   | "hero"

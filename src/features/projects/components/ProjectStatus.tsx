@@ -23,11 +23,6 @@ export interface ProjectStatusProps {
   className?: string;
 }
 
-/**
- * Semantic status chip: a soft-tinted pill carrying an icon **and** a text
- * label, so status is never conveyed by color alone. Purely presentational
- * (Server Component); the tint + icon come from the strongly-typed registry.
- */
 export function ProjectStatus({
   status,
   label,

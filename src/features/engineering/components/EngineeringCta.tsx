@@ -15,11 +15,6 @@ export interface EngineeringCtaProps {
   locale: Locale;
 }
 
-/**
- * Closing call to action (§11 CTA) — an invitation to talk shop, mirroring the
- * landing and About closers so the site ends on one consistent, deliberate note.
- * Elevated centered card over a static focal glow; content reveals with `scale`.
- */
 export async function EngineeringCta({ locale }: EngineeringCtaProps) {
   const t = await getDictionary(locale);
   const section = t.engineering.cta;

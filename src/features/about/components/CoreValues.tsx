@@ -50,7 +50,10 @@ export async function CoreValues({ locale }: CoreValuesProps) {
             title={section.title}
             intro={section.intro}
           />
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <RevealGroup
+            variant="up"
+            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          >
             {coreValues.map((key) => {
               const item = section.items[key];
               const Icon = VALUE_ICON[key];
@@ -72,7 +75,7 @@ export async function CoreValues({ locale }: CoreValuesProps) {
                 </Card>
               );
             })}
-          </div>
+          </RevealGroup>
         </RevealGroup>
       </Container>
     </Section>

@@ -1,9 +1,5 @@
 import { Container, Section, Skeleton } from "@/shared/ui";
 
-/**
- * Loading skeleton for the contact page — intro header plus a form of labelled
- * fields and a submit button, matching the real layout. `aria-busy` region.
- */
 export default function Loading() {
   return (
     <Section aria-busy="true">

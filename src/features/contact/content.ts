@@ -1,11 +1,3 @@
-/**
- * Contact-page structural data — the non-translatable atoms (method keys, the
- * WhatsApp destination, and the availability / quick-fact keys). Translatable
- * copy lives in the `contact` dictionary namespace, keyed by the same
- * identifiers. Method hrefs for github/linkedin/email are resolved from the
- * single social config; WhatsApp is contact-page-only, so it lives here.
- */
-
 /** WhatsApp destination and the format shown on the card (owner-provided). */
 export const WHATSAPP = {
   href: "https://wa.me/201550047877",

@@ -1,10 +1,3 @@
-/**
- * Internationalization configuration — the single source of truth for locales
- * (INTERNATIONALIZATION.md §2). Every subsystem (routing, middleware, metadata,
- * the switcher, the future sitemap) reads from here; none re-declares the list.
- * Adding a locale is a change here plus its dictionary, not a cross-cutting edit.
- */
-
 export const locales = ["en", "ar"] as const;
 
 export type Locale = (typeof locales)[number];
@@ -37,11 +30,6 @@ export function isLocale(value: string): value is Locale {
   return (locales as readonly string[]).includes(value);
 }
 
-/**
- * Build a locale-prefixed href from a locale-agnostic route path. `""` maps to
- * the locale root. Locale is URL state, so all internal links flow through here
- * and never hardcode a prefix (INTERNATIONALIZATION.md §7).
- */
 export function localizedHref(locale: Locale, path: string): string {
   return path ? `/${locale}${path}` : `/${locale}`;
 }

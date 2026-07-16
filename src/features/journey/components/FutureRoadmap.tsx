@@ -25,10 +25,6 @@ const ROADMAP_ICON: Record<RoadmapKey, LucideIcon> = {
   growth: TrendingUp,
 };
 
-/**
- * Future roadmap (§7) — where the journey heads next, as forward-looking cards.
- * Reveals with `up`.
- */
 export async function FutureRoadmap({ locale }: FutureRoadmapProps) {
   const t = await getDictionary(locale);
   const section = t.journey.roadmap;
@@ -42,7 +38,10 @@ export async function FutureRoadmap({ locale }: FutureRoadmapProps) {
             title={section.title}
             intro={section.intro}
           />
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <RevealGroup
+            variant="up"
+            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+          >
             {roadmapItems.map((key) => (
               <JourneyCard
                 key={key}
@@ -51,7 +50,7 @@ export async function FutureRoadmap({ locale }: FutureRoadmapProps) {
                 description={section.items[key].description}
               />
             ))}
-          </div>
+          </RevealGroup>
         </RevealGroup>
       </Container>
     </Section>

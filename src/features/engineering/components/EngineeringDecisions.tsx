@@ -20,12 +20,6 @@ export interface EngineeringDecisionsProps {
   locale: Locale;
 }
 
-/**
- * Engineering decisions (§10) — an ADR-inspired section: selected decisions from
- * this portfolio, each with its rationale and the trade-off it accepts (the part
- * that separates a decision from a preference). Links to the full ADR log.
- * Reveals with `scale`.
- */
 export async function EngineeringDecisions({
   locale,
 }: EngineeringDecisionsProps) {
@@ -42,7 +36,10 @@ export async function EngineeringDecisions({
             title={section.title}
             intro={section.intro}
           />
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <RevealGroup
+            variant="up"
+            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          >
             {engineeringDecisions.map((key) => {
               const item = section.items[key];
               return (
@@ -71,7 +68,7 @@ export async function EngineeringDecisions({
                 </Card>
               );
             })}
-          </div>
+          </RevealGroup>
           <DeepDiveLink
             href={localizedHref(locale, `/engineering/${DECISIONS_DOC_SLUG}`)}
             label={section.docCta}

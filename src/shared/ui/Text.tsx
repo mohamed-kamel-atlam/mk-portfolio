@@ -22,10 +22,6 @@ export interface TextProps extends HTMLAttributes<HTMLElement> {
   tone?: keyof typeof textTones;
 }
 
-/**
- * Body copy at a token type step. Color comes from a semantic tone token, so it
- * is correct in both themes; hierarchy is carried by size, not color.
- */
 export function Text({
   as: Tag = "p",
   size = "body",

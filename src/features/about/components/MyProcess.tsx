@@ -38,13 +38,6 @@ const STEP_ICON: Record<ProcessStepKey, LucideIcon> = {
   deliver: Rocket,
 };
 
-/**
- * My process — the repeatable workflow from ambiguity to production. Rendered as
- * a numbered `<ol>` of cards (the ordinal carries the sequence semantically),
- * deliberately card-based rather than the dotted timeline used by Experience, so
- * the two adjacent list-like sections stay visually distinct. Reveals with the
- * `up` variant.
- */
 export async function MyProcess({ locale }: MyProcessProps) {
   const t = await getDictionary(locale);
   const section = t.about.process;
@@ -58,7 +51,11 @@ export async function MyProcess({ locale }: MyProcessProps) {
             title={section.title}
             intro={section.intro}
           />
-          <ol className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <RevealGroup
+            variant="up"
+            as="ol"
+            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          >
             {processSteps.map((key, index) => {
               const item = section.steps[key];
               const Icon = STEP_ICON[key];
@@ -89,7 +86,7 @@ export async function MyProcess({ locale }: MyProcessProps) {
                 </li>
               );
             })}
-          </ol>
+          </RevealGroup>
         </RevealGroup>
       </Container>
     </Section>

@@ -15,15 +15,6 @@ export interface SectionBackgroundProps {
   className?: string;
 }
 
-/**
- * Decorative background for a section or page. Composes the layers for the chosen
- * variant behind content — `aria-hidden`, non-interactive, sitting on the
- * `z-behind` plane. The parent must establish a stacking context (`relative
- * isolate`) so the layer stays scoped to that section.
- *
- * A Server Component: the entire effect is CSS, so it adds zero client JS and
- * never re-renders.
- */
 export function SectionBackground({
   variant = "default",
   className,

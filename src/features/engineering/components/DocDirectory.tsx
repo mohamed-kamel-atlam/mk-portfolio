@@ -10,12 +10,6 @@ export interface DocDirectoryProps {
   locale: Locale;
 }
 
-/**
- * Deep dives (§11) — the engineering-doc directory. The section owns the `<h2>`
- * (via `SectionHeading`); each category is an `<h3>` group of doc cards linking
- * into the full MDX articles. Grouping is done in the lib (data shaping); this
- * component only lays the groups out. Reveals with `up`.
- */
 export async function DocDirectory({ locale }: DocDirectoryProps) {
   const t = await getDictionary(locale);
   const section = t.engineering.deepDives;
@@ -35,7 +29,10 @@ export async function DocDirectory({ locale }: DocDirectoryProps) {
               <Heading level={3} size="h4" className="text-muted-foreground">
                 {t.engineering.groups[group.key]}
               </Heading>
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              <RevealGroup
+                variant="up"
+                className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+              >
                 {group.docs.map((doc) => (
                   <DocCard
                     key={doc.slug}
@@ -45,7 +42,7 @@ export async function DocDirectory({ locale }: DocDirectoryProps) {
                     summary={doc.frontmatter.summary}
                   />
                 ))}
-              </div>
+              </RevealGroup>
             </div>
           ))}
         </RevealGroup>

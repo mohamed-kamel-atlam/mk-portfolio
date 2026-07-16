@@ -21,8 +21,6 @@ export interface ContactMethodsProps {
   locale: Locale;
 }
 
-/** Resolve each method's destination — social config for the known channels,
- *  the contact-local constant for WhatsApp. */
 function hrefFor(key: ContactMethodKey): string {
   if (key === "whatsapp") return WHATSAPP.href;
   return socialLinks.find((social) => social.key === key)?.href ?? "#";
@@ -35,13 +33,6 @@ function externalAttrs(key: ContactMethodKey) {
     : { target: "_blank" as const, rel: "noopener noreferrer" };
 }
 
-/**
- * Contact methods (§2) — premium link cards for every direct channel. Each is a
- * real `<a>` (Server Component, zero JS): large icon, title, description, an
- * arrow that slides on hover, border-accent glow + elevation lift, and the
- * global focus ring for keyboard users. The WhatsApp card adds the number and a
- * reply-time note, in a subtle accent that blends with the design system.
- */
 export async function ContactMethods({ locale }: ContactMethodsProps) {
   const t = await getDictionary(locale);
   const section = t.contact.methods;
@@ -55,7 +46,11 @@ export async function ContactMethods({ locale }: ContactMethodsProps) {
             title={section.title}
             intro={section.intro}
           />
-          <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <RevealGroup
+            variant="up"
+            as="ul"
+            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+          >
             {contactMethods.map((key) => {
               const item = section.items[key];
               const Icon = methodIcons[key];
@@ -106,7 +101,7 @@ export async function ContactMethods({ locale }: ContactMethodsProps) {
                 </li>
               );
             })}
-          </ul>
+          </RevealGroup>
         </RevealGroup>
       </Container>
     </Section>

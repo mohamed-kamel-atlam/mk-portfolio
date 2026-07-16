@@ -47,6 +47,8 @@ export { Splash } from "./Splash";
 export type { SplashProps } from "./Splash";
 export { Spinner } from "./Spinner";
 export type { SpinnerProps } from "./Spinner";
+export { TechLogo, getTechLogo } from "./TechLogo";
+export type { TechLogoProps } from "./TechLogo";
 export { Text } from "./Text";
 export type { TextProps } from "./Text";
 export { Textarea } from "./Textarea";

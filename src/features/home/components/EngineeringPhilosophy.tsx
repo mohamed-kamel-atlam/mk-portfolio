@@ -33,12 +33,6 @@ const PRINCIPLE_ICON: Record<PhilosophyKey, LucideIcon> = {
   simplicity: Feather,
 };
 
-/**
- * Engineer identity: a first-person statement (the architecture mindset) leading
- * into the principle cards drawn from the documented engineering values. The
- * statement is anchored by a thin accent rule — a visual anchor, not a boxed
- * card — so it reads as a point of view, not another tile.
- */
 export async function EngineeringPhilosophy({
   locale,
 }: EngineeringPhilosophyProps) {
@@ -61,7 +55,7 @@ export async function EngineeringPhilosophy({
           >
             {section.statement}
           </Text>
-          <div className="grid gap-6 sm:grid-cols-2">
+          <RevealGroup variant="up" className="grid gap-6 sm:grid-cols-2">
             {philosophyPrinciples.map((key) => {
               const item = section.items[key];
               const Icon = PRINCIPLE_ICON[key];
@@ -83,7 +77,7 @@ export async function EngineeringPhilosophy({
                 </Card>
               );
             })}
-          </div>
+          </RevealGroup>
         </RevealGroup>
       </Container>
     </Section>

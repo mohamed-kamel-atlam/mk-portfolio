@@ -8,14 +8,6 @@ export interface HeaderShellProps {
   children: ReactNode;
 }
 
-/**
- * Sticky header shell that transitions to a translucent "glass" state on scroll
- * (blur + hairline border + soft shadow + a one-step height shrink). A minimal
- * client island — one passive scroll listener, no re-render churn beyond a
- * boolean — wrapping server-rendered header content. Transitions are token-timed
- * and settle instantly under reduced motion (global rule). The `data-scrolled`
- * flag drives the child height shrink via a named group.
- */
 export function HeaderShell({ children }: HeaderShellProps) {
   const [scrolled, setScrolled] = useState(false);
 

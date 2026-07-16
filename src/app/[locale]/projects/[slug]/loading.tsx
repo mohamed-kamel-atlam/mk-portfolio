@@ -1,10 +1,5 @@
 import { Container, Section, Skeleton } from "@/shared/ui";
 
-/**
- * Loading skeleton for a project detail page — back link, title + meta, cover,
- * tech chips and body lines, matching the article layout. `aria-busy` region;
- * decorative skeletons.
- */
 export default function Loading() {
   return (
     <Section aria-busy="true">

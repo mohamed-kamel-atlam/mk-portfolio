@@ -34,13 +34,6 @@ export async function generateMetadata({
   });
 }
 
-/**
- * About & Experience (FR-004). A thin routing-layer composition: it resolves the
- * locale and assembles the about feature's sections in narrative order — who I am,
- * how I engineer, how I work, what I build with, what I've shipped, what I value,
- * and an invitation to collaborate. Each is a Server Component owning its own
- * content and layout; `PersonJsonLd` emits the site's identity structured data.
- */
 export default async function AboutPage({ params }: AboutPageProps) {
   const { locale } = await params;
   const active: Locale = isLocale(locale) ? locale : defaultLocale;

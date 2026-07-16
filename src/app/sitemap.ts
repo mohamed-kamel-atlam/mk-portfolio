@@ -5,13 +5,6 @@ import { siteConfig } from "@/shared/config/site";
 import { defaultLocale, locales } from "@/shared/i18n/config";
 import { localeAlternates } from "@/shared/lib/seo";
 
-/**
- * sitemap.xml (SEO.md §6) — every indexable route, for every locale, with
- * `hreflang` alternates (incl. `x-default`). Content routes carry their real
- * `lastModified` from frontmatter; static routes omit it. Built from the
- * content layer, so a new project/doc appears automatically.
- */
-
 const STATIC_PATHS = [
   "",
   "/about",

@@ -33,11 +33,6 @@ const PROJECT_ICON: Record<JourneyProjectKey, LucideIcon> = {
   graduation: GraduationCap,
 };
 
-/**
- * Major projects and what they taught (§4). Each card leads with the lesson, not
- * the feature list, and links to the real project page when one exists. Reveals
- * with `fade`.
- */
 export async function JourneyProjects({ locale }: JourneyProjectsProps) {
   const t = await getDictionary(locale);
   const section = t.journey.projects;
@@ -51,7 +46,7 @@ export async function JourneyProjects({ locale }: JourneyProjectsProps) {
             title={section.title}
             intro={section.intro}
           />
-          <div className="grid gap-6 sm:grid-cols-2">
+          <RevealGroup variant="up" className="grid gap-6 sm:grid-cols-2">
             {journeyProjects.map((project) => {
               const item = section.items[project.key];
               const Icon = PROJECT_ICON[project.key];
@@ -93,7 +88,7 @@ export async function JourneyProjects({ locale }: JourneyProjectsProps) {
                 </Card>
               );
             })}
-          </div>
+          </RevealGroup>
         </RevealGroup>
       </Container>
     </Section>

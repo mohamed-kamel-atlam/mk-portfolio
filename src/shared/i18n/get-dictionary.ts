@@ -1,12 +1,6 @@
 import { type Locale } from "./config";
 import enCommon from "./dictionaries/en/common.json";
 
-/**
- * The dictionary shape is the canonical `en` key set (INTERNATIONALIZATION.md
- * §5), namespaced by feature (`nav`, `footer`, …). Other locales are validated
- * against it, and missing keys fall back to `en` (§2) — a one-level deep merge
- * so a partially translated namespace still resolves per key.
- */
 export type Dictionary = typeof enCommon;
 
 // Non-`en` dictionaries are dynamically imported so only the active locale's
@@ -39,11 +33,6 @@ function mergeWithFallback(
   return result as Dictionary;
 }
 
-/**
- * Resolve the dictionary for a locale — **server-only** (called from Server
- * Components / metadata). Localized text ships as HTML with no dictionary or
- * translation runtime on the client (QAT-1). Missing keys fall back to `en`.
- */
 export async function getDictionary(locale: Locale): Promise<Dictionary> {
   const localized = await loaders[locale]();
   return mergeWithFallback(enCommon, localized);

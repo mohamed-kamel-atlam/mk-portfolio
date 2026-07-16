@@ -11,12 +11,6 @@ export interface UseInViewOptions {
   once?: boolean;
 }
 
-/**
- * Observe when an element enters the viewport. A single IntersectionObserver
- * wrapper reused by scroll-driven primitives (e.g. Reveal), so the observer
- * logic lives in one place. Degrades to immediately-in-view when
- * IntersectionObserver is unavailable (content never stays hidden).
- */
 export function useInView<T extends Element = HTMLDivElement>(
   options: UseInViewOptions = {},
 ): { ref: RefObject<T | null>; inView: boolean } {

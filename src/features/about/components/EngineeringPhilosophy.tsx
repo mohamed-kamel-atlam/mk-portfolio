@@ -37,12 +37,6 @@ const PRINCIPLE_ICON: Record<PhilosophyKey, LucideIcon> = {
   ownership: ShieldCheck,
 };
 
-/**
- * Engineering philosophy — the page's most important section. A first-person
- * statement (anchored by a thin accent rule, so it reads as a point of view, not
- * a boxed tile) leads into the principle cards. The `scale` reveal sets this
- * section apart from its neighbours while staying within the one motion system.
- */
 export async function EngineeringPhilosophy({
   locale,
 }: EngineeringPhilosophyProps) {
@@ -65,7 +59,10 @@ export async function EngineeringPhilosophy({
           >
             {section.statement}
           </Text>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <RevealGroup
+            variant="up"
+            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          >
             {philosophyPrinciples.map((key) => {
               const item = section.items[key];
               const Icon = PRINCIPLE_ICON[key];
@@ -87,7 +84,7 @@ export async function EngineeringPhilosophy({
                 </Card>
               );
             })}
-          </div>
+          </RevealGroup>
         </RevealGroup>
       </Container>
     </Section>

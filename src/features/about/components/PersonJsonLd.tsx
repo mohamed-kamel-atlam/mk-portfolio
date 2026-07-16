@@ -17,11 +17,6 @@ const KNOWS_ABOUT = [
   "AI Product Engineering",
 ] as const;
 
-/**
- * `Person` structured data (SEO.md §5) — the site's identity anchor, rendered
- * server-side on About. Sourced from real on-page content and the site config;
- * localized, with absolute canonical URLs. No claims beyond the résumé.
- */
 export async function PersonJsonLd({ locale }: PersonJsonLdProps) {
   const t = await getDictionary(locale);
   const p = t.about.jsonLd;

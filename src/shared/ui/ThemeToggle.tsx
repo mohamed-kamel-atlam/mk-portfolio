@@ -12,11 +12,6 @@ export interface ThemeToggleProps {
   label?: string;
 }
 
-/**
- * Binary dark/light theme switch (default dark). A Client leaf that consumes
- * `useTheme()`; presentation is delegated to {@link IconButton}, so it shares the
- * design system's button styling rather than duplicating it (ADR-0005).
- */
 export function ThemeToggle({ className, label }: ThemeToggleProps) {
   const { resolvedTheme, setTheme } = useTheme();
   const isDark = resolvedTheme === "dark";

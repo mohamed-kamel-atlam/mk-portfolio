@@ -7,13 +7,6 @@ export interface TocItem {
   level: 2 | 3;
 }
 
-/**
- * Build a table of contents from an MDX body's `##`/`###` headings. Slugs are
- * generated with `github-slugger` — the same library `rehype-slug` uses — so the
- * anchors match the ids emitted on the rendered headings. Fenced code blocks are
- * skipped. Shared across features (engineering docs + project case studies) so
- * there is one heading-extraction implementation.
- */
 export function buildToc(body: string): TocItem[] {
   const slugger = new GithubSlugger();
   const items: TocItem[] = [];

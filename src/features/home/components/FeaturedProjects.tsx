@@ -15,13 +15,6 @@ export interface FeaturedProjectsProps {
   locale: Locale;
 }
 
-/**
- * Selected-work grid. Project data comes from the MDX content engine
- * (`@/content`) — validated, ordered, locale-scoped frontmatter — rendered with
- * the shared {@link ProjectCard} (reused by the projects index). Section chrome
- * is localized via the dictionary. The heading, grid and CTA reveal in a gentle
- * stagger as the section scrolls in.
- */
 export async function FeaturedProjects({ locale }: FeaturedProjectsProps) {
   const t = await getDictionary(locale);
   const section = t.home.projects;
@@ -37,7 +30,10 @@ export async function FeaturedProjects({ locale }: FeaturedProjectsProps) {
             title={section.title}
             intro={section.intro}
           />
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <RevealGroup
+            variant="up"
+            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          >
             {projects.map((project) => (
               <ProjectCard
                 key={project.slug}
@@ -48,7 +44,7 @@ export async function FeaturedProjects({ locale }: FeaturedProjectsProps) {
                 tags={project.frontmatter.techStack.map((tech) => tech.name)}
               />
             ))}
-          </div>
+          </RevealGroup>
           <div>
             <ButtonLink
               href={localizedHref(locale, "/projects")}

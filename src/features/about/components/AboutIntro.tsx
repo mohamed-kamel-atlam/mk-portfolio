@@ -17,13 +17,6 @@ export interface AboutIntroProps {
   locale: Locale;
 }
 
-/**
- * About introduction — the page hero. A two-column story: the positioning
- * statement and narrative beside a framed portrait. Holds the single `<h1>`
- * (Display step). A Server Component: content ships as HTML, the portrait is a
- * priority `next/image` (the hero's LCP candidate), and the only motion is a CSS
- * entrance transition honored by reduced-motion.
- */
 export async function AboutIntro({ locale }: AboutIntroProps) {
   const t = await getDictionary(locale);
   const intro = t.about.intro;

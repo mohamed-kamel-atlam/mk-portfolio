@@ -15,13 +15,6 @@ export interface SiteHeaderProps {
   locale: Locale;
 }
 
-/**
- * Sticky site header — the primary navigation chrome. A Server Component that
- * resolves nav labels from the dictionary once and passes the (serializable)
- * link data to the client nav islands, so the header markup ships as HTML.
- * Desktop shows the inline nav + controls; narrow viewports collapse into the
- * {@link MobileNav} sheet. Opens with a skip link for keyboard users.
- */
 export async function SiteHeader({ locale }: SiteHeaderProps) {
   const t = await getDictionary(locale);
   const items: NavLinkItem[] = mainNav.map((item) => ({

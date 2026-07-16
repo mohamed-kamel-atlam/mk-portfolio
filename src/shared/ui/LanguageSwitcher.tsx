@@ -21,14 +21,6 @@ export interface LanguageSwitcherProps {
 
 const ONE_YEAR_SECONDS = 60 * 60 * 24 * 365;
 
-/**
- * Binary EN/AR language switch. Locale is URL state (INTERNATIONALIZATION.md §7),
- * so switching is a real navigation to the *same route* under the other locale
- * prefix — not a client-only toggle — persisting a cookie hint that never
- * overrides an explicit URL. Presentation is delegated to {@link Button}. The
- * label renders the TARGET language in its own script (`lang`) with an
- * accessible name; the icon never replaces the label.
- */
 export function LanguageSwitcher({ className, label }: LanguageSwitcherProps) {
   const pathname = usePathname();
   const router = useRouter();

@@ -1,11 +1,5 @@
 import { Container, Section, Skeleton } from "@/shared/ui";
 
-/**
- * Route-level Loading UI for the whole `[locale]` segment — the automatic
- * Suspense fallback shown while a route streams in during navigation. A single
- * DRY, token-driven skeleton of the page shell (heading + content grid); the
- * region is marked `aria-busy` and the skeletons are decorative (`aria-hidden`).
- */
 export default function Loading() {
   return (
     <Section aria-busy="true">

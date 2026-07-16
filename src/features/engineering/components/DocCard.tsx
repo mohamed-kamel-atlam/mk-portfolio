@@ -9,11 +9,6 @@ export interface DocCardProps {
   summary: string;
 }
 
-/**
- * Presentational card for a single engineering doc — a category badge, title,
- * and summary. The whole card is one link; the accent border/title on hover
- * signals interactivity without relying on color alone.
- */
 export function DocCard({ href, kindLabel, title, summary }: DocCardProps) {
   return (
     <Link href={href} className="group block h-full rounded-lg">

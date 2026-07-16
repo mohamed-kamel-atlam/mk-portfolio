@@ -2,13 +2,6 @@ import type { CSSProperties, ReactNode } from "react";
 
 import { cn } from "@/shared/lib/cn";
 
-/**
- * On-load entrance primitives — pure CSS (Server Components, zero client JS).
- * They apply a token-driven keyframe animation, gated by `motion-safe` and the
- * global reduced-motion rule. Use these for above-the-fold content; use
- * {@link Reveal} for content that should animate when scrolled into view.
- */
-
 type AnimateTag = "div" | "section" | "span" | "li" | "article" | "header";
 
 const variantClass = {

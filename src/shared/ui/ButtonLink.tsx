@@ -20,12 +20,6 @@ export interface ButtonLinkProps extends ComponentProps<typeof Link> {
   trailingArrow?: boolean;
 }
 
-/**
- * A navigation control styled as a button — a `next/link` wearing the shared
- * interactive variants, so a call-to-action that *navigates* stays a real link
- * (correct semantics/accessibility) while matching {@link Button} visually. No
- * duplicated variant styling. `trailingArrow` adds the shared CTA arrow-slide.
- */
 export function ButtonLink({
   variant = "primary",
   size = "md",

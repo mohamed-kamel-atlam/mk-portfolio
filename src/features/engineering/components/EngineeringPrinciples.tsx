@@ -36,10 +36,6 @@ const PRINCIPLE_ICON: Record<EngineeringPrincipleKey, LucideIcon> = {
   learning: GraduationCap,
 };
 
-/**
- * Engineering principles (§9) — the non-negotiables this codebase enforces, as
- * cards. Reveals with `up`.
- */
 export async function EngineeringPrinciples({
   locale,
 }: EngineeringPrinciplesProps) {
@@ -55,7 +51,10 @@ export async function EngineeringPrinciples({
             title={section.title}
             intro={section.intro}
           />
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <RevealGroup
+            variant="up"
+            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+          >
             {engineeringPrinciples.map((key) => (
               <IconCard
                 key={key}
@@ -64,7 +63,7 @@ export async function EngineeringPrinciples({
                 description={section.items[key].description}
               />
             ))}
-          </div>
+          </RevealGroup>
         </RevealGroup>
       </Container>
     </Section>

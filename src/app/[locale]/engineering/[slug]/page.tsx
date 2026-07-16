@@ -43,11 +43,6 @@ export async function generateMetadata({
   return buildContentMetadata(doc, `/engineering/${slug}`);
 }
 
-/**
- * Engineering doc — reads like official documentation: a header, a same-page
- * table of contents, the MDX body rendered through the design-system component
- * map, and previous/next paging. Static per (locale, slug).
- */
 export default async function DocPage({ params }: DocPageProps) {
   const { locale, slug } = await params;
   const active: Locale = isLocale(locale) ? locale : defaultLocale;

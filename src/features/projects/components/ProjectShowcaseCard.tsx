@@ -16,11 +16,6 @@ import { TechChip, TechOverflowChip } from "./TechChip";
 /** An icon component — a Lucide icon or an inline SVG (both take SVG props). */
 type IconComponent = ComponentType<SVGProps<SVGSVGElement>>;
 
-/**
- * GitHub mark — Lucide dropped brand icons, so the source CTA uses this inline
- * monochrome glyph (inherits `currentColor`), matching the site's other brand
- * marks (e.g. the home social icons).
- */
 function GithubMark(props: SVGProps<SVGSVGElement>) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
@@ -41,8 +36,6 @@ export interface ProjectCardLabels {
   more: string;
 }
 
-/** Shape the card labels from the `projectsPage` dictionary namespace (DRY —
- *  reused by the index page and the related-projects block). */
 export function buildProjectCardLabels(
   p: Dictionary["projectsPage"],
 ): ProjectCardLabels {
@@ -80,24 +73,12 @@ export interface ProjectShowcaseCardProps {
   href: string;
   labels: ProjectCardLabels;
   variant?: "standard" | "featured";
-  /** Semantic heading level for the title — keeps document outline valid in
-   *  whatever section the card is placed (index = 2, related strip = 3). */
   headingLevel?: 2 | 3;
   /** Priority-load the cover (LCP) — the featured, above-the-fold card. */
   priority?: boolean;
   className?: string;
 }
 
-/**
- * The premium project card — fully data-driven (no per-project layout). Hierarchy
- * reads cover → name → summary → tech → status → CTA in under five seconds. The
- * whole card is a stretched link to the detail page; the CTA links sit above that
- * overlay so they stay independently operable (valid, no nested anchors). A
- * Server Component: hover/reveal are pure CSS, so it ships zero JS.
- *
- * The CTA row is a data list — adding a third action (e.g. Case Study) is one
- * push into `ctas`, no layout change.
- */
 export function ProjectShowcaseCard({
   project,
   href,

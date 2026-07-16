@@ -5,15 +5,6 @@ import { defaultLocale, type Locale } from "@/shared/i18n/config";
 import { loadCollection } from "./loader";
 import type { ContentItem, ContentType } from "./schema";
 
-/**
- * The typed content-access API (MDX_PIPELINE §7). It returns the same types
- * validated at build time, so consumers never receive an unexpected shape
- * (QAT-3). This is the public surface of the Content layer (`@/content`).
- *
- * Note: the MDX *render* path (`@/content/mdx`) is a separate module so its
- * heavier compile dependencies are only loaded by routes that render bodies.
- */
-
 /** Order by explicit `order` (ascending), then by `date` descending (§2.4). */
 function sortItems<T extends ContentType>(
   items: ContentItem<T>[],
@@ -28,11 +19,6 @@ function sortItems<T extends ContentType>(
   });
 }
 
-/**
- * All non-draft items of a type for a locale, ordered. One item per slug:
- * prefer the requested locale, else fall back to the default locale (MDX_PIPELINE
- * §8), so a listing is complete even when some items aren't translated yet.
- */
 export async function listContent<T extends ContentType>(
   type: T,
   locale: Locale,

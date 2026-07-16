@@ -8,14 +8,6 @@ export function generateStaticParams() {
   return locales.map((locale) => ({ locale }));
 }
 
-/**
- * Default social share image (1200×630) for every route under `[locale]`
- * (SEO.md §4). A branded card built with `next/og` at build time — no binary
- * asset to maintain. Colors are resolved token literals (Satori cannot read CSS
- * variables): background neutral-950, foreground neutral-50, accent-500.
- * Text is the (Latin) brand name, so it renders consistently in both locales
- * while the page's title/description/og:locale carry the localization.
- */
 export const alt = siteConfig.title;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";

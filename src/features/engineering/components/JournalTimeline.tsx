@@ -16,11 +16,6 @@ export interface JournalTimelineProps {
   locale: Locale;
 }
 
-/**
- * Development journal — a chronological log of the build's milestones
- * (FR-015), sourced from the `journey` content collection. The marker column
- * uses flexbox so the dot and connector mirror correctly in RTL.
- */
 export async function JournalTimeline({ locale }: JournalTimelineProps) {
   const t = await getDictionary(locale);
   const section = t.engineering.journal;
@@ -36,7 +31,7 @@ export async function JournalTimeline({ locale }: JournalTimelineProps) {
             title={section.title}
             intro={section.intro}
           />
-          <ol className="flex flex-col">
+          <RevealGroup variant="up" as="ol" className="flex flex-col">
             {entries.map((entry, index) => {
               const fm = entry.frontmatter;
               return (
@@ -69,7 +64,7 @@ export async function JournalTimeline({ locale }: JournalTimelineProps) {
                 </li>
               );
             })}
-          </ol>
+          </RevealGroup>
         </RevealGroup>
       </Container>
     </Section>

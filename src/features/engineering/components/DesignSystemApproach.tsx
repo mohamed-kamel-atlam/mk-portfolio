@@ -30,11 +30,6 @@ const TOPIC_ICON: Record<DesignSystemTopicKey, LucideIcon> = {
   maintainability: Wrench,
 };
 
-/**
- * Design systems (§6) — how I build UI that scales. The page itself is the
- * proof: the statement makes the token rule concrete. Links to the architecture
- * doc. Reveals with `fade`.
- */
 export async function DesignSystemApproach({
   locale,
 }: DesignSystemApproachProps) {
@@ -56,7 +51,10 @@ export async function DesignSystemApproach({
           >
             {section.statement}
           </Text>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <RevealGroup
+            variant="up"
+            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          >
             {designSystemTopics.map((key) => (
               <IconCard
                 key={key}
@@ -65,7 +63,7 @@ export async function DesignSystemApproach({
                 description={section.topics[key].description}
               />
             ))}
-          </div>
+          </RevealGroup>
           <DeepDiveLink
             href={localizedHref(locale, "/engineering/architecture")}
             label={t.engineering.readMore}

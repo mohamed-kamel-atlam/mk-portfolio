@@ -14,11 +14,6 @@ export interface ProjectLogoProps {
   className?: string;
 }
 
-/**
- * The project's logo in a premium rounded, glassy container. Never empty: with a
- * dedicated `logo` it renders the image; without one it renders a designed
- * initials monogram. Presentational Server Component.
- */
 export function ProjectLogo({ logo, name, className }: ProjectLogoProps) {
   return (
     <span

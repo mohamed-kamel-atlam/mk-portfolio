@@ -22,11 +22,6 @@ export interface SocialLinksProps {
   className?: string;
 }
 
-/**
- * The social/contact links from the single site config, rendered as accessible
- * text anchors with external-link safety. Defined once so Hero, About, Contact,
- * and the footer never re-derive the `isExternal` check or drift on styling.
- */
 export function SocialLinks({
   variant = "inline",
   className,

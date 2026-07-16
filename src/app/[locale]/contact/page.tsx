@@ -30,12 +30,6 @@ export async function generateMetadata({
   });
 }
 
-/**
- * Contact (FR-010). A thin routing-layer composition: a premium hero, direct
- * contact-method cards, the message form (the page's single client island), what
- * I'm available for, quick facts, and a closing CTA. Every section is a Server
- * Component owning its own content; only the form runs on the client.
- */
 export default async function ContactPage({ params }: ContactPageProps) {
   const { locale } = await params;
   const active: Locale = isLocale(locale) ? locale : defaultLocale;

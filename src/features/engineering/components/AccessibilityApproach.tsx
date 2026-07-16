@@ -30,11 +30,6 @@ const TOPIC_ICON: Record<A11yTopicKey, LucideIcon> = {
   screenReaders: Ear,
 };
 
-/**
- * Accessibility (§5) — why it matters, then what it means in practice. Statement
- * anchored by an accent rule, topics as cards. Links to the accessibility doc.
- * Reveals with `up`.
- */
 export async function AccessibilityApproach({
   locale,
 }: AccessibilityApproachProps) {
@@ -56,7 +51,10 @@ export async function AccessibilityApproach({
           >
             {section.statement}
           </Text>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <RevealGroup
+            variant="up"
+            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          >
             {a11yTopics.map((key) => (
               <IconCard
                 key={key}
@@ -65,7 +63,7 @@ export async function AccessibilityApproach({
                 description={section.topics[key].description}
               />
             ))}
-          </div>
+          </RevealGroup>
           <DeepDiveLink
             href={localizedHref(locale, "/engineering/accessibility")}
             label={t.engineering.readMore}

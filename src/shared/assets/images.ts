@@ -1,10 +1,5 @@
 import { ASSET_DIR, assetPath } from "./paths";
 
-/**
- * A described image: path + accessibility + intrinsic size. Pairing `alt` with
- * the source keeps the accessibility contract at the data layer (QAT-2), the
- * same discipline the content schema's `gallery` images use.
- */
 export interface ImageAsset {
   src: string;
   alt: string;
@@ -12,10 +7,6 @@ export interface ImageAsset {
   height: number;
 }
 
-/**
- * Responsive `sizes` presets for `next/image` — declared once so callers never
- * hand-write viewport math. Pick the preset matching the layout slot.
- */
 export const IMAGE_SIZES = {
   /** Full-bleed / edge-to-edge. */
   full: "100vw",
@@ -33,12 +24,6 @@ export const IMAGE_SIZES = {
 
 export type ImageSizePreset = keyof typeof IMAGE_SIZES;
 
-/**
- * A lightweight solid-tone blur placeholder for local photography, as an SVG
- * data URL (no Buffer/btoa, works on server and client). The tone is the
- * resolved dark `--color-surface-muted` (navy-800) — a literal is required here
- * because a data URL cannot read a CSS variable; kept in sync with globals.css.
- */
 export function blurDataUrl(tone = "#101b2d"): string {
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="8" height="8"><rect width="8" height="8" fill="${tone}"/></svg>`;
   return `data:image/svg+xml,${encodeURIComponent(svg)}`;
@@ -50,21 +35,10 @@ export const BLUR_DATA_URL = blurDataUrl();
 /** Profile / avatar photograph (single source: `public/images/profile`). */
 export const PROFILE_IMAGE_SRC = assetPath("profile", "profile.png");
 
-/**
- * A project **cover screenshot** path (in `public/images/projects/covers`).
- * `file` is the cover's file name as stored in the project's MDX `cover`
- * frontmatter — the author owns the exact asset (content-as-data). Covers are a
- * separate concept from {@link projectLogo}; the two are never mixed.
- */
 export function projectCover(file: string): string {
   return assetPath("projectCovers", file);
 }
 
-/**
- * A dedicated project **brand logo** path (in `public/images/projects/logos`).
- * Separate from cover screenshots — a screenshot is never used as a logo. When a
- * project has no dedicated logo, the card renders an initials monogram instead.
- */
 export function projectLogo(file: string): string {
   return assetPath("projectLogos", file);
 }

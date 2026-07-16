@@ -1,10 +1,5 @@
 import { Container, Section, Skeleton } from "@/shared/ui";
 
-/**
- * Loading skeleton for the projects showcase — mirrors the real layout: intro
- * header, the full-width featured hero, then the 1/2/3 card grid. Decorative
- * skeletons (`aria-hidden`); the region is `aria-busy`.
- */
 export default function Loading() {
   return (
     <Section aria-busy="true">

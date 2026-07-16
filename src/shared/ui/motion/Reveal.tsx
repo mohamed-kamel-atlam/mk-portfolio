@@ -21,12 +21,6 @@ export interface RevealProps {
 
 type RevealState = "idle" | "hidden" | "visible";
 
-/**
- * Reveal content when it scrolls into view (fade + ≤8px rise). Robust by design:
- * it only hides items that start OFF-screen, so SSR, no-JS, reduced-motion, and
- * screen readers always get visible content (opacity/transform only — never
- * `display:none`). The hidden→visible transition is token-driven.
- */
 export function Reveal({ children, delay = 0, className }: RevealProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [state, setState] = useState<RevealState>("idle");

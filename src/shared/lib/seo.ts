@@ -8,13 +8,6 @@ import {
   type Locale,
 } from "@/shared/i18n/config";
 
-/**
- * SEO helpers (SEO.md). One place builds the per-route metadata contract —
- * canonical, `hreflang` alternates (incl. `x-default`), Open Graph, Twitter
- * card, and the branded social image — so every localized page is consistent
- * and no route hand-assembles URLs.
- */
-
 /** hreflang alternates for a locale-agnostic path (all locales + `x-default`). */
 export function localeAlternates(path: string): Record<string, string> {
   const languages: Record<string, string> = {};
@@ -25,12 +18,6 @@ export function localeAlternates(path: string): Record<string, string> {
   return languages;
 }
 
-/**
- * The localized social share image (the `opengraph-image`/`twitter-image` route
- * for this locale). Relative — resolved to an absolute URL via `metadataBase`.
- * Referenced explicitly because a page that sets its own `openGraph` does not
- * otherwise inherit the file-convention image.
- */
 export function socialImage(locale: Locale, kind: "opengraph" | "twitter") {
   return {
     url: `/${locale}/${kind}-image`,

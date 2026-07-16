@@ -9,11 +9,6 @@ export interface JourneyHeroProps {
   locale: Locale;
 }
 
-/**
- * Journey hero — the page's single `<h1>` and the framing that this is a story
- * of growth, not a résumé. A locale-formatted year-range chip anchors the arc.
- * Server Component; the only motion is one CSS entrance, honored by reduced-motion.
- */
 export async function JourneyHero({ locale }: JourneyHeroProps) {
   const t = await getDictionary(locale);
   const hero = t.journey.hero;

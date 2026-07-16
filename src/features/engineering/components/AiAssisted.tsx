@@ -27,12 +27,6 @@ const PRACTICE_ICON: Record<AiPracticeKey, LucideIcon> = {
   validation: CircleCheck,
 };
 
-/**
- * AI-assisted development (§7) — how AI accelerates the work while engineering
- * judgment stays human. The statement makes the boundary explicit; the practices
- * show the responsible use; the tools are named plainly. Links to the ai-workflow
- * doc. Reveals with `scale`.
- */
 export async function AiAssisted({ locale }: AiAssistedProps) {
   const t = await getDictionary(locale);
   const section = t.engineering.ai;
@@ -52,7 +46,10 @@ export async function AiAssisted({ locale }: AiAssistedProps) {
           >
             {section.statement}
           </Text>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <RevealGroup
+            variant="up"
+            className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+          >
             {aiPractices.map((key) => (
               <IconCard
                 key={key}
@@ -61,7 +58,7 @@ export async function AiAssisted({ locale }: AiAssistedProps) {
                 description={section.practices[key].description}
               />
             ))}
-          </div>
+          </RevealGroup>
           <ul className="flex flex-wrap gap-2">
             {aiTools.map((tool) => (
               <li key={tool}>

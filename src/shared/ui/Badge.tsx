@@ -17,10 +17,6 @@ export interface BadgeProps extends HTMLAttributes<HTMLSpanElement> {
   variant?: keyof typeof badgeVariants;
 }
 
-/**
- * Small status/category label. Status is conveyed by the text content, never by
- * color alone (WCAG 1.4.1). Each fill pairs with its `-foreground` token.
- */
 export function Badge({
   variant = "neutral",
   className,

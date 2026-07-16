@@ -16,11 +16,6 @@ export interface EmptyStateProps extends HTMLAttributes<HTMLDivElement> {
   action?: ReactNode;
 }
 
-/**
- * A centered "no content" state — for empty lists, no search results, or error
- * placeholders. Composes {@link Heading} and {@link Text} for consistent
- * typography; `title`/`description` are localized by the caller.
- */
 export function EmptyState({
   icon,
   title,

@@ -19,15 +19,6 @@ export interface SplashProps {
   loadingLabel: string;
 }
 
-/**
- * First-visit splash. Visibility is decided pre-paint by the inline splash script
- * (`data-splash` on `<html>`) and gated purely in CSS, so returning visitors
- * never see it and there is no flash. This client island only drives the timing:
- * it trickles the progress bar and rotates the messages, dismisses as soon as the
- * page is ready **and** a short minimum has passed (never forcing a wait, hard
- * capped by {@link SPLASH_MAX_MS}), then removes `data-splash` (CSS fades it out)
- * and records the visit. Respects reduced motion (static, quick dismiss).
- */
 export function Splash({ messages, loadingLabel }: SplashProps) {
   const [message, setMessage] = useState(0);
   const [progress, setProgress] = useState(0.05);

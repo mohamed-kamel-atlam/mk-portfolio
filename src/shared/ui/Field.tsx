@@ -17,12 +17,6 @@ export interface FieldProps {
   className?: string;
 }
 
-/**
- * A labelled form field: label, optional description, the control (as
- * `children`), and an error region. The control is wired for accessibility by
- * the caller using the derived ids (`<id>-error` / `<id>-desc`) so `aria-invalid`
- * and `aria-describedby` stay explicit and correct.
- */
 export function Field({
   id,
   label,

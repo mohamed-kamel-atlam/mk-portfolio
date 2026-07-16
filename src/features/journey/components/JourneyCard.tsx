@@ -11,11 +11,6 @@ export interface JourneyCardProps {
   className?: string;
 }
 
-/**
- * The journey feature's recurring card: an accent icon badge, an `<h3>`, and a
- * description. Feature-local (mirrors the same grammar the other pages use)
- * rather than imported across features, keeping the feature self-contained.
- */
 export function JourneyCard({
   icon: Icon,
   title,

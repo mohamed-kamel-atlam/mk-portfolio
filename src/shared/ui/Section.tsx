@@ -13,11 +13,6 @@ export interface SectionProps extends HTMLAttributes<HTMLElement> {
   spacing?: keyof typeof sectionSpacing;
 }
 
-/**
- * A semantic `<section>` establishing the vertical rhythm between page sections.
- * Pairs with {@link Container} for horizontal bounds; spacing values come from
- * the section-padding steps of the spacing scale.
- */
 export function Section({ spacing = "md", className, ...props }: SectionProps) {
   return (
     <section className={cn(sectionSpacing[spacing], className)} {...props} />

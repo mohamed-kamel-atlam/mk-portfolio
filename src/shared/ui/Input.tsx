@@ -4,12 +4,6 @@ import { cn } from "@/shared/lib/cn";
 
 export type InputProps = ComponentPropsWithRef<"input">;
 
-/**
- * Text input primitive. Token-driven surface/border/text; the border turns
- * `danger` when the control is marked `aria-invalid` (never color alone — a
- * paired error message conveys the state). Focus uses the global focus ring.
- * Forwards `ref` (React 19) for imperative focus / form-library integration.
- */
 export function Input({ className, ref, ...props }: InputProps) {
   return (
     <input
