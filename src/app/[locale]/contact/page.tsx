@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
 
-import { ContactForm, ContactInfo } from "@/features/contact";
+import {
+  Availability,
+  ContactCta,
+  ContactFormSection,
+  ContactHero,
+  ContactMethods,
+  QuickFacts,
+} from "@/features/contact";
 import { defaultLocale, isLocale, type Locale } from "@/shared/i18n/config";
 import { getDictionary } from "@/shared/i18n/get-dictionary";
 import { buildRouteMetadata } from "@/shared/lib/seo";
-import { Container, Heading, Section, Text } from "@/shared/ui";
 
 interface ContactPageProps {
   params: Promise<{ locale: string }>;
@@ -25,36 +31,23 @@ export async function generateMetadata({
 }
 
 /**
- * Contact (FR-010). Thin routing-layer composition: the server resolves the
- * locale and dictionary and passes localized copy to the interactive form (the
- * only client island) and the presentational info panel.
+ * Contact (FR-010). A thin routing-layer composition: a premium hero, direct
+ * contact-method cards, the message form (the page's single client island), what
+ * I'm available for, quick facts, and a closing CTA. Every section is a Server
+ * Component owning its own content; only the form runs on the client.
  */
 export default async function ContactPage({ params }: ContactPageProps) {
   const { locale } = await params;
   const active: Locale = isLocale(locale) ? locale : defaultLocale;
-  const t = await getDictionary(active);
-  const c = t.contact;
 
   return (
-    <Section>
-      <Container className="flex flex-col gap-12">
-        <div className="flex max-w-2xl flex-col gap-4">
-          <p className="text-caption uppercase text-accent">
-            {c.intro.eyebrow}
-          </p>
-          <Heading level={1} size="display" className="text-balance">
-            {c.intro.title}
-          </Heading>
-          <Text size="body-lg" tone="muted" className="text-pretty">
-            {c.intro.lead}
-          </Text>
-        </div>
-
-        <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr]">
-          <ContactForm copy={c.form} errors={c.errors} success={c.success} />
-          <ContactInfo title={c.info.title} subtitle={c.info.subtitle} />
-        </div>
-      </Container>
-    </Section>
+    <>
+      <ContactHero locale={active} />
+      <ContactMethods locale={active} />
+      <ContactFormSection locale={active} />
+      <Availability locale={active} />
+      <QuickFacts locale={active} />
+      <ContactCta locale={active} />
+    </>
   );
 }

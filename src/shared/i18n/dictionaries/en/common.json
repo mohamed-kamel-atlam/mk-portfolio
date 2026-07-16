@@ -726,12 +726,41 @@
       "title": "Contact",
       "description": "Get in touch with Mohamed Kamel — frontend and AI product engineering. Send a message or reach out directly."
     },
-    "intro": {
+    "hero": {
       "eyebrow": "Contact",
-      "title": "Let's build something exceptional.",
-      "lead": "Have a role, a project, or a question? Send a message and I'll get back to you."
+      "title": "Let's start a conversation.",
+      "lead": "Whether it's a role, a project, or a question about how something's built — I read every message and reply personally. Pick whatever's easiest for you.",
+      "primary": "Send a message",
+      "secondary": "Message on WhatsApp"
+    },
+    "methods": {
+      "eyebrow": "Reach me",
+      "title": "The fastest ways to reach me",
+      "intro": "Every channel goes straight to me — no forms in between, no assistants.",
+      "items": {
+        "github": {
+          "title": "GitHub",
+          "description": "Browse the code and how it's built."
+        },
+        "linkedin": {
+          "title": "LinkedIn",
+          "description": "Connect and see my experience."
+        },
+        "email": {
+          "title": "Email",
+          "description": "For roles, proposals, or anything detailed."
+        },
+        "whatsapp": {
+          "title": "WhatsApp",
+          "description": "The quickest way to reach me directly.",
+          "status": "Usually replies within a few hours."
+        }
+      }
     },
     "form": {
+      "eyebrow": "Message",
+      "title": "Send me a message",
+      "intro": "Tell me a little about the role or project and I'll get back to you.",
       "name": "Name",
       "namePlaceholder": "Your name",
       "email": "Email",
@@ -754,9 +783,38 @@
       "title": "Message sent.",
       "body": "Thanks for reaching out — I'll get back to you soon."
     },
-    "info": {
-      "title": "Other ways to reach me",
-      "subtitle": "Prefer email or social? Find me here."
+    "availability": {
+      "eyebrow": "Availability",
+      "title": "What I'm open to",
+      "intro": "Currently open to the right opportunity — here's where I fit best.",
+      "statusLabel": "Available now",
+      "items": {
+        "fulltime": "Full-time",
+        "freelance": "Freelance",
+        "remote": "Remote",
+        "ai": "AI products",
+        "saas": "SaaS platforms"
+      }
+    },
+    "quickFacts": {
+      "eyebrow": "At a glance",
+      "title": "Quick facts",
+      "intro": "The short version, for the scanners.",
+      "items": {
+        "role": "Frontend Engineer",
+        "location": "Egypt",
+        "react": "React",
+        "nextjs": "Next.js",
+        "typescript": "TypeScript",
+        "relocation": "Open to relocation"
+      }
+    },
+    "finalCta": {
+      "eyebrow": "Have an idea?",
+      "title": "Let's build something exceptional together.",
+      "subtitle": "If you're building something where architecture, performance, and craft matter, I'd love to hear about it.",
+      "primary": "Get in touch",
+      "secondary": "See my work"
     }
   },
   "splash": {

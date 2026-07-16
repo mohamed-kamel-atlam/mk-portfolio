@@ -1,5 +1,6 @@
 "use client";
 
+import { CircleCheck } from "lucide-react";
 import {
   useActionState,
   useEffect,
@@ -9,7 +10,7 @@ import {
   type FormEvent,
 } from "react";
 
-import { Button, Field, Input, Textarea } from "@/shared/ui";
+import { Button } from "@/shared/ui";
 
 import { submitContact } from "../lib/actions";
 import {
@@ -20,14 +21,12 @@ import {
   type ContactErrors,
   type ContactField,
 } from "../lib/schema";
+import { FloatingField } from "./FloatingField";
 
 export interface ContactFormCopy {
   name: string;
-  namePlaceholder: string;
   email: string;
-  emailPlaceholder: string;
   message: string;
-  messagePlaceholder: string;
   submit: string;
   submitting: string;
 }
@@ -44,8 +43,10 @@ const FIELDS: ContactField[] = ["name", "email", "message"];
 /**
  * Contact form (Client Component — genuine local UI state). Validation runs on
  * the client for fast feedback and again on the server (authoritative) via a
- * Server Action. Localized strings are passed in as props, so no dictionary
- * runtime ships to the client. Loading, error, and success states are handled.
+ * Server Action. Presentation is upgraded with floating labels and an animated
+ * success state; the logic — dual validation, honeypot, focus management — is
+ * unchanged. Localized strings are passed as props, so no dictionary ships to
+ * the client. Reduced motion is honored (the success icon uses `motion-safe`).
  */
 export function ContactForm({ copy, errors, success }: ContactFormProps) {
   const [state, formAction, isPending] = useActionState(
@@ -122,10 +123,16 @@ export function ContactForm({ copy, errors, success }: ContactFormProps) {
           ref={successRef}
           tabIndex={-1}
           role="status"
-          className="flex flex-col gap-1 rounded-lg border border-success bg-surface-muted p-4 focus-visible:outline-none"
+          className="flex items-start gap-3 rounded-lg border border-success bg-surface-muted p-4 focus-visible:outline-none motion-safe:animate-fade-in-up"
         >
-          <p className="font-medium text-foreground">{success.title}</p>
-          <p className="text-small text-muted-foreground">{success.body}</p>
+          <CircleCheck
+            aria-hidden="true"
+            className="mt-0.5 size-5 shrink-0 text-success motion-safe:animate-scale-in"
+          />
+          <div className="flex flex-col gap-1">
+            <p className="font-medium text-foreground">{success.title}</p>
+            <p className="text-small text-muted-foreground">{success.body}</p>
+          </div>
         </div>
       ) : null}
 
@@ -134,68 +141,51 @@ export function ContactForm({ copy, errors, success }: ContactFormProps) {
         action={formAction}
         onSubmit={handleSubmit}
         noValidate
-        className="flex flex-col gap-6"
+        className="flex flex-col gap-5"
       >
         <fieldset
           disabled={isPending}
-          className="m-0 flex min-w-0 flex-col gap-6 border-0 p-0"
+          className="m-0 flex min-w-0 flex-col gap-5 border-0 p-0"
         >
-          <Field
+          <FloatingField
             id="name"
+            name="name"
             label={copy.name}
+            type="text"
+            autoComplete="name"
             required
+            invalid={Boolean(fieldErrors.name)}
+            describedBy={describedBy("name")}
             error={messageFor("name")}
-          >
-            <Input
-              id="name"
-              name="name"
-              type="text"
-              autoComplete="name"
-              placeholder={copy.namePlaceholder}
-              required
-              aria-invalid={fieldErrors.name ? true : undefined}
-              aria-describedby={describedBy("name")}
-              onBlur={handleBlur}
-            />
-          </Field>
+            onBlur={handleBlur}
+          />
 
-          <Field
+          <FloatingField
             id="email"
+            name="email"
             label={copy.email}
+            type="email"
+            inputMode="email"
+            autoComplete="email"
             required
+            invalid={Boolean(fieldErrors.email)}
+            describedBy={describedBy("email")}
             error={messageFor("email")}
-          >
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              inputMode="email"
-              autoComplete="email"
-              placeholder={copy.emailPlaceholder}
-              required
-              aria-invalid={fieldErrors.email ? true : undefined}
-              aria-describedby={describedBy("email")}
-              onBlur={handleBlur}
-            />
-          </Field>
+            onBlur={handleBlur}
+          />
 
-          <Field
+          <FloatingField
             id="message"
+            name="message"
             label={copy.message}
+            multiline
+            rows={6}
             required
+            invalid={Boolean(fieldErrors.message)}
+            describedBy={describedBy("message")}
             error={messageFor("message")}
-          >
-            <Textarea
-              id="message"
-              name="message"
-              rows={6}
-              placeholder={copy.messagePlaceholder}
-              required
-              aria-invalid={fieldErrors.message ? true : undefined}
-              aria-describedby={describedBy("message")}
-              onBlur={handleBlur}
-            />
-          </Field>
+            onBlur={handleBlur}
+          />
 
           {/* Honeypot — hidden from users and assistive tech; bots that fill it
               are rejected on the server. */}

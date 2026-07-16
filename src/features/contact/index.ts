@@ -1,7 +1,12 @@
-export { ContactForm } from "./components/ContactForm";
-export type {
-  ContactFormProps,
-  ContactFormCopy,
-} from "./components/ContactForm";
-export { ContactInfo } from "./components/ContactInfo";
-export type { ContactInfoProps } from "./components/ContactInfo";
+export { ContactHero } from "./components/ContactHero";
+export type { ContactHeroProps } from "./components/ContactHero";
+export { ContactMethods } from "./components/ContactMethods";
+export type { ContactMethodsProps } from "./components/ContactMethods";
+export { ContactFormSection } from "./components/ContactFormSection";
+export type { ContactFormSectionProps } from "./components/ContactFormSection";
+export { Availability } from "./components/Availability";
+export type { AvailabilityProps } from "./components/Availability";
+export { QuickFacts } from "./components/QuickFacts";
+export type { QuickFactsProps } from "./components/QuickFacts";
+export { ContactCta } from "./components/ContactCta";
+export type { ContactCtaProps } from "./components/ContactCta";
