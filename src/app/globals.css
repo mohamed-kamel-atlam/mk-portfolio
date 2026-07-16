@@ -485,6 +485,41 @@
       transparent
     );
   }
+
+  /* Case-study reading experience — typographic rhythm + auto chapter numbers
+     for the MDX story body. Everything here is presentation only: the numbers
+     come from a CSS counter, so the content is never touched. */
+  .case-study-prose {
+    counter-reset: chapter;
+    max-width: 70ch;
+  }
+  .case-study-prose > * + * {
+    margin-top: var(--space-6);
+  }
+  .case-study-prose > h2 {
+    margin-top: var(--space-16);
+  }
+  .case-study-prose > h2:first-child {
+    margin-top: 0;
+  }
+  .case-study-prose > h3 {
+    margin-top: var(--space-10);
+  }
+  .case-study-prose > h2,
+  .case-study-prose > h3 {
+    scroll-margin-top: var(--space-24);
+  }
+  .case-study-prose > h2::before {
+    counter-increment: chapter;
+    content: counter(chapter, decimal-leading-zero);
+    display: block;
+    margin-block-end: var(--space-3);
+    font-size: var(--font-size-small);
+    font-weight: var(--weight-semibold);
+    letter-spacing: var(--tracking-caption);
+    font-variant-numeric: tabular-nums;
+    color: var(--color-accent);
+  }
 }
 
 /* First-visit splash visibility gate — UNLAYERED (top-level) so it reliably wins

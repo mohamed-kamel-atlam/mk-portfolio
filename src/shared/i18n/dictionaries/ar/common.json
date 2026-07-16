@@ -153,7 +153,9 @@
     "viewLiveAria": "عرض حي لمشروع {project}",
     "viewSourceAria": "الكود المصدري لمشروع {project}",
     "moreTech": "+{count} تقنيات إضافية",
-    "empty": "لا توجد مشاريع لعرضها بعد."
+    "empty": "لا توجد مشاريع لعرضها بعد.",
+    "onThisPage": "في هذه الصفحة",
+    "readingProgress": "تقدّم القراءة"
   },
   "about": {
     "meta": {

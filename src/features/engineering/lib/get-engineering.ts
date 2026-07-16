@@ -1,5 +1,3 @@
-import GithubSlugger from "github-slugger";
-
 import {
   getContent,
   getContentSlugs,
@@ -7,8 +5,13 @@ import {
   type ContentItem,
 } from "@/content";
 import { type Locale } from "@/shared/i18n/config";
+import { buildToc, type TocItem } from "@/shared/lib/toc";
 
 import { docGroups, type DocGroupKey } from "../content";
+
+// Re-exported so existing consumers (the engineering barrel + DocToc) keep their
+// import path; the implementation now lives in the shared toc util (DRY).
+export { buildToc, type TocItem };
 
 /** A validated engineering doc (frontmatter + raw MDX body). */
 export type EngineeringDoc = ContentItem<"engineering">;
@@ -72,44 +75,6 @@ export async function getAdjacentDocs(
     prev: index > 0 ? (all[index - 1] ?? null) : null,
     next: index < all.length - 1 ? (all[index + 1] ?? null) : null,
   };
-}
-
-export interface TocItem {
-  id: string;
-  text: string;
-  level: 2 | 3;
-}
-
-/**
- * Build the "On this page" table of contents from an MDX body's `##`/`###`
- * headings. Slugs are generated with `github-slugger` — the same library
- * `rehype-slug` uses — so the anchors match the ids emitted on the rendered
- * headings. Fenced code blocks are skipped.
- */
-export function buildToc(body: string): TocItem[] {
-  const slugger = new GithubSlugger();
-  const items: TocItem[] = [];
-  let inFence = false;
-
-  for (const line of body.split("\n")) {
-    if (line.trimStart().startsWith("```")) {
-      inFence = !inFence;
-      continue;
-    }
-    if (inFence) continue;
-
-    const match = /^(#{2,3})\s+(.+?)\s*$/.exec(line);
-    const hashes = match?.[1];
-    const rawText = match?.[2];
-    if (!hashes || !rawText) continue;
-
-    const level = hashes.length as 2 | 3;
-    // Strip inline markdown so the slug matches rendered text content.
-    const text = rawText.replace(/[`*_]/g, "").trim();
-    items.push({ id: slugger.slug(text), text, level });
-  }
-
-  return items;
 }
 
 /** Localized long-form date (INTERNATIONALIZATION §formatting — `Intl`). */

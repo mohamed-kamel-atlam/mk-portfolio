@@ -153,7 +153,9 @@
     "viewLiveAria": "Live demo of {project}",
     "viewSourceAria": "View source of {project}",
     "moreTech": "+{count} more technologies",
-    "empty": "No projects to show yet."
+    "empty": "No projects to show yet.",
+    "onThisPage": "On this page",
+    "readingProgress": "Reading progress"
   },
   "about": {
     "meta": {

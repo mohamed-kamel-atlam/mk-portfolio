@@ -7,6 +7,8 @@ export {
   type Project,
 } from "./lib/get-projects";
 export { ProjectArchitecture } from "./components/ProjectArchitecture";
+export { CaseStudyToc } from "./components/CaseStudyToc";
+export { ReadingProgress } from "./components/ReadingProgress";
 export { ProjectGallery } from "./components/ProjectGallery";
 export { ProjectPager } from "./components/ProjectPager";
 export { ProjectsGrid } from "./components/ProjectsGrid";
