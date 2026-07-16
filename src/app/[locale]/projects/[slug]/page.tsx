@@ -26,8 +26,16 @@ import {
   type Locale,
 } from "@/shared/i18n/config";
 import { getDictionary } from "@/shared/i18n/get-dictionary";
+import { breadcrumbJsonLd } from "@/shared/lib/structured-data";
 import { buildToc, type TocItem } from "@/shared/lib/toc";
-import { ButtonLink, Container, Heading, Section, Text } from "@/shared/ui";
+import {
+  ButtonLink,
+  Container,
+  Heading,
+  JsonLd,
+  Section,
+  Text,
+} from "@/shared/ui";
 import { Reveal } from "@/shared/ui/motion";
 
 interface ProjectDetailPageProps {
@@ -91,15 +99,18 @@ export default async function ProjectDetailPage({
     author: { "@type": "Person", name: siteConfig.name },
     url: `${siteConfig.url}${localizedHref(active, `/projects/${slug}`)}`,
   };
+  const breadcrumb = breadcrumbJsonLd(active, [
+    { name: t.nav.home, path: "" },
+    { name: t.nav.projects, path: "/projects" },
+    { name: frontmatter.title, path: `/projects/${slug}` },
+  ]);
 
   return (
     <Section>
       <ReadingProgress label={p.readingProgress} />
       <Container>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        <JsonLd data={jsonLd} />
+        <JsonLd data={breadcrumb} />
         <article className="flex flex-col gap-16">
           <div className="lg:grid lg:grid-cols-[minmax(0,1fr)_15rem] lg:gap-12">
             <div className="flex min-w-0 flex-col gap-16">

@@ -8,6 +8,8 @@ import {
   TechStack,
 } from "@/features/home";
 import { defaultLocale, isLocale, type Locale } from "@/shared/i18n/config";
+import { websiteJsonLd } from "@/shared/lib/structured-data";
+import { JsonLd } from "@/shared/ui";
 
 interface HomePageProps {
   params: Promise<{ locale: string }>;
@@ -24,6 +26,7 @@ export default async function HomePage({ params }: HomePageProps) {
 
   return (
     <>
+      <JsonLd data={websiteJsonLd(active)} />
       <Hero locale={active} />
       <FeaturedProjects locale={active} />
       <TechStack locale={active} />

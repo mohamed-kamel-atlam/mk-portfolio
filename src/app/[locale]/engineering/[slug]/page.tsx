@@ -21,7 +21,8 @@ import {
   type Locale,
 } from "@/shared/i18n/config";
 import { getDictionary } from "@/shared/i18n/get-dictionary";
-import { Container, Section } from "@/shared/ui";
+import { breadcrumbJsonLd } from "@/shared/lib/structured-data";
+import { Container, JsonLd, Section } from "@/shared/ui";
 
 interface DocPageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -72,14 +73,17 @@ export default async function DocPage({ params }: DocPageProps) {
     author: { "@type": "Person", name: siteConfig.name },
     url,
   };
+  const breadcrumb = breadcrumbJsonLd(active, [
+    { name: t.nav.home, path: "" },
+    { name: t.nav.engineering, path: "/engineering" },
+    { name: frontmatter.title, path: `/engineering/${slug}` },
+  ]);
 
   return (
     <Section>
       <Container>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        <JsonLd data={jsonLd} />
+        <JsonLd data={breadcrumb} />
         <div className="mx-auto flex max-w-5xl flex-col-reverse gap-10 lg:flex-row lg:items-start lg:gap-12">
           <article className="flex min-w-0 flex-1 flex-col gap-10 lg:max-w-3xl">
             <DocHeader
