@@ -43,7 +43,7 @@ Built with the Next.js App Router and React Server Components, documented like a
 
 > 🔗 **Placeholder** — production URL:
 
-**[mohamedkamel.dev](https://mohamedkamel.dev)**
+**[mohamedkamel.dev](https://mk-portfolio-f23d.vercel.app)**
 
 ---
 
