@@ -26,6 +26,8 @@ export { IconButton } from "./IconButton";
 export type { IconButtonProps } from "./IconButton";
 export { LanguageSwitcher } from "./LanguageSwitcher";
 export type { LanguageSwitcherProps } from "./LanguageSwitcher";
+export { NotFoundView } from "./NotFoundView";
+export type { NotFoundViewProps } from "./NotFoundView";
 export { ProjectCard } from "./ProjectCard";
 export type { ProjectCardProps } from "./ProjectCard";
 export { RouteProgress } from "./RouteProgress";

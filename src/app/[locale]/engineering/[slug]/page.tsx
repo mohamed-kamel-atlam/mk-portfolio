@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 
 import { buildContentMetadata } from "@/content";
 import { MDXContent } from "@/content/mdx";
@@ -22,7 +21,7 @@ import {
 } from "@/shared/i18n/config";
 import { getDictionary } from "@/shared/i18n/get-dictionary";
 import { breadcrumbJsonLd } from "@/shared/lib/structured-data";
-import { Container, JsonLd, Section } from "@/shared/ui";
+import { Container, JsonLd, NotFoundView, Section } from "@/shared/ui";
 
 interface DocPageProps {
   params: Promise<{ locale: string; slug: string }>;
@@ -40,7 +39,7 @@ export async function generateMetadata({
   const { locale, slug } = await params;
   const active: Locale = isLocale(locale) ? locale : defaultLocale;
   const doc = await getEngineeringDoc(slug, active);
-  if (!doc) return {};
+  if (!doc) return { robots: { index: false, follow: false } };
   return buildContentMetadata(doc, `/engineering/${slug}`);
 }
 
@@ -53,7 +52,7 @@ export default async function DocPage({ params }: DocPageProps) {
   const { locale, slug } = await params;
   const active: Locale = isLocale(locale) ? locale : defaultLocale;
   const doc = await getEngineeringDoc(slug, active);
-  if (!doc) notFound();
+  if (!doc) return <NotFoundView locale={active} />;
 
   const t = await getDictionary(active);
   const article = t.engineering.article;

@@ -1,7 +1,6 @@
 import { ArrowLeft } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
 
 import { buildContentMetadata } from "@/content";
 import { MDXContent } from "@/content/mdx";
@@ -33,6 +32,7 @@ import {
   Container,
   Heading,
   JsonLd,
+  NotFoundView,
   Section,
   Text,
 } from "@/shared/ui";
@@ -54,7 +54,7 @@ export async function generateMetadata({
   const { locale, slug } = await params;
   const active: Locale = isLocale(locale) ? locale : defaultLocale;
   const project = await getProject(slug, active);
-  if (!project) return {};
+  if (!project) return { robots: { index: false, follow: false } };
   return buildContentMetadata(project, `/projects/${slug}`);
 }
 
@@ -70,7 +70,7 @@ export default async function ProjectDetailPage({
   const { locale, slug } = await params;
   const active: Locale = isLocale(locale) ? locale : defaultLocale;
   const project = await getProject(slug, active);
-  if (!project) notFound();
+  if (!project) return <NotFoundView locale={active} />;
 
   const t = await getDictionary(active);
   const p = t.projectsPage;
